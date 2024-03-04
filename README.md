@@ -11,7 +11,7 @@ This project aims to develop an application for managing tennis courts and reser
 - **Igor Litwa** (@miszor03)
 - **Wiktor Mazur** (@ZegarekPL)
 - **Paweł Buczek** (@pablitoo1)
-- **Bartłomiej** Krówka (@bkrowka)
+- **Bartłomiej Krówka** (@bkrowka)
 
 ## Features
 
@@ -26,6 +26,6 @@ This project aims to develop an application for managing tennis courts and reser
 
 ## Technologies Used
 
-- Frontend: React/NextJS (TypeScript), Tailwindcss
+- Frontend: React/Next.js (TypeScript), TailwindCSS
 - Backend: 
-- Database: Postgresql
+- Database: PostgreSQL

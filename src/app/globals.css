@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Segoe UI";
+  /* src: local('Segoe UI'), url('/fonts/Segoe_UI.ttf.ttf') format('ttf'); */
+  src: local("Segoe UI Bold"), url("/fonts/Segoe_UI_Bold.ttf.ttf") format("ttf");
+}
+
+* {
+  font-family: "Segoe UI", sans-serif;
+}
+
+html,
+body,
+:root {
+  min-height: 100%;
+  font-size: inherit;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --color-webkit-scrollbar: 200 200 200;
+
+  /*COLORS FROM LOGO*/
+  --color-mainOrange: 252 115 35;
+  --color-mainGreen: 105 160 92;
+  --color-mainBlack: 21 36 39;
+  --color-mainWhite: 247 247 247;
+  --color-mainBrown: 75 35 14;
+  --color-lightGrey: 141 138 146;
+  --color-darkGreen: 23 64 52;
+}

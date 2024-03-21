@@ -8,9 +8,9 @@ export default function Map() {
       </h1>
       <div className="bg-mainOrange h-6" />
       <div className="flex justify-evenly w-full">
-        <Pin height={"12"} />
-        <Pin height={"12"} />
-        <Pin height={"12"} />
+        <Pin className={"mt-12"} />
+        <Pin className={"mt-24"} />
+        <Pin className={"mt-12"} />
       </div>
     </div>
   );

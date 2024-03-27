@@ -58,13 +58,13 @@ export async function getAllImagesByAuthorId(authorId: number) {
     }
 }
   
-export async function uploadSingleImage(uploadedFile: string, thumbnail?: boolean) {
+export async function uploadSingleImage(uploadedFile: File, thumbnail?: boolean) {
     try {
+      const formData = new FormData();
+      formData.append('uploadedFile', uploadedFile);
       const response: AxiosResponse<ImageResponseData> = await appAPI.post(
         thumbnail ? `/api/image?thumbnail=${thumbnail}` : `/api/image`,
-        {
-            uploadedFile,
-        },
+        formData,
         {
           withCredentials: true,
           headers: {
@@ -95,13 +95,16 @@ export async function uploadSingleImage(uploadedFile: string, thumbnail?: boolea
     }
 }
 
-export async function uploadMultipleImages(uploadedFiles: string[], thumbnail?: boolean) {
+export async function uploadMultipleImages(uploadedFiles: File[], thumbnail?: boolean) {
     try {
+      const formData = new FormData();
+        uploadedFiles.forEach((file) => {
+            formData.append('uploadedFiles', file);
+        }
+      );
       const response: AxiosResponse<ImageResponseData[]> = await appAPI.post(
         thumbnail ? `/api/image?thumbnail=${thumbnail}` : `/api/image`,
-        {
-            uploadedFiles,
-        },
+        formData,
         {
           withCredentials: true,
           headers: {

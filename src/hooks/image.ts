@@ -57,27 +57,6 @@ export async function getAllImagesByAuthorId(authorId: number) {
         throw new Error("Error500");
     }
 }
-
-// export async function getImageById(imageId: number, thumbnail?: boolean) {
-//     try{
-//         const response: AxiosResponse<string> = await appAPI.get(
-//             thumbnail ? `/api/image/${imageId}?thumbnail=${thumbnail}` : `/api/image/${imageId}`,
-//             {
-//                 withCredentials: true,
-//             }
-//         );
-//         if (response.status === 200) {
-//             console.log("Zdjęcie pobrano poprawnie!")
-//             return response.data;
-//         } else {
-//             console.error("Wystąpił błąd podczas pobierania zdjęcia");
-//             return "Wystąpił błąd podczas pobierania zdjęcia";
-//         }
-//     } catch (error: any) {
-//         throw new Error("Error500");
-//     }
-// }
-
   
 export async function uploadSingleImage(uploadedFile: string, thumbnail?: boolean) {
     try {
@@ -95,15 +74,15 @@ export async function uploadSingleImage(uploadedFile: string, thumbnail?: boolea
       );
   
       if (response.status === 200) {
-        console.log("Zdjęcie zostało usunięte poprawnie!")
+        console.log("Zdjęcie zostało przesłane poprawnie!")
         return response.data;
         } else if(response.status === 401) {
             window.location.replace("/login");
             console.error("Brak autoryzacji użytkownika");
             return "Brak autoryzacji użytkownika";
         } else {
-            console.error("Wystąpił błąd podczas usuwania zdjęcia");
-            return "Wystąpił błąd podczas usuwania zdjęcia";
+            console.error("Wystąpił błąd podczas przesyłania zdjęcia");
+            return "Wystąpił błąd podczas przesyłania zdjęcia";
         }
     } catch (error: any) {
         if (error.response.status === 401) {
@@ -118,7 +97,7 @@ export async function uploadSingleImage(uploadedFile: string, thumbnail?: boolea
 
 export async function uploadMultipleImages(uploadedFiles: string[], thumbnail?: boolean) {
     try {
-      const response: AxiosResponse<ImageResponseData> = await appAPI.post(
+      const response: AxiosResponse<ImageResponseData[]> = await appAPI.post(
         thumbnail ? `/api/image?thumbnail=${thumbnail}` : `/api/image`,
         {
             uploadedFiles,
@@ -132,15 +111,15 @@ export async function uploadMultipleImages(uploadedFiles: string[], thumbnail?: 
       );
   
       if (response.status === 200) {
-        console.log("Zdjęcie zostało usunięte poprawnie!")
+        console.log("Zdjęcia zostały przesłane poprawnie!")
         return response.data;
         } else if(response.status === 401) {
             window.location.replace("/login");
             console.error("Brak autoryzacji użytkownika");
             return "Brak autoryzacji użytkownika";
         } else {
-            console.error("Wystąpił błąd podczas usuwania zdjęcia");
-            return "Wystąpił błąd podczas usuwania zdjęcia";
+            console.error("Wystąpił błąd podczas przesyłania zdjęć");
+            return "Wystąpił błąd podczas przesyłania zdjęć";
         }
     } catch (error: any) {
         if (error.response.status === 401) {

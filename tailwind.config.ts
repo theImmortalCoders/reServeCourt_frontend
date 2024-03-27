@@ -52,6 +52,9 @@ const config: Config = {
         sidebar: "var(--sidebar)",
         max: "100vw",
       },
+      inset: {
+        navbar: "var(--navbar)",
+      },
     },
   },
   plugins: [],

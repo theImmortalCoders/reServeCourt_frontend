@@ -4,7 +4,7 @@ import { AxiosResponse } from "axios";
 export async function deleteAccount() {
     try{
         const response: AxiosResponse<void> = await appAPI.delete(
-            `/api`,
+            `/api/user`,
             {
                 withCredentials: true,
             }
@@ -48,7 +48,7 @@ export interface GetCurrentUserData {
 export async function getCurrentUser() {
     try{
         const response: AxiosResponse<GetCurrentUserData> = await appAPI.get(
-            `/api/me`,
+            `/api/user/me`,
             {
                 withCredentials: true,
             }
@@ -78,7 +78,7 @@ export async function getCurrentUser() {
 export async function logoutUser() {
     try{
         const response: AxiosResponse<void> = await appAPI.get(
-            `/api/logout`,
+            `/api/user/logout`,
             {
                 withCredentials: true,
             }
@@ -108,7 +108,7 @@ export async function logoutUser() {
 export async function changeUserRole(userId: number, userRole: string) {
     try{
         const response: AxiosResponse<void> = await appAPI.patch(
-            `/api/${userId}/role`,
+            `/api/user/${userId}/role`,
             {
                 userRole,
             },
@@ -141,7 +141,7 @@ export async function changeUserRole(userId: number, userRole: string) {
 export async function banUser(userId: number) {
     try{
         const response: AxiosResponse<void> = await appAPI.patch(
-            `/api/${userId}/ban`,
+            `/api/user/${userId}/ban`,
             {
                 withCredentials: true,
             }
@@ -171,7 +171,7 @@ export async function banUser(userId: number) {
 export async function changeEmail(value: string) {
     try{
         const response: AxiosResponse<void> = await appAPI.patch(
-            `/api/change-username`,
+            `/api/user/change-username`,
             {
                 value,
             },
@@ -209,7 +209,7 @@ interface changePasswordData {
 export async function changePassword(passwordsData: changePasswordData) {
     try{
         const response: AxiosResponse<void> = await appAPI.patch(
-            `/api/change-password`,
+            `/api/user/change-password`,
             passwordsData,
             {
                 withCredentials: true,
@@ -250,7 +250,7 @@ export interface RegisterNewUserData {
 export async function registerNewUser(newUser: RegisterNewUserData) {
     try{
         const response: AxiosResponse<void> = await appAPI.post(
-            `/api/register`,
+            `/api/user/register`,
             newUser,
             {
                 withCredentials: true,
@@ -284,7 +284,7 @@ export interface AuthenticateUserData {
 export async function authenticateUser(userData: AuthenticateUserData) {
     try{
         const response: AxiosResponse<void> = await appAPI.post(
-            `/api/login`,
+            `/api/user/login`,
             userData,
             {
                 withCredentials: true,
@@ -319,7 +319,7 @@ export interface AuthenticateAsCourtOwner {
 export async function authenticateAsCourtOwner(ownerData: AuthenticateAsCourtOwner) {
     try{
         const response: AxiosResponse<void> = await appAPI.post(
-            `/api/become-court-owner`,
+            `/api/user/become-court-owner`,
             ownerData,
             {
                 withCredentials: true,

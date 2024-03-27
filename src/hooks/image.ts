@@ -1,0 +1,154 @@
+import { appAPI } from "@/utils/appAPI";
+import { AxiosResponse } from "axios";
+
+export async function deleteImage(imageId: number) {
+    try{
+        const response: AxiosResponse<void> = await appAPI.delete(
+            `/api/image/${imageId}`,
+            {
+                withCredentials: true,
+            }
+        );
+        if (response.status === 200) {
+            console.log("Zdjęcie zostało usunięte poprawnie!")
+            return response.status;
+        } else if(response.status === 401) {
+            window.location.replace("/login");
+            console.error("Brak autoryzacji użytkownika");
+            return "Brak autoryzacji użytkownika";
+        } else {
+            console.error("Wystąpił błąd podczas usuwania zdjęcia");
+            return "Wystąpił błąd podczas usuwania zdjęcia";
+        }
+    } catch (error: any) {
+        if (error.response.status === 401) {
+            window.location.replace("/login");
+            console.error("Brak autoryzacji użytkownika");
+            return "Brak autoryzacji użytkownika";
+        } else {
+            throw new Error("Error500");
+        }
+    }
+}
+
+export interface ImageResponseData {
+    id: number;
+    path: string;
+    hasThumbnaild: boolean;
+    authorId: number;
+}
+
+export async function getAllImagesByAuthorId(authorId: number) {
+    try{
+        const response: AxiosResponse<ImageResponseData[]> = await appAPI.get(
+            `/api/image?authorId=${authorId}`,
+            {
+                withCredentials: true,
+            }
+        );
+        if (response.status === 200) {
+            console.log("Zdjęcia danego autora pobrano poprawnie!")
+            return response.data;
+        } else {
+            console.error("Wystąpił błąd podczas pobierania zdjęć danego autora");
+            return "Wystąpił błąd podczas pobierania zdjęć danego autora";
+        }
+    } catch (error: any) {
+        throw new Error("Error500");
+    }
+}
+
+// export async function getImageById(imageId: number, thumbnail?: boolean) {
+//     try{
+//         const response: AxiosResponse<string> = await appAPI.get(
+//             thumbnail ? `/api/image/${imageId}?thumbnail=${thumbnail}` : `/api/image/${imageId}`,
+//             {
+//                 withCredentials: true,
+//             }
+//         );
+//         if (response.status === 200) {
+//             console.log("Zdjęcie pobrano poprawnie!")
+//             return response.data;
+//         } else {
+//             console.error("Wystąpił błąd podczas pobierania zdjęcia");
+//             return "Wystąpił błąd podczas pobierania zdjęcia";
+//         }
+//     } catch (error: any) {
+//         throw new Error("Error500");
+//     }
+// }
+
+  
+export async function uploadSingleImage(uploadedFile: string, thumbnail?: boolean) {
+    try {
+      const response: AxiosResponse<ImageResponseData> = await appAPI.post(
+        thumbnail ? `/api/image?thumbnail=${thumbnail}` : `/api/image`,
+        {
+            uploadedFile,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        console.log("Zdjęcie zostało usunięte poprawnie!")
+        return response.data;
+        } else if(response.status === 401) {
+            window.location.replace("/login");
+            console.error("Brak autoryzacji użytkownika");
+            return "Brak autoryzacji użytkownika";
+        } else {
+            console.error("Wystąpił błąd podczas usuwania zdjęcia");
+            return "Wystąpił błąd podczas usuwania zdjęcia";
+        }
+    } catch (error: any) {
+        if (error.response.status === 401) {
+            window.location.replace("/login");
+            console.error("Brak autoryzacji użytkownika");
+            return "Brak autoryzacji użytkownika";
+        } else {
+            throw new Error("Error500");
+        }
+    }
+}
+
+export async function uploadMultipleImages(uploadedFiles: string[], thumbnail?: boolean) {
+    try {
+      const response: AxiosResponse<ImageResponseData> = await appAPI.post(
+        thumbnail ? `/api/image?thumbnail=${thumbnail}` : `/api/image`,
+        {
+            uploadedFiles,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        console.log("Zdjęcie zostało usunięte poprawnie!")
+        return response.data;
+        } else if(response.status === 401) {
+            window.location.replace("/login");
+            console.error("Brak autoryzacji użytkownika");
+            return "Brak autoryzacji użytkownika";
+        } else {
+            console.error("Wystąpił błąd podczas usuwania zdjęcia");
+            return "Wystąpił błąd podczas usuwania zdjęcia";
+        }
+    } catch (error: any) {
+        if (error.response.status === 401) {
+            window.location.replace("/login");
+            console.error("Brak autoryzacji użytkownika");
+            return "Brak autoryzacji użytkownika";
+        } else {
+            throw new Error("Error500");
+        }
+    }
+}

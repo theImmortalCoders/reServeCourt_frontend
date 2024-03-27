@@ -34,7 +34,7 @@ export async function deleteImage(imageId: number) {
 export interface ImageResponseData {
     id: number;
     path: string;
-    hasThumbnaild: boolean;
+    hasThumbnail: boolean;
     authorId: number;
 }
 

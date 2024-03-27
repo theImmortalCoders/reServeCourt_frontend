@@ -105,13 +105,10 @@ export async function logoutUser() {
     }
 }
 
-export async function changeUserRole(userId: number, userRole: string) {
+export async function changeUserRole(userId: number, newRole: string) {
     try{
         const response: AxiosResponse<void> = await appAPI.patch(
-            `/api/user/${userId}/role`,
-            {
-                userRole,
-            },
+            `/api/user/${userId}/role?newRole=${newRole}`,
             {
                 withCredentials: true,
             }

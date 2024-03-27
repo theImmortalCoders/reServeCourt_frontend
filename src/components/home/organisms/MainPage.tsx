@@ -11,6 +11,7 @@ export default function MainPage() {
             src={Tennis}
             alt={"Tennis"}
             className="h-[60%] w-auto rounded-r-3xl"
+            priority
           />
           <div className="absolute top-[35%] bottom-0 w-full h-[30%] bg-slate-200 z-1 flex flex-col items-center justify-center uppercase text-4xl text-darkGreen opacity-90">
             <h1>Zaplanuj swój trening</h1>

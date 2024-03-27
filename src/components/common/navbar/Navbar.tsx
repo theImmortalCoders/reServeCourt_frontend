@@ -14,9 +14,9 @@ export default function Navbar() {
 
   return (
     <nav className="max-w-screen h-navbar bg-mainWhite flex items-center justify-between px-4 md:px-8">
-      <Image src={Logo} alt="Logo" width={50} height={50} />
+      <Image src={Logo} alt="Logo" width={70} height={70} />
 
-      <div className="text-darkGreen font-thin text-md md:text-lg md:flex md:flex-row md:gap-10 hidden">
+      <div className="text-darkGreen font-thin text-md md:text-lg lg:text-2xl md:flex md:flex-row md:gap-10 hidden">
         <a href="/aboutus">
           <button>O nas</button>
         </a>
@@ -31,22 +31,22 @@ export default function Navbar() {
         </a>
       </div>
 
-      <div className="flex flex-row gap-8 items-center">
+      <div className="flex flex-row gap-4 md:gap-8 items-center">
         <a href="/book">
-          <button className="text-mainWhite bg-darkGreen py-1 px-6 rounded-lg">
+          <button className="text-mainWhite bg-darkGreen py-1 px-6 rounded-lg text-md md:text-lg lg:text-1xl">
             Rezerwuj
           </button>
         </a>
-        <IoPersonCircleOutline className="w-6 h-6 text-darkGreen" />
+        <IoPersonCircleOutline className="w-8 h-8 text-darkGreen" />
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
-            className="text-darkGreen mr-5 flex items-center"
+            className="text-darkGreen mr-2 flex items-center"
           >
             {isMenuOpen ? (
-              <IoCloseOutline className="w-6 h-6" />
+              <IoCloseOutline className="w-8 h-8" />
             ) : (
-              <IoMenuOutline className="w-6 h-6" />
+              <IoMenuOutline className="w-8 h-8" />
             )}
           </button>
         </div>

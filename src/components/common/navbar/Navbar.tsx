@@ -13,10 +13,10 @@ export default function Navbar() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="max-w-screen h-navbar bg-mainWhite flex items-center justify-between px-4 md:px-8">
-      <Image src={Logo} alt="Logo" width={70} height={70} />
+    <nav className="max-w-screen h-navbar bg-mainWhite flex items-center justify-between px-4 md:px-8 shadow-navbarShadow sticky z-20">
+      <a href="/"><Image src={Logo} alt="Logo" width={70} height={70} /></a>
 
-      <div className="text-darkGreen font-thin text-md md:text-lg lg:text-2xl md:flex md:flex-row md:gap-10 hidden">
+      <div className="text-darkGreen font-sans text-md md:text-lg lg:text-xl md:flex md:flex-row md:gap-10 hidden">
         <a href="/aboutus">
           <button>O nas</button>
         </a>
@@ -33,7 +33,7 @@ export default function Navbar() {
 
       <div className="flex flex-row gap-4 md:gap-8 items-center">
         <a href="/book">
-          <button className="text-mainWhite bg-darkGreen py-1 px-6 rounded-lg text-md md:text-lg lg:text-1xl">
+          <button className="text-mainWhite bg-darkGreen py-1 px-6 rounded-lg text-md md:text-lg">
             Rezerwuj
           </button>
         </a>

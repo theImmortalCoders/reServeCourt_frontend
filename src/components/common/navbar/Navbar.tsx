@@ -14,7 +14,9 @@ export default function Navbar() {
 
   return (
     <nav className="max-w-screen h-navbar bg-mainWhite flex items-center justify-between px-4 md:px-8 shadow-navbarShadow sticky z-20">
-      <a href="/"><Image src={Logo} alt="Logo" width={70} height={70} /></a>
+      <a href="/">
+        <Image src={Logo} alt="Logo" width={70} height={70} />
+      </a>
 
       <div className="text-darkGreen font-sans text-md md:text-lg lg:text-xl md:flex md:flex-row md:gap-10 hidden">
         <a href="/aboutus">
@@ -37,7 +39,10 @@ export default function Navbar() {
             Rezerwuj
           </button>
         </a>
-        <IoPersonCircleOutline className="w-8 h-8 text-darkGreen" />
+        <a href="/login">
+          <IoPersonCircleOutline className="w-8 h-8 text-darkGreen" />
+        </a>
+
         <div className="md:hidden">
           <button
             onClick={toggleMenu}

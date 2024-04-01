@@ -2,92 +2,97 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FiMail, FiLock } from "react-icons/fi"; // Importowanie ikon z React Icons
 import { AuthenticateUserData, authenticateUser } from "@/hooks/user";
+import LoginInput from "@/components/login/LoginInput";
+import { FaRegUser } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [logged, setLogged] = useState<boolean | undefined>(undefined);
+  const router = useRouter();
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const userData: AuthenticateUserData = { email, password };
-    const status = await authenticateUser(userData);
-    console.log("status", status);
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      setLogged(undefined);
+      const userData: AuthenticateUserData = { email, password };
+      const result = await authenticateUser(userData);
+      if (result === 200) {
+        setLogged(true);
+        router.push("/dashboard");
+      } else if (result === "Błędne dane logowania") {
+        setLogged(false);
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleForgotPassword = () => {
-    // Tutaj możesz dodać logikę do przekierowania użytkownika do formularza odzyskiwania hasła
     console.log("Przekierowanie do formularza odzyskiwania hasła");
   };
 
   const handleRegisterForm = () => {
-    // Tutaj możesz dodać logikę do przekierowania użytkownika do formularza rejestracji
     console.log("Przekierowanie do formularza rejestracji");
   };
 
   return (
     <main className="min-h-screen max-w-max bg-mainWhite flex justify-center items-center">
-      <div className="bg-white p-8 rounded shadow-md">
-        <h2 className="text-2xl mb-4">Logowanie</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="relative">
-            <FiMail className="absolute top-3 left-3 text-gray-400" size={20} />
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Email"
-              className="w-full pl-10 border-gray-300 rounded-md p-2"
-              required
-            />
-          </div>
-          <div className="relative">
-            <FiLock className="absolute top-3 left-3 text-gray-400" size={20} />
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={handlePasswordChange}
-              placeholder="Hasło"
-              className="w-full pl-10 border-gray-300 rounded-md p-2"
-              required
-            />
-          </div>
-          <div className="flex justify-between">
-            <button
-              type="submit"
-              className="w-1/2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
-            >
-              Zaloguj się
-            </button>
-            <p className="w-1/2 text-right">
-              <button
-                onClick={handleForgotPassword}
-                className="text-blue-500 hover:underline focus:outline-none"
-                type="button"
-              >
-                Zapomniałeś hasła?
-              </button>
-            </p>
-          </div>
-        </form>
-        <p className="mt-4 text-center">
-          Nie masz jeszcze konta?{" "}
+      <div className="bg-mainWhite p-7 rounded shadow-md w-64 xs:w-80 lg:w-96">
+        <h2 className="text-xl lg:text-2xl font-semibold mb-6">Logowanie</h2>
+        <LoginInput
+          type="text"
+          placeholder="Adres E-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        >
+          <FiMail className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
+        </LoginInput>
+        <button
+          className="w-full text-right text-darkGreen underline"
+          onClick={handleForgotPassword}
+        >
+          Zapomniałeś hasła?
+        </button>
+        <LoginInput
+          type="password"
+          placeholder="Hasło"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        >
+          <FiLock className="h-4 w-4 lg:h-5 lg:w- text-gray-500 mr-2" />
+        </LoginInput>
+        <button
+          className="bg-darkGreen text-mainWhite rounded px-3 lg:px-4 py-2 w-full"
+          onClick={handleLogin}
+          disabled={loading}
+        >
+          {loading ? "Logowanie..." : "Zaloguj"}
+        </button>
+        <div className="flex flex-row justify-center gap-x-1 pt-2">
+          <p>Nie masz konta?</p>
           <button
+            className="text-right text-darkGreen underline"
             onClick={handleRegisterForm}
-            className="text-blue-500 hover:underline focus:outline-none"
           >
-            Zarejestruj się
+            Załóż konto
           </button>
-        </p>
+        </div>
+
+        {logged === false && (
+          <p className="mt-4 text-start text-sm text-red-800">
+            Błędne dane logowania
+          </p>
+        )}
+        {logged === true && (
+          <p className="mt-4 text-start text-sm text-green-800">
+            Zalogowano poprawnie
+          </p>
+        )}
       </div>
     </main>
   );

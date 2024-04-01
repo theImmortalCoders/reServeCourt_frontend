@@ -5,6 +5,8 @@ import { AuthenticateUserData, authenticateUser } from "@/hooks/user";
 import LoginInput from "@/components/login/LoginInput";
 import { FaRegUser } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import ResetPasswordModal from "@/components/login/ResetPasswordModal";
+import { LoginButtonClass } from "@/components/login/LoginButton";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -12,7 +14,9 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState<boolean | undefined>(undefined);
   const router = useRouter();
-
+  const [resetPasswordModalVisible, setResetPasswordModalVisible] =
+    useState(false);
+  const [signUpModalVisible, setSignUpModalVisible] = useState(false);
   const handleLogin = async () => {
     try {
       setLoading(true);
@@ -33,7 +37,7 @@ export default function Login() {
   };
 
   const handleForgotPassword = () => {
-    console.log("Przekierowanie do formularza odzyskiwania hasła");
+    setResetPasswordModalVisible(true);
   };
 
   const handleRegisterForm = () => {
@@ -58,6 +62,7 @@ export default function Login() {
         >
           Zapomniałeś hasła?
         </button>
+        {resetPasswordModalVisible && <ResetPasswordModal />}
         <LoginInput
           type="password"
           placeholder="Hasło"
@@ -67,7 +72,7 @@ export default function Login() {
           <FiLock className="h-4 w-4 lg:h-5 lg:w- text-gray-500 mr-2" />
         </LoginInput>
         <button
-          className="bg-darkGreen text-mainWhite rounded px-3 lg:px-4 py-2 w-full"
+          className={LoginButtonClass}
           onClick={handleLogin}
           disabled={loading}
         >

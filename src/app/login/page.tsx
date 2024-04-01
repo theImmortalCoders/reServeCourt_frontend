@@ -2,11 +2,14 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FiMail, FiLock } from "react-icons/fi"; // Importowanie ikon z React Icons
 import { AuthenticateUserData, authenticateUser } from "@/hooks/user";
-import LoginInput from "@/components/login/LoginInput";
+import LoginInput from "@/components/login/atoms/LoginInput";
 import { FaRegUser } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ResetPasswordModal from "@/components/login/ResetPasswordModal";
-import { LoginButtonClass } from "@/components/login/LoginButton";
+import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
+import AddAccountModal from "@/components/login/AddAccountModal";
+import InputPassword from "@/components/login/molecules/InputPassword";
+import InputEmail from "@/components/login/molecules/InputEmail";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,9 +17,10 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState<boolean | undefined>(undefined);
   const router = useRouter();
-  const [resetPasswordModalVisible, setResetPasswordModalVisible] =
+  const [isResetPasswordModalVisible, setIsResetPasswordModalVisible] =
     useState(false);
-  const [signUpModalVisible, setSignUpModalVisible] = useState(false);
+  const [isAddAccountModalVisible, setIsAddAccountModalVisible] =
+    useState(false);
   const handleLogin = async () => {
     try {
       setLoading(true);
@@ -36,41 +40,43 @@ export default function Login() {
     }
   };
 
-  const handleForgotPassword = () => {
-    setResetPasswordModalVisible(true);
+  const openResetPasswordModal = () => {
+    setIsResetPasswordModalVisible(true);
   };
 
-  const handleRegisterForm = () => {
-    console.log("Przekierowanie do formularza rejestracji");
+  const closeResetPasswordModal = () => {
+    setIsResetPasswordModalVisible(false);
+  };
+
+  const openAddAccountModal = () => {
+    setIsAddAccountModalVisible(true);
+  };
+
+  const closeAddAccountModal = () => {
+    setIsAddAccountModalVisible(false);
   };
 
   return (
     <main className="min-h-screen max-w-max bg-mainWhite flex justify-center items-center">
       <div className="bg-mainWhite p-7 rounded shadow-md w-64 xs:w-80 lg:w-96">
         <h2 className="text-xl lg:text-2xl font-semibold mb-6">Logowanie</h2>
-        <LoginInput
-          type="text"
-          placeholder="Adres E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        >
-          <FiMail className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
-        </LoginInput>
+        <p className="text-sm text-gray-700 mb-4">
+          Wprowadź adres e-mail oraz hasło aby uzyskać dostęp do konta.
+        </p>
+        <InputEmail value={email} onChange={(e) => setEmail(e.target.value)} />
         <button
           className="w-full text-right text-darkGreen underline"
-          onClick={handleForgotPassword}
+          onClick={openResetPasswordModal}
         >
           Zapomniałeś hasła?
         </button>
-        {resetPasswordModalVisible && <ResetPasswordModal />}
-        <LoginInput
-          type="password"
-          placeholder="Hasło"
+        {isResetPasswordModalVisible && (
+          <ResetPasswordModal closeModal={closeResetPasswordModal} />
+        )}
+        <InputPassword
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        >
-          <FiLock className="h-4 w-4 lg:h-5 lg:w- text-gray-500 mr-2" />
-        </LoginInput>
+        />
         <button
           className={LoginButtonClass}
           onClick={handleLogin}
@@ -82,12 +88,14 @@ export default function Login() {
           <p>Nie masz konta?</p>
           <button
             className="text-right text-darkGreen underline"
-            onClick={handleRegisterForm}
+            onClick={openAddAccountModal}
           >
             Załóż konto
           </button>
         </div>
-
+        {isAddAccountModalVisible && (
+          <AddAccountModal closeModal={closeAddAccountModal} />
+        )}
         {logged === false && (
           <p className="mt-4 text-start text-sm text-red-800">
             Błędne dane logowania

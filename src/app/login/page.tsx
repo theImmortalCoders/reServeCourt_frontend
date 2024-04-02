@@ -1,15 +1,13 @@
 "use client";
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { FiMail, FiLock } from "react-icons/fi"; // Importowanie ikon z React Icons
+import React, { useLayoutEffect, useState } from "react";
 import { AuthenticateUserData, authenticateUser } from "@/hooks/user";
-import LoginInput from "@/components/login/atoms/LoginInput";
-import { FaRegUser } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ResetPasswordModal from "@/components/login/ResetPasswordModal";
 import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
 import AddAccountModal from "@/components/login/AddAccountModal";
 import InputPassword from "@/components/login/molecules/InputPassword";
 import InputEmail from "@/components/login/molecules/InputEmail";
+import LoginHeader from "@/components/login/atoms/LoginHeader";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -56,13 +54,27 @@ export default function Login() {
     setIsAddAccountModalVisible(false);
   };
 
+  useLayoutEffect(() => {
+    if (isResetPasswordModalVisible || isAddAccountModalVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isResetPasswordModalVisible, isAddAccountModalVisible]);
+
   return (
     <main className="min-h-screen max-w-max bg-mainWhite flex justify-center items-center">
       <div className="bg-mainWhite p-7 rounded shadow-md w-64 xs:w-80 lg:w-96">
-        <h2 className="text-xl lg:text-2xl font-semibold mb-6">Logowanie</h2>
-        <p className="text-sm text-gray-700 mb-4">
-          Wprowadź adres e-mail oraz hasło aby uzyskać dostęp do konta.
-        </p>
+        <LoginHeader
+          title={"Logowanie"}
+          description={
+            "Wprowadź adres e-mail oraz hasło aby uzyskać dostęp do konta."
+          }
+        />
         <InputEmail value={email} onChange={(e) => setEmail(e.target.value)} />
         <button
           className="w-full text-right text-darkGreen underline"

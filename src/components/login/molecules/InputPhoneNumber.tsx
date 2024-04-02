@@ -1,7 +1,7 @@
 import LoginInput from "../atoms/LoginInput";
-import { FiMail } from "react-icons/fi";
+import { FiPhone } from "react-icons/fi";
 
-export default function InputEmail({
+export default function InputPhoneNumber({
   value,
   onChange,
 }: {
@@ -10,12 +10,12 @@ export default function InputEmail({
 }) {
   return (
     <LoginInput
-      type="email"
-      placeholder="Adres E-mail"
+      type="tel"
+      placeholder="Numer Telefonu"
       value={value}
       onChange={onChange}
     >
-      <FiMail className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
+      <FiPhone className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
     </LoginInput>
   );
 }

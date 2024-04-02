@@ -1,7 +1,7 @@
 import LoginInput from "../atoms/LoginInput";
-import { FiMail } from "react-icons/fi";
+import { LiaBirthdayCakeSolid } from "react-icons/lia";
 
-export default function InputEmail({
+export default function InputBirthDate({
   value,
   onChange,
 }: {
@@ -10,12 +10,12 @@ export default function InputEmail({
 }) {
   return (
     <LoginInput
-      type="email"
-      placeholder="Adres E-mail"
+      type="date"
+      placeholder="Data urodzenia"
       value={value}
       onChange={onChange}
     >
-      <FiMail className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
+      <LiaBirthdayCakeSolid className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
     </LoginInput>
   );
 }

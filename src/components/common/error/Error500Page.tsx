@@ -3,7 +3,7 @@ import Logo from "@/assets/home/reServeCourt.png"
 
 export default function Error500Page () {
     return (
-        <div className="flex flex-col justify-center items-center h-screen bg-mainWhite">
+        <div className="flex flex-col justify-center items-center h-min-h-max bg-mainWhite">
             <p className="text-2xl lg:text-4xl text-darkGreen">BŁĄD 500</p>
             <Image 
                 src={Logo}

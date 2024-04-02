@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
-function Point ({ children }: { children: React.ReactNode }) {
+function Point ({ children, onClick }: { children: React.ReactNode, onClick: () => void }) {
     return (
-        <span className="flex items-center text-base sm:text-xl md:text-2xl text-mainOrange pt-2 select-none">{ children }</span>
+        <span className="flex items-center text-base sm:text-xl md:text-2xl text-mainOrange pt-2 select-none cursor-pointer" onClick={onClick}>{ children }</span>
     )
 }
 
@@ -22,12 +22,7 @@ function Rule ({ children }: { children: React.ReactNode }) {
 
 export default function Page() {
     
-    const [isVisible1, setIsVisible1] = useState<boolean>(false);
-    const [isVisible2, setIsVisible2] = useState<boolean>(false);
-    const [isVisible3, setIsVisible3] = useState<boolean>(false);
-    const [isVisible4, setIsVisible4] = useState<boolean>(false);
-    const [isVisible5, setIsVisible5] = useState<boolean>(false);
-    const [isVisible6, setIsVisible6] = useState<boolean>(false);
+    const [isVisible, setIsVisible] = useState<number>(0);
 
     return (
         <div className="flex flex-col items-center min-h-max">
@@ -36,30 +31,42 @@ export default function Page() {
                     <h1 className="text-3xl md:text-4xl text-darkGreen">REGULAMIN</h1>
                     <p className="text-xs md:text-sm text-mainBlack mt-2">REGULAMIN PORTALU <span className="text-mainGreen">ReServeCourt</span> (dostępny pod adresem www.reservecourt.pl)</p>
                 </div>
-                <Point>I. Postanowienia ogólne<FiChevronDown className={`cursor-pointer transform ${isVisible1 ? 'rotate-180' : ''}`} onClick={() => setIsVisible1(!isVisible1)}/></Point>
-                {isVisible1 &&(
+                <Point onClick={() => (isVisible !== 1 ? setIsVisible(1) : setIsVisible(0))}>
+                    <span>I. Postanowienia ogólne</span>
+                    <FiChevronDown className={`cursor-pointer transform ${isVisible === 1 ? 'rotate-180' : ''}`}/>
+                </Point>
+                {isVisible === 1 &&(
                     <List>
                         <Rule>Niniejszy regulamin dotyczy korzystania z systemu rezerwacji online kortów tenisowych dostępnego na portalu ReServeCourt.</Rule> 
                         <Rule>Korzystanie z systemu rezerwacji oznacza akceptację postanowień niniejszego regulaminu.</Rule>
                     </List>
                 )}
-                <Point>II. Rezerwacja kortu<FiChevronDown className={`cursor-pointer transform ${isVisible2 ? 'rotate-180' : ''}`} onClick={() => setIsVisible2(!isVisible2)}/></Point>
-                {isVisible2 &&(
+                <Point onClick={() => (isVisible !== 2 ? setIsVisible(2) : setIsVisible(0))}>
+                    <span>II. Rezerwacja kortu</span>
+                    <FiChevronDown className={`cursor-pointer transform ${isVisible === 2 ? 'rotate-180' : ''}`}/>
+                </Point>
+                {isVisible === 2 &&(
                     <List>
                         <Rule>Rezerwacji można dokonać poprzez wypełnienie formularza rezerwacyjnego na stronie.</Rule> 
                         <Rule>Rezerwacja jest możliwa do 14 dni przed planowanym terminem.</Rule>
                         <Rule>Każdy użytkownik może dokonać maksymalnie dwóch rezerwacji tygodniowo.</Rule>
                     </List>
                 )}
-                <Point>III. Opłaty i płatności<FiChevronDown className={`cursor-pointer transform ${isVisible3 ? 'rotate-180' : ''}`} onClick={() => setIsVisible3(!isVisible3)}/></Point>
-                {isVisible3 &&(
+                <Point onClick={() => (isVisible !== 3 ? setIsVisible(3) : setIsVisible(0))}>
+                    <span>III. Opłaty i płatności</span>
+                    <FiChevronDown className={`cursor-pointer transform ${isVisible === 3 ? 'rotate-180' : ''}`}/>
+                </Point>
+                {isVisible === 3 &&(
                     <List>
                         <Rule>Opłata za wynajem kortu jest ustalana zgodnie z cennikiem opublikowanym na stronie.</Rule> 
                         <Rule>Płatność za rezerwację należy dokonać online za pomocą dostępnych metod płatności.</Rule>
                     </List>
                 )}
-                <Point>IV. Odwołanie rezerwacji<FiChevronDown className={`cursor-pointer transform ${isVisible4 ? 'rotate-180' : ''}`} onClick={() => setIsVisible4(!isVisible4)}/></Point>
-                {isVisible4 &&(
+                <Point onClick={() => (isVisible !== 4 ? setIsVisible(4) : setIsVisible(0))}>
+                    <span>IV. Odwołanie rezerwacji</span>
+                    <FiChevronDown className={`cursor-pointer transform ${isVisible === 4 ? 'rotate-180' : ''}`}/>
+                </Point>
+                {isVisible === 4 &&(
                     <List>
                         <Rule>
                             Użytkownik ma prawo odwołać rezerwację bez ponoszenia kosztów do 48 godzin przed planowanym terminem.
@@ -67,15 +74,21 @@ export default function Page() {
                         <Rule>W przypadku późniejszego odwołania, użytkownikowi nie przysługuje zwrot kosztów rezerwacji.</Rule>
                     </List>
                 )}
-                <Point>V. Zasady korzystania z kortu<FiChevronDown className={`cursor-pointer transform ${isVisible5 ? 'rotate-180' : ''}`} onClick={() => setIsVisible5(!isVisible5)}/></Point>
-                {isVisible5 &&(
+                <Point onClick={() => (isVisible !== 5 ? setIsVisible(5) : setIsVisible(0))}>
+                    <span>V. Zasady korzystania z kortu</span>
+                    <FiChevronDown className={`cursor-pointer transform ${isVisible === 5 ? 'rotate-180' : ''}`}/>
+                </Point>
+                {isVisible === 5 &&(
                     <List>
                         <Rule>Użytkownicy są zobowiązani do przestrzegania zasad korzystania z kortu, w tym do zachowania czystości i porządku.</Rule> 
                         <Rule>Na kortach obowiązuje zakaz palenia i spożywania alkoholu.</Rule>
                     </List>
                 )}
-                <Point>VI. Postanowienia końcowe<FiChevronDown className={`cursor-pointer transform ${isVisible6 ? 'rotate-180' : ''}`} onClick={() => setIsVisible6(!isVisible6)}/></Point>
-                {isVisible6 &&(
+                <Point onClick={() => (isVisible !== 6 ? setIsVisible(6) : setIsVisible(0))}>
+                    <span>VI. Postanowienia końcowe</span>
+                    <FiChevronDown className={`cursor-pointer transform ${isVisible === 6 ? 'rotate-180' : ''}`}/>
+                </Point>
+                {isVisible === 6 &&(
                     <List>
                         <Rule>Właściciel kortów zastrzega sobie prawo do zmiany regulaminu.</Rule> 
                         <Rule>W sprawach nieuregulowanych niniejszym regulaminem zastosowanie mają przepisy ogólne prawa.</Rule>

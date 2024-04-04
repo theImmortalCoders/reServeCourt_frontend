@@ -103,31 +103,31 @@ function Description () {
 function Graphics () {
     return (
         <span className="flex flex-col md:flex-row justify-center space-x-0 md:space-x-5 space-y-5 md:space-y-0 my-5">
-            <span className="flex w-full md:w-1/2 justify-center md:justify-end space-x-5">
+            <span className="flex flex-col 2xs:flex-row w-full md:w-1/2 items-center 2xs:items-start space-y-5 2xs:space-y-0 justify-center md:justify-end space-x-0 2xs:space-x-5">
                 <Image
                     src={Court_1}
                     alt={"Court_1"}
-                    className="w-1/3"
+                    className="w-3/5 2xs:w-1/3"
                     priority
                 />
                 <Image
                     src={Balls_1}
                     alt={"Balls_1"}
-                    className="w-1/3"
+                    className="w-3/5 2xs:w-1/3"
                     priority
                 />
             </span>
-            <span className="flex w-full md:w-1/2 justify-center md:justify-start space-x-5">
+            <span className="flex flex-col 2xs:flex-row w-full md:w-1/2 justify-center items-center 2xs:items-start space-y-5 2xs:space-y-0 md:justify-start space-x-0 2xs:space-x-5">
                 <Image
                     src={Court_2}
                     alt={"Court_2"}
-                    className="w-1/3"
+                    className="w-3/5 2xs:w-1/3"
                     priority
                 />
                 <Image
                     src={Balls_2}
                     alt={"Balls_2"}
-                    className="w-1/3"
+                    className="w-3/5 2xs:w-1/3"
                     priority
                 />
             </span>

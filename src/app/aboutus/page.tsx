@@ -72,13 +72,13 @@ function Description () {
                 <PointContainer>
                     <HeaderPoint>Komfortowe warunki</HeaderPoint>
                     <ContentPoint>
-                        Zapewniamy komfortowe warunki przez cały rok. Posiadamy trzy hale tenisowe oraz profesjonalnie oświetlone korty, co umożliwia grę w tenisa niezależnie od pory dnia czy warunków pogodowych. W naszym ośrodku regularnie organizowane są kursy, aby zapewnić naszym graczom możliwość doskonalenia swoich umiejętności.
+                        Zapewniamy komfortowe warunki przez cały rok. Posiadamy szeroki wybór hal tenisowych oraz profesjonalnie oświetlonych kortów, co umożliwia grę w tenisa niezależnie od pory dnia czy warunków pogodowych. Dzięki trosce o detale oraz wysokim standardom obsługi, zapewniamy naszym klientom nie tylko możliwość gry w tenisa, ale również niezrównany komfort i satysfakcję z korzystania z obiektów.
                     </ContentPoint>
                 </PointContainer>
                 <PointContainer>
                     <HeaderPoint>Dla wszystkich</HeaderPoint>
                     <ContentPoint>
-                        Nasz priorytet to zapewnienie przyjemnego doświadczenia tenisowego dla wszystkich odwiedzających. Niezależnie od tego, czy jesteś początkujący, czy wracasz po przerwie, zawsze możesz liczyć na wsparcie. Oferujemy wynajem kortów oraz kompleksowe programy treningowe dla wszystkich grup wiekowych, aby umożliwić rozwój umiejętności.
+                        Nasz priorytet to zapewnienie przyjemnego doświadczenia tenisowego dla wszystkich odwiedzających. Niezależnie od tego, czy jesteś początkujący, czy wracasz po przerwie, zawsze możesz liczyć na wsparcie. Oferujemy wynajem kortów oraz wypożyczalnie sprzętu, aby umożliwić rozwój umiejętności sportowych.
                     </ContentPoint>
                 </PointContainer>
             </ContentContainer>
@@ -86,13 +86,13 @@ function Description () {
                 <PointContainer>
                     <HeaderPoint>Pod okiem profesjonalistów</HeaderPoint>
                     <ContentPoint>
-                        Nasi doświadczeni trenerzy są dostępni do prowadzenia treningów zarówno w formie grupowej, jak i indywidualnej. Dodatkowo, oferujemy aktywny program tenisowy dla dzieci oraz dla każdego, kto chciałby po prostu pojawić się i zagrać. Jako przyjazny ośrodek tenisowy, witamy graczy w każdym wieku i o różnym poziomie umiejętności.
+                        Doświadczeni trenerzy są dostępni do prowadzenia treningów zarówno w formie grupowej, jak i indywidualnej. Dodatkowo, oferujemy aktywny program tenisowy dla dzieci oraz dla każdego, kto chciałby po prostu pojawić się i zagrać. Wspieramy graczy w każdym wieku i doświadczeniu.
                     </ContentPoint>
                 </PointContainer>
                 <PointContainer>
                     <HeaderPoint>Organizacja wydarzeń</HeaderPoint>
                     <ContentPoint>
-                        Nasza oferta obejmuje również wynajem sali na różnorodne wydarzenia, takie jak szkolenia, urodziny czy spotkania biznesowe. Po intensywnej grze w tenisa, jeśli będziecie mieli ochotę na chwilę regeneracji i odprężenia, serdecznie zapraszamy do skorzystania z usług masażu w naszej strefie relaksu.
+                        Nasza oferta obejmuje również wynajem kortów tenisowych na różnorodne wydarzenia w tym urodziny, imprezy firmowe oraz inne specjalne spotkania. Oferujemy doskonałe warunki do organizacji aktywnego i niezapomnianego czasu spędzonego na korcie, zapewniając kompleksową obsługę oraz profesjonalne przygotowanie infrastruktury. 
                     </ContentPoint>
                 </PointContainer>
             </ContentContainer>

@@ -8,6 +8,15 @@ import {
   IoCloseOutline,
 } from "react-icons/io5";
 
+function NavbarElement ({ url, text }: { url: string, text: string }) {
+  return (
+    <a href={`/${url}`} className="relative group">
+      <button className="block">{ text }</button>
+      <span className="absolute inset-x-0 bottom-0 h-0.5 bg-darkGreen transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
+    </a>
+  )
+}
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -17,18 +26,10 @@ export default function Navbar() {
       <a href="/"><Image src={Logo} alt="Logo" width={70} height={70} /></a>
 
       <div className="text-darkGreen font-sans text-md md:text-lg lg:text-xl md:flex md:flex-row md:gap-10 hidden">
-        <a href="/aboutus">
-          <button>O nas</button>
-        </a>
-        <a href="/price">
-          <button>Cennik</button>
-        </a>
-        <a href="/rules">
-          <button>Regulamin</button>
-        </a>
-        <a href="/contact">
-          <button>Kontakt</button>
-        </a>
+        <NavbarElement url="aboutus" text="O nas"/>
+        <NavbarElement url="price" text="Cennik"/>
+        <NavbarElement url="rules" text="Regulamin"/>
+        <NavbarElement url="courts" text="Korty"/>
       </div>
 
       <div className="flex flex-row gap-4 md:gap-8 items-center">
@@ -64,8 +65,8 @@ export default function Navbar() {
             <a href="/rules" onClick={toggleMenu}>
               <button>Regulamin</button>
             </a>
-            <a href="/contact" onClick={toggleMenu}>
-              <button>Kontakt</button>
+            <a href="/courts" onClick={toggleMenu}>
+              <button>Korty</button>
             </a>
           </div>
         </div>

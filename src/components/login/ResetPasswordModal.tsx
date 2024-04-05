@@ -3,6 +3,7 @@ import { LoginButtonClass } from "./atoms/LoginButton";
 import Modal from "../common/modal/Modal";
 import InputEmail from "./molecules/InputEmail";
 import LoginHeader from "./atoms/LoginHeader";
+import { requestResetPassword } from "@/hooks/user";
 
 export default function ResetPasswordModal({
   closeModal,
@@ -12,7 +13,7 @@ export default function ResetPasswordModal({
   const [email, setEmail] = useState("");
 
   const handleResetPassword = () => {
-    console.log("Reset Password");
+    requestResetPassword(email);
   };
   return (
     <Modal closeModal={closeModal}>

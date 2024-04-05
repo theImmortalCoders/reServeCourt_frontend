@@ -76,8 +76,12 @@ export default function Login() {
           }
         />
         <InputEmail value={email} onChange={(e) => setEmail(e.target.value)} />
+        <InputPassword
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button
-          className="w-full text-right text-darkGreen underline"
+          className="w-full text-right text-darkGreen underline pb-2"
           onClick={openResetPasswordModal}
         >
           Zapomniałeś hasła?
@@ -85,10 +89,6 @@ export default function Login() {
         {isResetPasswordModalVisible && (
           <ResetPasswordModal closeModal={closeResetPasswordModal} />
         )}
-        <InputPassword
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
         <button
           className={LoginButtonClass}
           onClick={handleLogin}

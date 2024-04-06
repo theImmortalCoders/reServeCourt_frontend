@@ -1,8 +1,9 @@
 "use client";
 import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
-import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
+import { LoginButton } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
+import LoginMessage from "@/components/login/atoms/LoginMessage";
 import { InputEmail } from "@/components/login/molecules/Inputs";
 import { requestResetPassword } from "@/hooks/user";
 import { useState } from "react";
@@ -45,19 +46,19 @@ export default function passwordReset() {
             }
           />
           <InputEmail />
-          <button className={LoginButtonClass} disabled={buttonDisabled}>
-            {loading ? "Resetowanie hasła..." : "Resetuj hasło"}
-          </button>
-          {resetPasswordState === false && (
-            <p className="mt-4 text-start text-sm text-red-800">{message}</p>
-          )}
-          {resetPasswordState === true && (
-            <div className="mt-4 text-start text-sm">
-              <p className="text-green-800">
-                Sprawdź swoją skrzynkę e-mail w celu zresetowania hasła.
-              </p>
-            </div>
-          )}
+          <LoginButton
+            loading={loading}
+            disabled={buttonDisabled}
+            messageIfLoadingIsTrue={"Resetowanie hasła..."}
+            messageIfLoadingIsFalse={"Resetuj hasło"}
+          />
+          <LoginMessage
+            value={resetPasswordState}
+            messageIfIsRed={message}
+            messageIfIsGreen={
+              "Sprawdź swoją skrzynkę e-mail w celu zresetowania hasła."
+            }
+          />
         </form>
       </Box>
     </Page>

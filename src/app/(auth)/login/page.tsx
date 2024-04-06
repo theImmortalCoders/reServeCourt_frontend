@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import { AuthenticateUserData, authenticateUser } from "@/hooks/user";
 import { useRouter } from "next/navigation";
-import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
+import { LoginButton } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
 import Page from "@/components/common/page/Page";
 import Box from "@/components/common/box/Box";
 import Link from "next/link";
 import { InputPassword, InputEmail } from "@/components/login/molecules/Inputs";
+import LoginMessage from "@/components/login/atoms/LoginMessage";
 
 export default function Login() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -55,9 +56,12 @@ export default function Login() {
               Zapomniałeś hasła?
             </button>
           </Link>
-          <button className={LoginButtonClass} disabled={buttonDisabled}>
-            {loading ? "Logowanie..." : "Zaloguj"}
-          </button>
+          <LoginButton
+            loading={loading}
+            disabled={buttonDisabled}
+            messageIfLoadingIsTrue={"Logowanie..."}
+            messageIfLoadingIsFalse={"Zaloguj"}
+          />
           <div className="flex flex-row justify-center gap-x-1 pt-2 text-sm sm:text-md">
             <p>Nie masz konta?</p>
             <Link href={"/add-account"}>
@@ -66,14 +70,11 @@ export default function Login() {
               </button>
             </Link>
           </div>
-          {logged === false && (
-            <p className="mt-4 text-start text-sm text-red-800">{message}</p>
-          )}
-          {logged === true && (
-            <p className="mt-4 text-start text-sm text-green-800">
-              Zalogowano poprawnie
-            </p>
-          )}
+          <LoginMessage
+            value={logged}
+            messageIfIsRed={message}
+            messageIfIsGreen={"Zalogowano poprawnie"}
+          />
         </form>
       </Box>
     </Page>

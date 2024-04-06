@@ -1,8 +1,9 @@
 "use client";
 import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
-import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
+import { LoginButton } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
+import LoginMessage from "@/components/login/atoms/LoginMessage";
 import {
   InputBirthDate,
   InputEmail,
@@ -83,18 +84,18 @@ export default function AddAccount() {
           <InputBirthDate />
           <InputPassword />
           <InputSecondPassword />
-          <button className={LoginButtonClass} disabled={buttonDisabled}>
-            {loading ? "Sprawdzanie danych..." : "Stwórz konto"}
-          </button>
-          {addAccount === false && (
-            <p className="mt-4 text-start text-sm text-red-800">{message}</p>
-          )}
-          {addAccount === true && (
-            <div className="mt-4 text-start text-sm">
-              <p className="text-green-800">Konto zostało dodane poprawnie.</p>
-              Zaraz zostanie przeniesiony na stronę logowania
-            </div>
-          )}
+          <LoginButton
+            loading={loading}
+            disabled={buttonDisabled}
+            messageIfLoadingIsTrue={"Sprawdzanie danych..."}
+            messageIfLoadingIsFalse={"Stwórz konto"}
+          />
+          <LoginMessage
+            value={addAccount}
+            messageIfIsRed={message}
+            messageIfIsGreen={"Konto zostało dodane poprawnie."}
+            messageIfIsGreenAdd="Zaraz zostanie przeniesiony na stronę logowania"
+          />
         </form>
       </Box>
     </Page>

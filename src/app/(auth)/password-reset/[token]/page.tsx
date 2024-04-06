@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
-import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
+import { LoginButton } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
 import { resetPassword } from "@/hooks/user";
 import {
   InputPassword,
   InputSecondPassword,
 } from "@/components/login/molecules/Inputs";
+import LoginMessage from "@/components/login/atoms/LoginMessage";
 
 export default function PasswordResetToken({
   params,
@@ -63,20 +64,19 @@ export default function PasswordResetToken({
           />
           <InputPassword />
           <InputSecondPassword />
-          <button className={LoginButtonClass} disabled={buttonDisabled}>
-            {loading ? "Resetowanie hasła..." : "Resetuj hasło"}
-          </button>
-          {resetPasswordState === false && (
-            <p className="mt-4 text-start text-sm text-red-800">{message}</p>
-          )}
-          {resetPasswordState === true && (
-            <div className="mt-4 text-start text-sm">
-              <p className="text-green-800">
-                Hasło zostało zresetowane. Za chwilę zostaniesz przekierowany na
-                stronę logowania.
-              </p>
-            </div>
-          )}
+          <LoginButton
+            loading={loading}
+            disabled={buttonDisabled}
+            messageIfLoadingIsTrue={"Resetowanie hasła..."}
+            messageIfLoadingIsFalse={"Resetuj hasło"}
+          />
+          <LoginMessage
+            value={resetPasswordState}
+            messageIfIsRed={message}
+            messageIfIsGreen={
+              "Hasło zostało zresetowane. Za chwilę zostaniesz przekierowany na stronę logowania."
+            }
+          />
         </form>
       </Box>
     </Page>

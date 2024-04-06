@@ -13,28 +13,30 @@ import Link from "next/link";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState<boolean | undefined>(undefined);
   const router = useRouter();
 
   const handleLogin = async () => {
-    try {
-      setLoading(true);
-      setLogged(undefined);
-      const userData: AuthenticateUserData = { email, password };
-      const result = await authenticateUser(userData);
-      console.log("result", result);
-      if (result === 200) {
-        setLogged(true);
-        router.push("/dashboard");
-      } else if (result === "Błędne dane logowania") {
-        setLogged(false);
-      }
-    } catch (error) {
-      console.error("Login failed:", error);
-    } finally {
-      setLoading(false);
+    setLoading(true);
+    setButtonDisabled(true);
+    setLogged(undefined);
+    const userData: AuthenticateUserData = { email, password };
+    const result = await authenticateUser(userData);
+    if (result === 200) {
+      setLogged(true);
+      router.push("/dashboard");
+    } else {
+      setMessage(result);
+      setLogged(false);
     }
+    setTimeout(() => {
+      setButtonDisabled(false);
+      setLoading(false);
+      setLogged(undefined);
+    }, 6 * 1000);
   };
 
   return (
@@ -59,7 +61,7 @@ export default function Login() {
         <button
           className={LoginButtonClass}
           onClick={handleLogin}
-          disabled={loading}
+          disabled={buttonDisabled}
         >
           {loading ? "Logowanie..." : "Zaloguj"}
         </button>
@@ -72,9 +74,7 @@ export default function Login() {
           </Link>
         </div>
         {logged === false && (
-          <p className="mt-4 text-start text-sm text-red-800">
-            Błędne dane logowania
-          </p>
+          <p className="mt-4 text-start text-sm text-red-800">{message}</p>
         )}
         {logged === true && (
           <p className="mt-4 text-start text-sm text-green-800">

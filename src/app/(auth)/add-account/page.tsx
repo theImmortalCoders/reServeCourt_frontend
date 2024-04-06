@@ -10,6 +10,7 @@ import InputPassword from "@/components/login/molecules/InputPassword";
 import InputPhoneNumber from "@/components/login/molecules/InputPhoneNumber";
 import InputSurname from "@/components/login/molecules/InputSurname";
 import { RegisterNewUserData, registerNewUser } from "@/hooks/user";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function AddAccount() {
@@ -20,23 +21,48 @@ export default function AddAccount() {
   const [birthDate, setBirthDate] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [addAccount, setAddAccount] = useState<boolean | undefined>(undefined);
+  const router = useRouter();
 
-  const AddAccountFunction = () => {
+  const AddAccountFunction = async () => {
+    setLoading(true);
+    setButtonDisabled(true);
+    setAddAccount(undefined);
     if (password1 !== password2) {
-      setPasswordError("Hasła nie są takie same.");
+      setAddAccount(false);
+      setMessage("Hasła nie są takie same");
+      setTimeout(() => {
+        setButtonDisabled(false);
+        setLoading(false);
+        setAddAccount(undefined);
+      }, 2 * 1000);
       return;
+    } else {
+      const newUser: RegisterNewUserData = {
+        name,
+        surname,
+        birthDate,
+        password: password1,
+        phoneNumber,
+        email,
+      };
+      const result = await registerNewUser(newUser);
+      if (result === 200) {
+        setAddAccount(true);
+        router.push("/login");
+      } else {
+        setMessage(result);
+        setAddAccount(false);
+      }
+      setTimeout(() => {
+        setButtonDisabled(false);
+        setLoading(false);
+        setAddAccount(undefined);
+      }, 3 * 1000);
     }
-
-    const newUser: RegisterNewUserData = {
-      name,
-      surname,
-      birthDate,
-      password: password1,
-      phoneNumber,
-      email,
-    };
-    registerNewUser(newUser);
   };
 
   return (
@@ -68,14 +94,23 @@ export default function AddAccount() {
           value={password2}
           onChange={(e) => setPassword2(e.target.value)}
         />
-        {passwordError && (
-          <div style={{ color: "red", marginBottom: "10px" }}>
-            {passwordError}
+
+        <button
+          className={LoginButtonClass}
+          onClick={AddAccountFunction}
+          disabled={buttonDisabled}
+        >
+          {loading ? "Sprawdzanie danych..." : "Stwórz konto"}
+        </button>
+        {addAccount === false && (
+          <p className="mt-4 text-start text-sm text-red-800">{message}</p>
+        )}
+        {addAccount === true && (
+          <div className="mt-4 text-start text-sm">
+            <p className="text-green-800">Konto zostało dodane poprawnie.</p>
+            Zaraz zostanie przeniesiony na stronę logowania
           </div>
         )}
-        <button className={LoginButtonClass} onClick={AddAccountFunction}>
-          Stwórz konto
-        </button>
       </Box>
     </Page>
   );

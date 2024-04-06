@@ -238,21 +238,27 @@ export async function resetPassword(token: string, value: string) {
       }
     );
     if (response.status === 200) {
-      console.log("Użytkownik został zarejestrowany poprawnie!");
       return response.status;
-    } else if (response.status === 409) {
-      console.error("Użytkownik już istnieje");
-      return "Użytkownik już istnieje";
+    } else if (response.status === 400) {
+      console.error("Niepoprawne dane");
+      return "Niepoprawne dane";
+    } else if (response.status === 404) {
+      console.error("Nie podano email-a");
+      return "Nie podano email-a";
     } else {
-      console.error("Wystąpił błąd podczas rejestracji użytkownika");
-      return "Wystąpił błąd podczas rejestracji użytkownika";
+      console.error("Wystąpił błąd podczas resetowania hasła");
+      return "Wystąpił błąd podczas resetowania hasła";
     }
   } catch (error: any) {
-    if (error.response.status === 409) {
-      console.error("Użytkownik już istnieje");
-      return "Użytkownik już istnieje";
+    if (error.response.status === 400) {
+      console.error("Niepoprawne dane");
+      return "Niepoprawne dane";
+    } else if (error.response.status === 404) {
+      console.error("Nie podano email-a");
+      return "Nie podano email-a";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas resetowania hasła");
+      return "Wystąpił błąd podczas resetowania hasła";
     }
   }
 }
@@ -266,21 +272,27 @@ export async function requestResetPassword(email: string) {
       }
     );
     if (response.status === 200) {
-      console.log("requestResetPassword");
       return response.status;
-    } else if (response.status === 409) {
-      console.error("Użytkownik już istnieje");
-      return "Użytkownik już istnieje";
+    } else if (response.status === 400) {
+      console.error("Niepoprawne dane");
+      return "Niepoprawne dane";
+    } else if (response.status === 404) {
+      console.error("Nie podano email-a");
+      return "Nie podano email-a";
     } else {
-      console.error("Wystąpił błąd podczas rejestracji użytkownika");
-      return "Wystąpił błąd podczas rejestracji użytkownika";
+      console.error("Wystąpił błąd podczas resetowania hasła");
+      return "Wystąpił błąd podczas resetowania hasła";
     }
   } catch (error: any) {
-    if (error.response.status === 409) {
-      console.error("Użytkownik już istnieje");
-      return "Użytkownik już istnieje";
+    if (error.response.status === 400) {
+      console.error("Niepoprawne dane");
+      return "Niepoprawne dane";
+    } else if (error.response.status === 404) {
+      console.error("Nie podano email-a");
+      return "Nie podano email-a";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas resetowania hasła");
+      return "Wystąpił błąd podczas resetowania hasła";
     }
   }
 }
@@ -306,19 +318,26 @@ export async function registerNewUser(newUser: RegisterNewUserData) {
     if (response.status === 200) {
       console.log("Użytkownik został zarejestrowany poprawnie!");
       return response.status;
+    } else if (response.status === 400) {
+      console.error("Niepoprawne dane");
+      return "Niepoprawne dane";
     } else if (response.status === 409) {
-      console.error("Użytkownik już istnieje");
-      return "Użytkownik już istnieje";
+      console.error("Użytkownik o tym adresie email już istnieje");
+      return "Użytkownik o tym adresie email już istnieje";
     } else {
       console.error("Wystąpił błąd podczas rejestracji użytkownika");
       return "Wystąpił błąd podczas rejestracji użytkownika";
     }
   } catch (error: any) {
-    if (error.response.status === 409) {
-      console.error("Użytkownik już istnieje");
-      return "Użytkownik już istnieje";
+    if (error.response.status === 400) {
+      console.error("Niepoprawne dane");
+      return "Niepoprawne dane";
+    } else if (error.response.status === 409) {
+      console.error("Użytkownik o tym adresie email już istnieje");
+      return "Użytkownik o tym adresie email już istnieje";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas rejestracji użytkownika");
+      return "Wystąpił błąd podczas rejestracji użytkownika";
     }
   }
 }
@@ -352,7 +371,8 @@ export async function authenticateUser(userData: AuthenticateUserData) {
       console.error("Błędne dane logowania");
       return "Błędne dane logowania";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas rejestracji użytkownika");
+      return "Wystąpił błąd podczas rejestracji użytkownika";
     }
   }
 }

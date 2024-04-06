@@ -15,7 +15,7 @@ function Navbox() {
       <Link href="/aboutus">O nas</Link>
       <Link href="/price">Cennik</Link>
       <Link href="/rules">Regulamin </Link>
-      <Link href="/contact">Kontakt</Link>
+      <Link href="/courts">Korty</Link>
     </>
   );
 }

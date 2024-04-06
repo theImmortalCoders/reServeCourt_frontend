@@ -5,16 +5,17 @@ import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
 import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
-import InputPassword from "@/components/login/molecules/Inputs/InputPassword";
 import { resetPassword } from "@/hooks/user";
+import {
+  InputPassword,
+  InputSecondPassword,
+} from "@/components/login/molecules/Inputs";
 
 export default function PasswordResetToken({
   params,
 }: {
   params: { token: string };
 }) {
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,12 +24,14 @@ export default function PasswordResetToken({
   >(undefined);
   const router = useRouter();
 
-  const handleResetPassword = async () => {
+  const submitResetPassword = async (formData: FormData) => {
     setLoading(true);
     setButtonDisabled(true);
     setResetPasswordState(undefined);
-    if (password1 === password2) {
-      const result = await resetPassword(params.token, password1);
+    const password = formData.get("password");
+    const secondpassword = formData.get("secondpassword");
+    if (password === secondpassword) {
+      const result = await resetPassword(params.token, password);
       if (result === 200) {
         setResetPasswordState(true);
         setTimeout(() => {
@@ -51,34 +54,30 @@ export default function PasswordResetToken({
   return (
     <Page className="flex justify-center items-center">
       <Box>
-        <LoginHeader
-          title={"Resetowanie hasła"}
-          description={
-            "Wprowadź adres e-mail powiązany z Twoim kontem, aby zresetować hasło."
-          }
-        />
-        <InputPassword
-          value={password1}
-          onChange={(e) => setPassword1(e.target.value)}
-        />
-        <InputPassword
-          value={password2}
-          onChange={(e) => setPassword2(e.target.value)}
-        />
-        <button className={LoginButtonClass} onClick={handleResetPassword}>
-          {loading ? "Resetowanie hasła..." : "Resetuj hasło"}
-        </button>
-        {resetPasswordState === false && (
-          <p className="mt-4 text-start text-sm text-red-800">{message}</p>
-        )}
-        {resetPasswordState === true && (
-          <div className="mt-4 text-start text-sm">
-            <p className="text-green-800">
-              Hasło zostało zresetowane. Za chwilę zostaniesz przekierowany na
-              stronę logowania.
-            </p>
-          </div>
-        )}
+        <form action={submitResetPassword}>
+          <LoginHeader
+            title={"Resetowanie hasła"}
+            description={
+              "Wprowadź adres e-mail powiązany z Twoim kontem, aby zresetować hasło."
+            }
+          />
+          <InputPassword />
+          <InputSecondPassword />
+          <button className={LoginButtonClass} disabled={buttonDisabled}>
+            {loading ? "Resetowanie hasła..." : "Resetuj hasło"}
+          </button>
+          {resetPasswordState === false && (
+            <p className="mt-4 text-start text-sm text-red-800">{message}</p>
+          )}
+          {resetPasswordState === true && (
+            <div className="mt-4 text-start text-sm">
+              <p className="text-green-800">
+                Hasło zostało zresetowane. Za chwilę zostaniesz przekierowany na
+                stronę logowania.
+              </p>
+            </div>
+          )}
+        </form>
       </Box>
     </Page>
   );

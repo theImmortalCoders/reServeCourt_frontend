@@ -3,35 +3,33 @@ import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
 import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
-import InputBirthDate from "@/components/login/molecules/Inputs/InputBirthDate";
-import InputEmail from "@/components/login/molecules/Inputs/InputEmail";
-import InputName from "@/components/login/molecules/Inputs/InputName";
-import InputPassword from "@/components/login/molecules/Inputs/InputPassword";
-import InputPhoneNumber from "@/components/login/molecules/Inputs/InputPhoneNumber";
-import InputSurname from "@/components/login/molecules/Inputs/InputSurname";
+import {
+  InputBirthDate,
+  InputEmail,
+  InputName,
+  InputPassword,
+  InputPhoneNumber,
+  InputSecondPassword,
+  InputSurname,
+} from "@/components/login/molecules/Inputs";
 import { RegisterNewUserData, registerNewUser } from "@/hooks/user";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function AddAccount() {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [addAccount, setAddAccount] = useState<boolean | undefined>(undefined);
   const router = useRouter();
 
-  const AddAccountFunction = async () => {
+  const submitAddAccount = async (formData: FormData) => {
     setLoading(true);
     setButtonDisabled(true);
     setAddAccount(undefined);
-    if (password1 !== password2) {
+    const password = formData.get("password");
+    const secondpassword = formData.get("secondpassword");
+    if (password !== secondpassword) {
       setAddAccount(false);
       setMessage("Hasła nie są takie same");
       setTimeout(() => {
@@ -41,11 +39,16 @@ export default function AddAccount() {
       }, 2 * 1000);
       return;
     } else {
+      const name = formData.get("name");
+      const surname = formData.get("surname");
+      const birthDate = formData.get("birthDate");
+      const phoneNumber = formData.get("phoneNumber");
+      const email = formData.get("email");
       const newUser: RegisterNewUserData = {
         name,
         surname,
         birthDate,
-        password: password1,
+        password: password,
         phoneNumber,
         email,
       };
@@ -68,49 +71,31 @@ export default function AddAccount() {
   return (
     <Page className="flex justify-center items-center">
       <Box>
-        <LoginHeader
-          title={"Stworzenie konta"}
-          description={"Wprowadź podane dane aby stworzyć konto."}
-        />
-        <InputName value={name} onChange={(e) => setName(e.target.value)} />
-        <InputSurname
-          value={surname}
-          onChange={(e) => setSurname(e.target.value)}
-        />
-        <InputPhoneNumber
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-        <InputEmail value={email} onChange={(e) => setEmail(e.target.value)} />
-        <InputBirthDate
-          value={birthDate}
-          onChange={(e) => setBirthDate(e.target.value)}
-        />
-        <InputPassword
-          value={password1}
-          onChange={(e) => setPassword1(e.target.value)}
-        />
-        <InputPassword
-          value={password2}
-          onChange={(e) => setPassword2(e.target.value)}
-        />
-
-        <button
-          className={LoginButtonClass}
-          onClick={AddAccountFunction}
-          disabled={buttonDisabled}
-        >
-          {loading ? "Sprawdzanie danych..." : "Stwórz konto"}
-        </button>
-        {addAccount === false && (
-          <p className="mt-4 text-start text-sm text-red-800">{message}</p>
-        )}
-        {addAccount === true && (
-          <div className="mt-4 text-start text-sm">
-            <p className="text-green-800">Konto zostało dodane poprawnie.</p>
-            Zaraz zostanie przeniesiony na stronę logowania
-          </div>
-        )}
+        <form action={submitAddAccount}>
+          <LoginHeader
+            title={"Stworzenie konta"}
+            description={"Wprowadź podane dane aby stworzyć konto."}
+          />
+          <InputName />
+          <InputSurname />
+          <InputPhoneNumber />
+          <InputEmail />
+          <InputBirthDate />
+          <InputPassword />
+          <InputSecondPassword />
+          <button className={LoginButtonClass} disabled={buttonDisabled}>
+            {loading ? "Sprawdzanie danych..." : "Stwórz konto"}
+          </button>
+          {addAccount === false && (
+            <p className="mt-4 text-start text-sm text-red-800">{message}</p>
+          )}
+          {addAccount === true && (
+            <div className="mt-4 text-start text-sm">
+              <p className="text-green-800">Konto zostało dodane poprawnie.</p>
+              Zaraz zostanie przeniesiony na stronę logowania
+            </div>
+          )}
+        </form>
       </Box>
     </Page>
   );

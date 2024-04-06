@@ -228,7 +228,10 @@ export async function changePassword(passwordsData: changePasswordData) {
   }
 }
 
-export async function resetPassword(token: string, value: string) {
+export async function resetPassword(
+  token: string,
+  value: FormDataEntryValue | null
+) {
   try {
     const response: AxiosResponse<void> = await appAPI.post(
       `/api/user/reset-password?token=${token}`,
@@ -263,7 +266,7 @@ export async function resetPassword(token: string, value: string) {
   }
 }
 
-export async function requestResetPassword(email: string) {
+export async function requestResetPassword(email: FormDataEntryValue | null) {
   try {
     const response: AxiosResponse<void> = await appAPI.post(
       `/api/user/request-reset-password?email=${email}`,
@@ -298,12 +301,12 @@ export async function requestResetPassword(email: string) {
 }
 
 export interface RegisterNewUserData {
-  name: string;
-  surname: string;
-  birthDate: string;
-  password: string;
-  phoneNumber: string;
-  email: string;
+  name: FormDataEntryValue | null;
+  surname: FormDataEntryValue | null;
+  birthDate: FormDataEntryValue | null;
+  password: FormDataEntryValue | null;
+  phoneNumber: FormDataEntryValue | null;
+  email: FormDataEntryValue | null;
 }
 
 export async function registerNewUser(newUser: RegisterNewUserData) {
@@ -343,8 +346,8 @@ export async function registerNewUser(newUser: RegisterNewUserData) {
 }
 
 export interface AuthenticateUserData {
-  email: string;
-  password: string;
+  email: FormDataEntryValue | null;
+  password: FormDataEntryValue | null;
 }
 
 export async function authenticateUser(userData: AuthenticateUserData) {

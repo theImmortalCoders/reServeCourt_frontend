@@ -22,7 +22,7 @@ export default function AddAccountModal({
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const handleResetPassword = () => {
+  const AddAccountFunction = () => {
     console.log("Reset Password");
   };
 
@@ -54,7 +54,7 @@ export default function AddAccountModal({
         value={password2}
         onChange={(e) => setPassword2(e.target.value)}
       />
-      <button className={LoginButtonClass} onClick={handleResetPassword}>
+      <button className={LoginButtonClass} onClick={AddAccountFunction}>
         Stwórz konto
       </button>
     </Modal>

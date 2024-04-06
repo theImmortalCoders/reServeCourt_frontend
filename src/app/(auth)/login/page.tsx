@@ -1,13 +1,14 @@
 "use client";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { AuthenticateUserData, authenticateUser } from "@/hooks/user";
 import { useRouter } from "next/navigation";
-import ResetPasswordModal from "@/components/login/ResetPasswordModal";
 import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
-import AddAccountModal from "@/components/login/AddAccountModal";
 import InputPassword from "@/components/login/molecules/InputPassword";
 import InputEmail from "@/components/login/molecules/InputEmail";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
+import Page from "@/components/common/page/Page";
+import Box from "@/components/common/box/Box";
+import Link from "next/link";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,16 +16,14 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState<boolean | undefined>(undefined);
   const router = useRouter();
-  const [isResetPasswordModalVisible, setIsResetPasswordModalVisible] =
-    useState(false);
-  const [isAddAccountModalVisible, setIsAddAccountModalVisible] =
-    useState(false);
+
   const handleLogin = async () => {
     try {
       setLoading(true);
       setLogged(undefined);
       const userData: AuthenticateUserData = { email, password };
       const result = await authenticateUser(userData);
+      console.log("result", result);
       if (result === 200) {
         setLogged(true);
         router.push("/dashboard");
@@ -38,37 +37,9 @@ export default function Login() {
     }
   };
 
-  const openResetPasswordModal = () => {
-    setIsResetPasswordModalVisible(true);
-  };
-
-  const closeResetPasswordModal = () => {
-    setIsResetPasswordModalVisible(false);
-  };
-
-  const openAddAccountModal = () => {
-    setIsAddAccountModalVisible(true);
-  };
-
-  const closeAddAccountModal = () => {
-    setIsAddAccountModalVisible(false);
-  };
-
-  useLayoutEffect(() => {
-    if (isResetPasswordModalVisible || isAddAccountModalVisible) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isResetPasswordModalVisible, isAddAccountModalVisible]);
-
   return (
-    <main className="min-h-screen max-w-max bg-mainWhite flex justify-center items-center">
-      <div className="bg-mainWhite p-7 rounded shadow-md w-64 xs:w-80 lg:w-96">
+    <Page className="flex justify-center items-center">
+      <Box>
         <LoginHeader
           title={"Logowanie"}
           description={
@@ -80,15 +51,11 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          className="w-full text-right text-darkGreen underline pb-2"
-          onClick={openResetPasswordModal}
-        >
-          Zapomniałeś hasła?
-        </button>
-        {isResetPasswordModalVisible && (
-          <ResetPasswordModal closeModal={closeResetPasswordModal} />
-        )}
+        <Link href={"/password-reset"}>
+          <button className="w-full text-right text-darkGreen underline pb-2 text-sm sm:text-md">
+            Zapomniałeś hasła?
+          </button>
+        </Link>
         <button
           className={LoginButtonClass}
           onClick={handleLogin}
@@ -96,18 +63,14 @@ export default function Login() {
         >
           {loading ? "Logowanie..." : "Zaloguj"}
         </button>
-        <div className="flex flex-row justify-center gap-x-1 pt-2">
+        <div className="flex flex-row justify-center gap-x-1 pt-2 text-sm sm:text-md">
           <p>Nie masz konta?</p>
-          <button
-            className="text-right text-darkGreen underline"
-            onClick={openAddAccountModal}
-          >
-            Załóż konto
-          </button>
+          <Link href={"/add-account"}>
+            <button className="text-right text-darkGreen underline text-sm sm:text-md">
+              Załóż konto
+            </button>
+          </Link>
         </div>
-        {isAddAccountModalVisible && (
-          <AddAccountModal closeModal={closeAddAccountModal} />
-        )}
         {logged === false && (
           <p className="mt-4 text-start text-sm text-red-800">
             Błędne dane logowania
@@ -118,7 +81,7 @@ export default function Login() {
             Zalogowano poprawnie
           </p>
         )}
-      </div>
-    </main>
+      </Box>
+    </Page>
   );
 }

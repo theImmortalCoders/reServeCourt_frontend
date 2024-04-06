@@ -290,7 +290,6 @@ export interface RegisterNewUserData {
   surname: string;
   birthDate: string;
   password: string;
-  companyName: string;
   phoneNumber: string;
   email: string;
 }

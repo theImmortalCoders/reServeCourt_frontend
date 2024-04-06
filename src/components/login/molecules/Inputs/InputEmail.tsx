@@ -1,4 +1,4 @@
-import LoginInput from "../atoms/LoginInput";
+import LoginInput from "../../atoms/LoginInput";
 import { FiMail } from "react-icons/fi";
 
 export default function InputEmail({
@@ -14,8 +14,7 @@ export default function InputEmail({
       placeholder="Adres E-mail"
       value={value}
       onChange={onChange}
-    >
-      <FiMail className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
-    </LoginInput>
+      icon={<FiMail className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />}
+    />
   );
 }

@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { AuthenticateUserData, authenticateUser } from "@/hooks/user";
 import { useRouter } from "next/navigation";
 import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
-import InputPassword from "@/components/login/molecules/InputPassword";
-import InputEmail from "@/components/login/molecules/InputEmail";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
 import Page from "@/components/common/page/Page";
 import Box from "@/components/common/box/Box";
 import Link from "next/link";
+import InputEmail from "@/components/login/molecules/Inputs/InputEmail";
+import InputPassword from "@/components/login/molecules/Inputs/InputPassword";
 
 export default function Login() {
   const [email, setEmail] = useState("");

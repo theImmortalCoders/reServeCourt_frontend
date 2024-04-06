@@ -5,7 +5,7 @@ import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
 import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
-import InputPassword from "@/components/login/molecules/InputPassword";
+import InputPassword from "@/components/login/molecules/Inputs/InputPassword";
 import { resetPassword } from "@/hooks/user";
 
 export default function PasswordResetToken({

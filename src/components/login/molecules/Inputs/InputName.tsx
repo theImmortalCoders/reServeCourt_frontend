@@ -1,7 +1,7 @@
-import LoginInput from "../atoms/LoginInput";
+import LoginInput from "../../atoms/LoginInput";
 import { IoPersonOutline } from "react-icons/io5";
 
-export default function InputSurname({
+export default function InputName({
   value,
   onChange,
 }: {
@@ -11,11 +11,12 @@ export default function InputSurname({
   return (
     <LoginInput
       type="text"
-      placeholder="Nazwisko"
+      placeholder="Imię"
       value={value}
       onChange={onChange}
-    >
-      <IoPersonOutline className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
-    </LoginInput>
+      icon={
+        <IoPersonOutline className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
+      }
+    />
   );
 }

@@ -3,7 +3,7 @@ import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
 import { LoginButtonClass } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
-import InputEmail from "@/components/login/molecules/InputEmail";
+import InputEmail from "@/components/login/molecules/Inputs/InputEmail";
 import { requestResetPassword } from "@/hooks/user";
 import { useState } from "react";
 

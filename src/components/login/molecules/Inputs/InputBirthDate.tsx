@@ -1,4 +1,4 @@
-import LoginInput from "../atoms/LoginInput";
+import LoginInput from "../../atoms/LoginInput";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 
 export default function InputBirthDate({
@@ -14,8 +14,9 @@ export default function InputBirthDate({
       placeholder="Data urodzenia"
       value={value}
       onChange={onChange}
-    >
-      <LiaBirthdayCakeSolid className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
-    </LoginInput>
+      icon={
+        <LiaBirthdayCakeSolid className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
+      }
+    />
   );
 }

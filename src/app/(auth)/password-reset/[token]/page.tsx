@@ -27,7 +27,14 @@ export default function PasswordResetToken({
     setResetPasswordState(undefined);
     const password = formData.get("password");
     const secondpassword = formData.get("secondpassword");
-    if (password === secondpassword) {
+    if (password !== secondpassword) {
+      setResetPasswordState(false);
+      setMessage("Hasła nie są takie same");
+      setTimeout(() => {
+        setResetPasswordState(undefined);
+      }, 2 * 1000);
+      return;
+    } else {
       const result = await resetPassword(params.token, password);
       if (result === 200) {
         setResetPasswordState(true);
@@ -38,12 +45,10 @@ export default function PasswordResetToken({
         setMessage(result);
         setResetPasswordState(false);
       }
-    } else {
-      setMessage("Hasła nie są takie same");
+      setTimeout(() => {
+        setResetPasswordState(undefined);
+      }, 6 * 1000);
     }
-    setTimeout(() => {
-      setResetPasswordState(undefined);
-    }, 6 * 1000);
   };
 
   return (
@@ -52,9 +57,7 @@ export default function PasswordResetToken({
         <form action={submitResetPassword}>
           <LoginHeader
             title={"Resetowanie hasła"}
-            description={
-              "Wprowadź adres e-mail powiązany z Twoim kontem, aby zresetować hasło."
-            }
+            description={"Wprowadź nowe hasło."}
           />
           <InputPassword />
           <InputSecondPassword />
@@ -65,9 +68,8 @@ export default function PasswordResetToken({
           <LoginMessage
             value={resetPasswordState}
             messageIfIsRed={message}
-            messageIfIsGreen={
-              "Hasło zostało zresetowane. Za chwilę zostaniesz przekierowany na stronę logowania."
-            }
+            messageIfIsGreen={"Hasło zostało zresetowane"}
+            messageIfIsGreenAdd="Zaraz zostanie przeniesiony na stronę logowania"
           />
         </form>
       </Box>

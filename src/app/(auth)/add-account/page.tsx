@@ -50,14 +50,16 @@ export default function AddAccount() {
       const result = await registerNewUser(newUser);
       if (result === 200) {
         setAddAccount(true);
-        router.push("/login");
+        setTimeout(() => {
+          router.push("/login");
+        }, 6 * 1000);
       } else {
         setMessage(result);
         setAddAccount(false);
       }
       setTimeout(() => {
         setAddAccount(undefined);
-      }, 3 * 1000);
+      }, 6 * 1000);
     }
   };
 

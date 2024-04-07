@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
@@ -17,17 +17,13 @@ export default function PasswordResetToken({
 }: {
   params: { token: string };
 }) {
-  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
   const [resetPasswordState, setResetPasswordState] = useState<
     boolean | undefined
   >(undefined);
   const router = useRouter();
 
   const submitResetPassword = async (formData: FormData) => {
-    setLoading(true);
-    setButtonDisabled(true);
     setResetPasswordState(undefined);
     const password = formData.get("password");
     const secondpassword = formData.get("secondpassword");
@@ -46,8 +42,6 @@ export default function PasswordResetToken({
       setMessage("Hasła nie są takie same");
     }
     setTimeout(() => {
-      setButtonDisabled(false);
-      setLoading(false);
       setResetPasswordState(undefined);
     }, 6 * 1000);
   };
@@ -65,8 +59,6 @@ export default function PasswordResetToken({
           <InputPassword />
           <InputSecondPassword />
           <LoginButton
-            loading={loading}
-            disabled={buttonDisabled}
             messageIfLoadingIsTrue={"Resetowanie hasła..."}
             messageIfLoadingIsFalse={"Resetuj hasło"}
           />

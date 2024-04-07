@@ -9,16 +9,12 @@ import { requestResetPassword } from "@/hooks/user";
 import { useState } from "react";
 
 export default function passwordReset() {
-  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
   const [resetPasswordState, setResetPasswordState] = useState<
     boolean | undefined
   >(undefined);
 
   const submitResetPassword = async (formData: FormData) => {
-    setLoading(true);
-    setButtonDisabled(true);
     setResetPasswordState(undefined);
     const email = formData.get("email");
     const result = await requestResetPassword(email);
@@ -29,8 +25,6 @@ export default function passwordReset() {
       setResetPasswordState(false);
     }
     setTimeout(() => {
-      setButtonDisabled(false);
-      setLoading(false);
       setResetPasswordState(undefined);
     }, 6 * 1000);
   };
@@ -47,8 +41,6 @@ export default function passwordReset() {
           />
           <InputEmail />
           <LoginButton
-            loading={loading}
-            disabled={buttonDisabled}
             messageIfLoadingIsTrue={"Resetowanie hasła..."}
             messageIfLoadingIsFalse={"Resetuj hasło"}
           />

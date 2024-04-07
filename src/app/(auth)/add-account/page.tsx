@@ -18,15 +18,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function AddAccount() {
-  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
   const [addAccount, setAddAccount] = useState<boolean | undefined>(undefined);
   const router = useRouter();
 
   const submitAddAccount = async (formData: FormData) => {
-    setLoading(true);
-    setButtonDisabled(true);
     setAddAccount(undefined);
     const password = formData.get("password");
     const secondpassword = formData.get("secondpassword");
@@ -34,8 +30,6 @@ export default function AddAccount() {
       setAddAccount(false);
       setMessage("Hasła nie są takie same");
       setTimeout(() => {
-        setButtonDisabled(false);
-        setLoading(false);
         setAddAccount(undefined);
       }, 2 * 1000);
       return;
@@ -49,7 +43,7 @@ export default function AddAccount() {
         name,
         surname,
         birthDate,
-        password: password,
+        password,
         phoneNumber,
         email,
       };
@@ -62,8 +56,6 @@ export default function AddAccount() {
         setAddAccount(false);
       }
       setTimeout(() => {
-        setButtonDisabled(false);
-        setLoading(false);
         setAddAccount(undefined);
       }, 3 * 1000);
     }
@@ -85,8 +77,6 @@ export default function AddAccount() {
           <InputPassword />
           <InputSecondPassword />
           <LoginButton
-            loading={loading}
-            disabled={buttonDisabled}
             messageIfLoadingIsTrue={"Sprawdzanie danych..."}
             messageIfLoadingIsFalse={"Stwórz konto"}
           />

@@ -11,15 +11,11 @@ import { InputPassword, InputEmail } from "@/components/login/molecules/Inputs";
 import LoginMessage from "@/components/login/atoms/LoginMessage";
 
 export default function Login() {
-  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState<boolean | undefined>(undefined);
   const router = useRouter();
 
   const submitLogin = async (formData: FormData) => {
-    setLoading(true);
-    setButtonDisabled(true);
     setLogged(undefined);
     const email = formData.get("email");
     const password = formData.get("password");
@@ -33,8 +29,6 @@ export default function Login() {
       setLogged(false);
     }
     setTimeout(() => {
-      setButtonDisabled(false);
-      setLoading(false);
       setLogged(undefined);
     }, 6 * 1000);
   };
@@ -57,8 +51,6 @@ export default function Login() {
             </button>
           </Link>
           <LoginButton
-            loading={loading}
-            disabled={buttonDisabled}
             messageIfLoadingIsTrue={"Logowanie..."}
             messageIfLoadingIsFalse={"Zaloguj"}
           />

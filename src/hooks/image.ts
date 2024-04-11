@@ -80,6 +80,9 @@ export async function uploadSingleImage(uploadedFile: File, thumbnail?: boolean)
             window.location.replace("/login");
             console.error("Brak autoryzacji użytkownika");
             return "Brak autoryzacji użytkownika";
+        } else if (response.status === 413) {
+            console.error("Obrazek jest zbyt duży!");
+            return "Obrazek jest zbyt duży!";
         } else {
             console.error("Wystąpił błąd podczas przesyłania zdjęcia");
             return "Wystąpił błąd podczas przesyłania zdjęcia";
@@ -89,6 +92,9 @@ export async function uploadSingleImage(uploadedFile: File, thumbnail?: boolean)
             window.location.replace("/login");
             console.error("Brak autoryzacji użytkownika");
             return "Brak autoryzacji użytkownika";
+        } else if (error.response.status === 413) {
+            console.error("Obrazek jest zbyt duży!");
+            return "Obrazek jest zbyt duży!";
         } else {
             throw new Error("Error500");
         }
@@ -120,6 +126,9 @@ export async function uploadMultipleImages(uploadedFiles: File[], thumbnail?: bo
             window.location.replace("/login");
             console.error("Brak autoryzacji użytkownika");
             return "Brak autoryzacji użytkownika";
+        } else if (response.status === 413) {
+            console.error("Obrazek jest zbyt duży!");
+            return "Obrazek jest zbyt duży!";
         } else {
             console.error("Wystąpił błąd podczas przesyłania zdjęć");
             return "Wystąpił błąd podczas przesyłania zdjęć";
@@ -129,6 +138,9 @@ export async function uploadMultipleImages(uploadedFiles: File[], thumbnail?: bo
             window.location.replace("/login");
             console.error("Brak autoryzacji użytkownika");
             return "Brak autoryzacji użytkownika";
+        } else if (error.response.status === 413) {
+            console.error("Obrazek jest zbyt duży!");
+            return "Obrazek jest zbyt duży!";
         } else {
             throw new Error("Error500");
         }

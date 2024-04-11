@@ -88,7 +88,7 @@ export async function getClubDetails(clubId: number): Promise<GetClubDetailsData
         }
       );
       if (response.status === 200) {
-        console.log("Sczegóły klubu pobrano poprawnie!");
+        console.log("Szczegóły klubu pobrano poprawnie!");
         return response.data;
       } else {
         throw new Error("Wystąpił błąd podczas pobierania szczegółów klubu");

@@ -25,7 +25,7 @@ export default function Navbar() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="max-w-screen h-navbar bg-mainWhite flex items-center justify-between px-4 md:px-8 shadow-navbarShadow sticky z-20">
+    <nav className="max-w-screen h-navbar bg-mainWhite font-extralight flex items-center justify-between px-4 md:px-8 shadow-navbarShadow sticky z-20">
       <Link href="/">
         <Image src={Logo} alt="Logo" width={70} height={70} />
       </Link>

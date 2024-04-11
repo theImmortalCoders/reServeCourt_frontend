@@ -54,7 +54,6 @@ export async function getCurrentUser() {
       console.log("Dane użytkownika pobrano poprawnie!");
       return response.data;
     } else if (response.status === 401) {
-      window.location.replace("/login");
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
     } else {
@@ -63,7 +62,6 @@ export async function getCurrentUser() {
     }
   } catch (error: any) {
     if (error.response.status === 401) {
-      window.location.replace("/login");
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
     } else {
@@ -114,6 +112,9 @@ export async function changeUserRole(userId: number, newRole: string) {
       window.location.replace("/login");
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
+    } else if (response.status === 403) {
+      console.error("Brak dostępu");
+      return "Brak dostępu";
     } else {
       console.error("Wystąpił błąd podczas zmiany roli użytkownika");
       return "Wystąpił błąd podczas zmiany roli użytkownika";
@@ -123,6 +124,9 @@ export async function changeUserRole(userId: number, newRole: string) {
       window.location.replace("/login");
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
+    } else if (error.response.status === 403) {
+      console.error("Brak dostępu");
+      return "Brak dostępu";
     } else {
       throw new Error("Error500");
     }
@@ -144,6 +148,9 @@ export async function banUser(userId: number) {
       window.location.replace("/login");
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
+    } else if (response.status === 403) {
+      console.error("Brak dostępu");
+      return "Brak dostępu";
     } else {
       console.error("Wystąpił błąd podczas zablokowywania użytkownika");
       return "Wystąpił błąd podczas zablokowywania użytkownika";
@@ -153,6 +160,9 @@ export async function banUser(userId: number) {
       window.location.replace("/login");
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
+    } else if (error.response.status === 403) {
+      console.error("Brak dostępu");
+      return "Brak dostępu";
     } else {
       throw new Error("Error500");
     }

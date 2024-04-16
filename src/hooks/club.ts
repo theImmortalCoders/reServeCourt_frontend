@@ -140,7 +140,7 @@ interface GetAllClubsData {
 export async function getAllClubs(): Promise<GetAllClubsData | string> {
     try {
       const response: AxiosResponse<GetAllClubsData | string> = await appAPI.get(
-        `/api/club`,
+        `/api/club?sort=name&sortDirection=ASC`,
         {
           withCredentials: true,
         }

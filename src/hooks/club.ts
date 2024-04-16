@@ -44,7 +44,7 @@ interface Image {
     authorId: number;
 }
   
-interface Location {
+export interface Location {
     locX: number;
     locY: number;
     name: string;

@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { MdDriveFileRenameOutline, MdOutlineShortText, MdImage } from "react-icons/md";
+import { AddClubData, addClub, Location } from "@/hooks/club";
+import { uploadSingleImage } from "@/hooks/image";
 
 function FormBox ({ children }: { children: React.ReactNode }) {
     return (
@@ -18,7 +20,8 @@ function ClubFormInput ({
     value,
     icon,
     onChange,
-    className
+    className,
+    isForm,
     }: {
     type: string;
     id: string;
@@ -29,21 +32,37 @@ function ClubFormInput ({
     icon?: React.ReactNode;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     className?: string;
+    isForm?: boolean;
     }) {
     return (
         <div className={`flex items-center border text-sm lg:text-base border-gray-500 rounded px-3 py-2 ${className}`}>
             {icon}
-            <input
-                type={type}
-                id={id}
-                name={name}
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-                className="w-full outline-none focus:outline-none bg-inherit"
-                autoComplete="off"
-                required
-            />            
+            {isForm ? (
+                <form id={id}>
+                    <input
+                        type={type}
+                        name={name}
+                        placeholder={placeholder}
+                        value={value}
+                        onChange={onChange}
+                        className="w-full outline-none focus:outline-none bg-inherit"
+                        autoComplete="off"
+                        required
+                    />            
+                </form>
+            ) : (
+                <input
+                        type={type}
+                        id={id}
+                        name={name}
+                        placeholder={placeholder}
+                        value={value}
+                        onChange={onChange}
+                        className="w-full outline-none focus:outline-none bg-inherit"
+                        autoComplete="off"
+                        required
+                    />            
+            )}
         </div>
     )
 }
@@ -58,10 +77,15 @@ function ClubNameInput ({
     return (
         <ClubFormInput
             type="text"
-            id="name"
+            id="nameInput"
             name="name"
             placeholder="Nazwa"
+            value={name}
             icon={<MdDriveFileRenameOutline className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2"/>}
+            onChange={(e) => {
+                const value = e.target.value;
+                setName(value);
+            }}
         />   
     )
 }
@@ -77,10 +101,15 @@ function ClubDescriptionInput ({
         <div className="flex border text-sm lg:text-base border-gray-500 rounded px-3 py-2">
             <MdOutlineShortText className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2"/>
             <textarea
-                id="description"
+                id="descriptionInput"
                 name="description"
                 placeholder="Opis"
+                value={description}
                 className="w-full h-16 outline-none focus:outline-none bg-inherit"
+                onChange={(e) => {
+                    const value = e.target.value;
+                    setDescription(value);
+                }}
             />               
         </div>
     )
@@ -92,15 +121,30 @@ function ClubLocationMap () {
     )
 }
 
-function ClubLogoInput () {
+function ClubLogoInput ({
+    logoFile,
+    setLogoFile,
+    isForm,
+    }: {
+    logoFile: File;
+    setLogoFile: Dispatch<SetStateAction<File>>;
+    isForm?: boolean;
+    }) {
     return (
     <ClubFormInput
         type="file"
-        id="logoId"
-        name="logoId"
+        id="logoInput"
+        name="logoFile"
         placeholder="Logo"
         accept=".png, .jpg, .jpeg"
         icon={<MdImage className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2"/>}
+        onChange={(e) => {
+                if (e.target.files) {
+                    setLogoFile(e.target.files[0]);
+                }
+            }
+        }
+        isForm={isForm}
     />   
     )
 }
@@ -114,13 +158,73 @@ export default function AddClubForm ({
 }) {
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
+    const [locX, setLocX] = useState<number>(0);
+    const [locY, setLocY] = useState<number>(0);
+    const [locName, setLocName] = useState<string>("");
     const [logoId, setLogoId] = useState<number>(0);
-    const [imageFile, setImageFile] = useState<File>(new File([], ""));
+    const [logoFile, setLogoFile] = useState<File>(new File([], ""));
 
     const [message, setMessage] = useState<string>("");
 
+    useEffect(() => {
+        const handleNewImage = async () => {
+          try {
+            if (!logoFile.name) return;
+            const result = await uploadSingleImage(logoFile, false);
+            if (typeof result !== "string") setLogoId(result.id);
+          } catch (error) {
+            console.error("Błąd dodawania obrazu", error);
+          }
+        };
+    
+        handleNewImage();
+      }, [logoFile]);
+
     const submitForm  = async () => {
-        return;
+        if(!name || !description || locX === null || locY === null) {
+            console.error("Pola muszą być wypełnione");
+            setMessage("Pola muszą być wypełnione");
+            return;
+        }
+
+        const newLocation: Location = {
+            locX: locX,
+            locY: locY,
+            name: locName
+        }
+
+        const newClubData: AddClubData = {
+            name: name,
+            description: description,
+            location: newLocation,
+            logoId: logoId
+        }
+
+        try {
+            const result = await addClub(newClubData);
+            if (result === 200) {
+                setName("");
+                setDescription("");
+                setLocX(0);
+                setLocY(0);
+                setLocName("");
+                setLogoId(0);
+                setLogoFile(new File([], ""));
+                const form = document.getElementById("logoInput") as HTMLFormElement;
+                if (form) {
+                  form.reset();
+                }
+                setMessage("Dodano klub");
+            }
+            else {
+                console.error("Błąd dodawania klubu");
+                setMessage("Błąd dodawania klubu");
+            }
+        }
+        catch (error) {
+            console.error("Błąd dodawania klubu", error);
+            setMessage("Błąd dodawania klubu");
+        }
     }
 
     return (
@@ -135,12 +239,15 @@ export default function AddClubForm ({
             
             <div className="space-y-1">
                 <p className="text-sm">Wczytaj logo:</p>
-                <ClubLogoInput/>                
+                <ClubLogoInput logoFile={logoFile} setLogoFile={setLogoFile} isForm={true}/>                
             </div>
             <span className='flex justify-center space-x-4'>
                 <button onClick={() => setIsOpen(false)} className="text-right text-mainOrange text-sm sm:text-md">Zamknij</button>
                 <button onClick={submitForm} className="bg-darkGreen text-mainWhite text-sm rounded px-4 py-2 w-fit">Dodaj</button>
             </span>
+            <div className="flex w-full justify-center">
+                <p className="text-xs text-center">{ message }</p>
+            </div>
         </FormBox>
     )
 }

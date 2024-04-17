@@ -41,7 +41,7 @@ export default function DeleteWarning  ({
                     <button onClick={() => setDeleteWarning(false)} className="text-right text-mainOrange text-sm sm:text-md">Anuluj</button>
                     <button onClick={confirmDelete} className="bg-red-600 text-mainWhite text-sm rounded px-4 py-2 w-fit">Usuń</button>
                 </span>
-                { message }
+                { message && (<p className="mt-2 text-sm">{ message }</p>) }
             </div>
         </div>
     )

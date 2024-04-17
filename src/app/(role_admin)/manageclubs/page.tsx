@@ -1,15 +1,39 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction, } from "react";
 import { useQuery } from "react-query";
 import { getAllClubs } from "@/hooks/club";
 import APIImageComponent from "@/hooks/imageAPI";
 import AddClubForm from "../../../components/manageclubs/AddClubForm";
-import DashboardContainer from "@/components/common/dashboardContainer/dashboardContainer";
+import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import RatingStars from "@/components/common/ratingStars/RatingStars";
 import { MdEdit, MdDelete } from "react-icons/md";
 
+function DeleteWarning  ({
+    deleteWarning,
+    setDeleteWarning
+}: {
+    deleteWarning: boolean,
+    setDeleteWarning: Dispatch<SetStateAction<boolean>>
+}) {
+    return (
+        <div className="fixed flex items-center justify-center inset-0 z-10">
+            <div className="absolute inset-0 bg-mainWhite opacity-80"></div>
+            <div className="flex flex-col justify-center items-center w-1/4 border-2 border-darkGreen bg-mainWhite rounded space-y-2 p-4 z-20">
+                <h1 className="text-xl">Usuwanie klubu</h1>
+                <p className="text-sm text-center font-sans">Czy na pewno chcesz usunąć wybrany klub?<br/>Operacja jest nieodwracalna i spowoduje trwałe usunięcie klubu wraz ze wszystkimi przypisanymi do niego kortami.</p>
+                <span className="space-x-4">
+                    <button onClick={() => setDeleteWarning(false)}className="text-right text-mainOrange text-sm sm:text-md">Anuluj</button>
+                    <button className="bg-red-600 text-mainWhite text-sm rounded px-4 py-2 w-fit">Usuń</button>
+                </span>
+            </div>
+        </div>
+    )
+}
+
 export default function ManageClubs () {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [deleteWarning, setDeleteWarning] = useState<boolean>(false);
+
     const {
         data: clubsData,
         isLoading: clubsLoading,
@@ -50,7 +74,7 @@ export default function ManageClubs () {
                                     </div>
                                     <span className="flex justify-end items-center text-2xl space-x-2 p-4">
                                         <MdEdit className="cursor-pointer hover:text-mainGreen"/>
-                                        <MdDelete className="cursor-pointer hover:text-red-600"/> 
+                                        <MdDelete onClick={() => setDeleteWarning(true)} className="cursor-pointer hover:text-red-600" /> 
                                     </span>
                                 </DashboardContainer>
                             )) }
@@ -59,6 +83,9 @@ export default function ManageClubs () {
                 </>
             ) : (
                 <AddClubForm isOpen={isOpen} setIsOpen={setIsOpen}/>
+            )}
+            { deleteWarning && (
+                <DeleteWarning deleteWarning={deleteWarning} setDeleteWarning={setDeleteWarning}/>
             )}
         </div>
     )

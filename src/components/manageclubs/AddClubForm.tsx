@@ -1,5 +1,5 @@
 "use client";
-import DashboardContainer from "@/components/common/dashboardContainer/dashboardContainer";
+import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import { ClubNameInput, ClubDescriptionInput, ClubLocationMap, ClubLogoInput } from "@/components/manageclubs/Inputs";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { AddClubData, addClub, Location } from "@/hooks/club";

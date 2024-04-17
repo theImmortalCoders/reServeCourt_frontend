@@ -73,9 +73,9 @@ export async function uploadSingleImage(uploadedFile: File, thumbnail?: boolean)
         }
       );
   
-      if (response.status === 200) {
-        console.log("Zdjęcie zostało przesłane poprawnie!")
-        return response.data;
+        if (response.status === 200) {
+            console.log("Zdjęcie zostało przesłane poprawnie!")
+            return response.data;
         } else if(response.status === 401) {
             window.location.replace("/login");
             console.error("Brak autoryzacji użytkownika");

@@ -44,7 +44,7 @@ interface Image {
     authorId: number;
 }
   
-interface Location {
+export interface Location {
     locX: number;
     locY: number;
     name: string;
@@ -137,9 +137,9 @@ interface GetAllClubsData {
     empty: boolean;
 }
 
-export async function getAllClubs(): Promise<GetAllClubsData | string> {
+export async function getAllClubs(): Promise<GetAllClubsData> {
     try {
-      const response: AxiosResponse<GetAllClubsData | string> = await appAPI.get(
+      const response: AxiosResponse<GetAllClubsData> = await appAPI.get(
         `/api/club?sort=name&sortDirection=ASC`,
         {
           withCredentials: true,

@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.6",
+    "@types/google.maps": "^3.55.7",
     "axios": "^1.6.8",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.0.1"
+    "react-icons": "^5.0.1",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",

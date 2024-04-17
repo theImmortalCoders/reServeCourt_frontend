@@ -12,7 +12,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 export default function ManageClubs () {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [deleteWarning, setDeleteWarning] = useState<boolean>(false);
-    const [tempId, setTempId] = useState<number>(-1);
+    const [tempId, setTempId] = useState<number[]>([-1, -1]);
 
     const {
         data: clubsData,
@@ -54,7 +54,7 @@ export default function ManageClubs () {
                                     </div>
                                     <span className="flex justify-end items-center text-2xl space-x-2 p-4">
                                         <MdEdit className="cursor-pointer hover:text-mainGreen"/>
-                                        <MdDelete onClick={(e: any) => { e.stopPropagation(); setDeleteWarning(true); setTempId(club.id) }} className="cursor-pointer hover:text-red-600" /> 
+                                        <MdDelete onClick={(e: any) => { e.stopPropagation(); setDeleteWarning(true); setTempId([club.id, club.logo.id]) }} className="cursor-pointer hover:text-red-600" /> 
                                     </span>
                                 </DashboardContainer>
                             )) }

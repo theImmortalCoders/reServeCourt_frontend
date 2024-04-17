@@ -1,5 +1,6 @@
 import { useState, Dispatch, SetStateAction, } from "react";
 import { deleteClub } from "@/hooks/club";
+import { deleteImage } from "@/hooks/image";
 
 export default function DeleteWarning  ({
     deleteWarning,
@@ -9,16 +10,17 @@ export default function DeleteWarning  ({
 }: {
     deleteWarning: boolean,
     setDeleteWarning: Dispatch<SetStateAction<boolean>>,
-    tempId: number,
-    setTempId: Dispatch<SetStateAction<number>>
+    tempId: number[],
+    setTempId: Dispatch<SetStateAction<number[]>>
 }) {
     const [message, setMessage] = useState<string>("");
 
     const confirmDelete  = async () => {
         try {
-            const result = await deleteClub(tempId);
-            if (result === 200) {
-                setTempId(-1);
+            const result_1 = await deleteClub(tempId[0]);
+            const result_2 = await deleteImage(tempId[1]);
+            if (result_1 === 200 && result_2 === 200) {
+                setTempId([-1, -1]);
                 setDeleteWarning(false);
             }
             else {

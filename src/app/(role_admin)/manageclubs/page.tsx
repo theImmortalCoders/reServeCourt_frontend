@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { getAllClubs } from "@/hooks/club";
 import AddClubForm from "../../../components/manageclubs/AddClubForm";
@@ -10,7 +10,15 @@ export default function ManageClubs () {
         data: clubsData,
         isLoading: clubsLoading,
         isError: clubsError,
+        refetch: refetchClubs
     } = useQuery("clubs", getAllClubs)
+
+    useEffect(() => {
+        if (!isOpen) {
+            refetchClubs();
+        }
+    }, [isOpen]);
+
     return (
         <div className="flex flex-col items-center bg-mainWhite min-h-max py-8">
             {!isOpen ? (
@@ -35,5 +43,4 @@ export default function ManageClubs () {
             )}
         </div>
     )
-    
 }

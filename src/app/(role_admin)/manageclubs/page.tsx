@@ -74,7 +74,7 @@ export default function ManageClubs () {
                                     </div>
                                     <span className="flex justify-end items-center text-2xl space-x-2 p-4">
                                         <MdEdit className="cursor-pointer hover:text-mainGreen"/>
-                                        <MdDelete onClick={() => setDeleteWarning(true)} className="cursor-pointer hover:text-red-600" /> 
+                                        <MdDelete onClick={(e) => { e.stopPropagation(); setDeleteWarning(true); }} className="cursor-pointer hover:text-red-600" /> 
                                     </span>
                                 </DashboardContainer>
                             )) }

@@ -39,7 +39,7 @@ export default function ManageClubs () {
                     ) : (
                         <div className="w-11/12 lg:w-3/5 space-y-2">
                             { clubsData && clubsData.content.map((club, index) => (
-                                <DashboardContainer key={index} onClick={() => window.location.replace("/managecourts")} className="flex h-fit">
+                                <DashboardContainer key={index} onClick={() => window.location.replace(`/managecourts/${club.id}`)} className="flex h-fit cursor-pointer">
                                     <div className="p-4 w-[20%]">
                                         <APIImageComponent imageId={club.logo.id} type={club.logo.path} />
                                     </div>
@@ -54,7 +54,7 @@ export default function ManageClubs () {
                                     </div>
                                     <span className="flex justify-end items-center text-2xl space-x-2 p-4">
                                         <MdEdit className="cursor-pointer hover:text-mainGreen"/>
-                                        <MdDelete onClick={(e) => { e.stopPropagation(); setDeleteWarning(true); setTempId(club.id) }} className="cursor-pointer hover:text-red-600" /> 
+                                        <MdDelete onClick={(e: any) => { e.stopPropagation(); setDeleteWarning(true); setTempId(club.id) }} className="cursor-pointer hover:text-red-600" /> 
                                     </span>
                                 </DashboardContainer>
                             )) }

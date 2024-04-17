@@ -59,7 +59,7 @@ export default function ManageClubs () {
                     ) : (
                         <div className="w-11/12 lg:w-3/5 space-y-2">
                             { clubsData && clubsData.content.map((club, index) => (
-                                <DashboardContainer key={index} className="flex h-fit">
+                                <DashboardContainer key={index} onClick={() => window.location.replace("/managecourts")} className="flex h-fit">
                                     <div className="p-4 w-[20%]">
                                         <APIImageComponent imageId={club.logo.id} type={club.logo.path} />
                                     </div>

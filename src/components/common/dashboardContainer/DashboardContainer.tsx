@@ -6,10 +6,10 @@ export default function DashboardContainer({
     className?: string;
   }>) {
     return (
-      <main
+      <div
         className={`bg-mainWhite rounded shadow-md ${className}`}
       >
         {children}
-      </main>
+      </div>
     );
   }

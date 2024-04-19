@@ -4,25 +4,21 @@ import {
   ClubNameInput,
   ClubDescriptionInput,
   ClubLocationMap,
-  ClubLogoInput,
 } from "@/components/manageclubs/Inputs";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { AddClubData, addClub, Location } from "@/hooks/club";
-import {
-  ImageResponseData,
-  uploadMultipleImages,
-  uploadSingleImage,
-} from "@/hooks/image";
+import { Location } from "@/hooks/club";
+import { uploadMultipleImages } from "@/hooks/image";
 import { AddCourtData, addCourt } from "@/hooks/court";
 
 export default function AddCourtForm({
   isOpen,
   setIsOpen,
+  clubID,
 }: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  clubID: number;
 }) {
-  const [clubId, setClubId] = useState<number>(0);
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [courtType, setCourtType] = useState<string>("INDOOR");
@@ -83,7 +79,7 @@ export default function AddCourtForm({
     };
 
     try {
-      const result = await addCourt(1, newCourtData);
+      const result = await addCourt(clubID, newCourtData);
       if (result === 200) {
         setName("");
         setDescription("");

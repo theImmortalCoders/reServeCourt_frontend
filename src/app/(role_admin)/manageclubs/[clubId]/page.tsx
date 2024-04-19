@@ -104,7 +104,11 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
           )}
         </>
       ) : (
-        <AddCourtForm isOpen={isOpen} setIsOpen={setIsOpen} />
+        <AddCourtForm
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          clubID={parseInt(params.clubId)}
+        />
       )}
     </div>
   );

@@ -3,7 +3,7 @@ import { useState, useEffect, Dispatch, SetStateAction, } from "react";
 import { useQuery } from "react-query";
 import { getAllClubs } from "@/hooks/club";
 import APIImageComponent from "@/hooks/imageAPI";
-import AddClubForm from "../../../components/manageclubs/AddClubForm";
+import ClubForm from "../../../components/manageclubs/ClubForm";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import RatingStars from "@/components/common/ratingStars/RatingStars";
 import DeleteWarning from "@/components/manageclubs/DeleteWarning";
@@ -11,6 +11,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 
 export default function ManageClubs () {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isUpdate, setIsUpdate] = useState<boolean>(false);
     const [deleteWarning, setDeleteWarning] = useState<boolean>(false);
     const [tempId, setTempId] = useState<number[]>([-1, -1]);
 
@@ -45,7 +46,7 @@ export default function ManageClubs () {
                                     </div>
                                     <div className="flex flex-col justify-center w-full p-4 ">
                                         <p className="text-base">{ club.name }</p>
-                                        <p className="text-xs font-sans mb-2">{ club.description }</p>
+                                        <p className="text-xs font-sans mb-2 text-wrap">{ club.description }</p>
                                         <p className="text-sm text-mainOrange">{ club.location.name }</p>
                                         <span className="flex items-center space-x-8 mt-2 text-xs"> 
                                             <p>Liczba kortów: { club.courtsAmount }</p>
@@ -53,7 +54,7 @@ export default function ManageClubs () {
                                         </span>
                                     </div>
                                     <span className="flex justify-end items-center text-2xl space-x-2 p-4">
-                                        <MdEdit className="cursor-pointer hover:text-mainGreen"/>
+                                        <MdEdit onClick={(e: any) => { e.stopPropagation(); setIsUpdate(true);  setTempId([club.id, club.logo.id]); setIsOpen(true)}} className="cursor-pointer hover:text-mainGreen"/>
                                         <MdDelete onClick={(e: any) => { e.stopPropagation(); setDeleteWarning(true); setTempId([club.id, club.logo.id]) }} className="cursor-pointer hover:text-red-600" /> 
                                     </span>
                                 </DashboardContainer>
@@ -65,7 +66,7 @@ export default function ManageClubs () {
                     )}
                 </>
             ) : (
-                <AddClubForm isOpen={isOpen} setIsOpen={setIsOpen}/>
+                <ClubForm isOpen={isOpen} setIsOpen={setIsOpen} isUpdate={isUpdate} setIsUpdate={setIsUpdate} tempId={tempId} setTempId={setTempId}/>
             )}
 
         </div>

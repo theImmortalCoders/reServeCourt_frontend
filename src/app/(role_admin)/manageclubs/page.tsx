@@ -46,7 +46,7 @@ export default function ManageClubs() {
                   <DashboardContainer
                     key={index}
                     onClick={() =>
-                      window.location.replace(`/managecourts/${club.id}`)
+                      window.location.replace(`/manageclubs/${club.id}`)
                     }
                     className="flex h-fit cursor-pointer"
                   >

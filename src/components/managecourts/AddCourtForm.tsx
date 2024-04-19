@@ -15,7 +15,7 @@ import {
 } from "@/hooks/image";
 import { AddCourtData, addCourt } from "@/hooks/court";
 
-export default function AddClubForm({
+export default function AddCourtForm({
   isOpen,
   setIsOpen,
 }: {

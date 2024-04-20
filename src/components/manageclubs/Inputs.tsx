@@ -1,5 +1,11 @@
 import { MdDriveFileRenameOutline, MdOutlineShortText, MdImage } from "react-icons/md";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useMapEvents } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { useMap } from 'react-leaflet';
+import dynamic from "next/dynamic"
+import axios from 'axios';
 
 function ClubFormInput ({
     type,
@@ -104,9 +110,96 @@ export function ClubDescriptionInput ({
     )
 }
 
-export function ClubLocationMap () {
+const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), {
+    ssr: false,
+  });
+
+const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), {
+    ssr: false,
+  });
+
+const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), {
+    ssr: false,
+  });
+  
+const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), {
+    ssr: false,
+  });
+
+export function ClubLocationMap ({
+    locX,
+    setLocX,
+    locY,
+    setLocY,
+    locName,
+    setLocName
+} : {
+    locX: number;
+    setLocX: Dispatch<SetStateAction<number>>;
+    locY: number;
+    setLocY: Dispatch<SetStateAction<number>>; 
+    locName: string;
+    setLocName: Dispatch<SetStateAction<string>>;
+}) {
+
+    const [position, setPosition] = useState<L.LatLng | null>(null);
+
+    useEffect(() => {
+        import('leaflet').then((L) => {
+            if (locX === 0 && locY === 0) {
+                setPosition(null);
+            } else {
+                setPosition(new L.LatLng(locX, locY));
+            }
+        });
+    }, [locX, locY])
+      
+    const MyMapEvents: React.FC = () => {
+
+        const map = useMap();
+
+        useEffect(() => {
+            if (position !== null) {
+                map.setView(position, map.getZoom());
+            }
+        }, [position, map])
+
+        useMapEvents({
+          click(e) {
+            const { lat, lng } = e.latlng;
+            setPosition(e.latlng);
+            setLocX(lat);
+            setLocY(lng);
+            console.log(`Wybrane współrzędne: ${lat}, ${lng}`);
+            axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+            .then((response) => {
+                const address = response.data.address;
+                const streetNumber = address.house_number || '';
+                const streetName = address.road || '';
+                const city = address.city || address.town || address.village || ''
+                const name = streetNumber ? `${streetName} ${streetNumber}, ${city}` : `${streetName}, ${city}`;
+
+                setLocName(name);
+                console.log(`Nazwa miejsca: ${locName}`);
+            })
+            .catch((error) => {
+              console.error('Błąd pobierania nazwy miejsca:', error);
+            });
+          },
+        });
+    
+        return position ? (
+          <Marker position={position}>
+            <Popup>Wybrana lokalizacja: {locName}</Popup>
+          </Marker>
+        ) : null;
+      };
+
     return (
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d164088.40954316402!2d21.811627027973955!3d50.01357813382295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473cfae3cc14d449%3A0xd2240d31b33eb2ed!2zUnplc3rDs3c!5e0!3m2!1spl!2spl!4v1713206101009!5m2!1spl!2spl" className="w-full h-96 rounded"></iframe>
+        <MapContainer center={[50.04370714836096, 22.00386841259957]} zoom={15} className="w-full h-96 rounded">
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'/>
+            <MyMapEvents />
+        </MapContainer>
     )
 }
 

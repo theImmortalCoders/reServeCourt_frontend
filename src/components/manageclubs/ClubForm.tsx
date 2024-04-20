@@ -5,7 +5,7 @@ import {
   ClubDescriptionInput,
   ClubLocationMap,
   ClubLogoInput,
-} from "@/components/manageclubs/Inputs";
+} from "@/components/manageclubs/ClubFormInputs";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import {

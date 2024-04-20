@@ -81,7 +81,7 @@ export default function ClubForm ({
       }, [logoFile]);
 
     const submitForm  = async () => {
-        if(!name || !description || locX === null || locY === null) {
+        if(!name || !description || locX === 0 || locY === 0) {
             console.error("Pola muszą być wypełnione");
             setMessage("Pola muszą być wypełnione");
             return;

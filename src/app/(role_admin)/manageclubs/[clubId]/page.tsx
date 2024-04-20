@@ -1,13 +1,14 @@
 "use client";
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { getClubDetails } from "@/hooks/club";
 import APIImageComponent from "@/hooks/imageAPI";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
-import DeleteWarning from "@/components/manageclubs/DeleteWarning";
 import { MdEdit, MdDelete } from "react-icons/md";
 import Error500Page from "@/components/common/error/Error500Page";
 import AddCourtForm from "@/components/managecourts/AddCourtForm";
+import { translateCourtSurface, translateCourtType } from "@/utils/courthelper";
+import DeleteWarningCourt from "@/components/managecourts/DeleteWarningCourt";
 
 export default function ClubId({ params }: { params: { clubId: string } }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -37,7 +38,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
             onClick={() => setIsOpen(true)}
             className="bg-mainGreen text-mainWhite text-xl w-fit px-4 py-2 rounded"
           >
-            Dodaj klub
+            Dodaj kort
           </button>
           {clubDetailsLoading ? (
             <div>Trwa ładowanie danych...</div>
@@ -53,9 +54,6 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                     {clubDetailsData.courts.map((court, index) => (
                       <DashboardContainer
                         key={index}
-                        onClick={() =>
-                          window.location.replace(`/manageclubs/${court.id}`)
-                        }
                         className="flex h-fit cursor-pointer"
                       >
                         <div className="p-4 w-[20%]">
@@ -70,11 +68,20 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                             {court.location.name}
                           </p>
                           <p className="text-sm text-mainOrange">
-                            {court.surface}
+                            {court.location.name}
                           </p>
-                          <p className="text-sm text-mainOrange">
-                            {court.type}
-                          </p>
+                          <div className="text-sm flex items-center">
+                            <h1>Typ nawierzchni:</h1>
+                            <h2 className="pl-2 text-sm text-mainOrange">
+                              {translateCourtSurface(court.surface)}
+                            </h2>
+                          </div>
+                          <div className="text-sm flex items-center">
+                            <h1>Typ kortu:</h1>
+                            <h2 className="pl-2 text-sm text-mainOrange">
+                              {translateCourtType(court.type)}
+                            </h2>
+                          </div>
                         </div>
                         <span className="flex justify-end items-center text-2xl space-x-2 p-4">
                           <MdEdit className="cursor-pointer hover:text-mainGreen" />
@@ -95,7 +102,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
             </>
           )}
           {deleteWarning && (
-            <DeleteWarning
+            <DeleteWarningCourt
               deleteWarning={deleteWarning}
               setDeleteWarning={setDeleteWarning}
               tempId={tempId}

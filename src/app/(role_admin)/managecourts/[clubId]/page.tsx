@@ -30,7 +30,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
   if (clubDetailsError) return <Error500Page />;
 
   return (
-    <div className="flex flex-col items-center bg-mainWhite min-h-max p-8">
+    <div className="flex flex-col items-center bg-mainWhite min-h-max p-4 md:p-8">
       {!isOpen ? (
         <>
           {clubDetailsLoading ? (
@@ -48,28 +48,28 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                   <div className="mt-2">
                     <h1 className="w-full text-2xl">{clubDetailsData.name}</h1>
                   </div>
-                  <h1 className="mt-2 h-auto w-11/12 lg:w-3/5 flex justify-start text-lg">
+                  <h1 className="mt-2 h-auto w-11/12 lg:w-3/5 flex justify-start text-md lg:text-lg">
                     Opis:
                   </h1>
-                  <div className="h-auto w-11/12 lg:w-3/5 flex justify-start text-md text-mainOrange">
+                  <div className="h-auto w-11/12 lg:w-3/5 flex justify-start text-sm lg:text-md text-mainOrange">
                     {clubDetailsData.description}
                   </div>
-                  <div className="w-11/12 lg:w-3/5 text-lg flex items-start mt-2">
+                  <div className="w-11/12 lg:w-3/5 text-md lg:text-lg flex items-start mt-2">
                     <h1>Lokalizacja:</h1>
-                    <h2 className="pl-2 text-md text-mainOrange">
+                    <h2 className="pl-2 text-mainOrange">
                       {clubDetailsData.location.name}
                     </h2>
                   </div>
-                  <div className="h-auto w-11/12 lg:w-3/5 flex justify-between mt-2">
-                    <div className="h-auto w-auto text-lg flex items-start">
+                  <div className="h-full w-11/12 lg:w-3/5 flex justify-between mt-2">
+                    <div className="h-full w-auto text-md lg:text-lg flex items-start justify-center">
                       <h1>Liczba kortów:</h1>
-                      <h2 className="pl-2 text-md text-mainOrange">
+                      <h2 className="pl-2 text-mainOrange h-full w-auto flex justify-center">
                         {clubDetailsData.courts.length}
                       </h2>
                     </div>
                     <button
                       onClick={() => setIsOpen(true)}
-                      className="w-auto h-auto bg-mainGreen text-mainWhite text-xl px-4 py-2 rounded"
+                      className="w-auto h-auto bg-mainGreen text-mainWhite text-md md:text-lg lg:text-xl px-2 lg:px-4 py-1 lg:py-2 rounded"
                     >
                       Dodaj kort
                     </button>

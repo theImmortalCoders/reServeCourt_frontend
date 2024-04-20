@@ -19,28 +19,32 @@ export default function CourtListComponent({
   setTempId: Dispatch<SetStateAction<number[]>>;
 }) {
   return (
-    <DashboardContainer className="flex h-fit cursor-pointer">
-      <div className="p-4 w-[20%]">
+    <DashboardContainer className="flex flex-col md:flex-row md:h-36 cursor-pointer">
+      <div className="flex items-center w-40 p-4">
         <APIImageComponent imageId={court.image.id} type={court.image.path} />
       </div>
       <div className="flex flex-col justify-center w-full p-4 ">
         <p className="text-base">{court.name}</p>
-        <p className="text-xs font-sans mb-2"></p>
-        <p className="text-sm text-mainOrange">{court.location.name}</p>
-        <div className="text-sm flex items-center">
-          <h1>Typ nawierzchni:</h1>
-          <h2 className="pl-2 text-sm text-mainOrange">
-            {translateCourtSurface(court.surface)}
-          </h2>
-        </div>
-        <div className="text-sm flex items-center">
-          <h1>Typ kortu:</h1>
-          <h2 className="pl-2 text-sm text-mainOrange">
-            {translateCourtType(court.type)}
-          </h2>
+        <div className="hidden md:flex flex-col justify-end space-y-1 h-full">
+          <p className="text-sm text-mainOrange text-wrap">
+            {court.location.name}
+          </p>
+          <span className="flex items-end space-x-8 text-xs">
+            <p>Typ nawierzchni: {translateCourtSurface(court.surface)}</p>
+            <p>Typ kortu: {translateCourtType(court.type)}</p>
+          </span>
         </div>
       </div>
-      <span className="flex justify-end items-center text-2xl space-x-2 p-4">
+      <span className="flex justify-end items-center p-4">
+        <div className="flex md:hidden flex-col justify-end space-y-1 h-full w-full">
+          <p className="text-xs 2xs:text-sm text-mainOrange">
+            {court.location.name}
+          </p>
+          <span className="flex flex-col 2xs:flex-row items-start xs:items-end space-x-0 2xs:space-x-4 text-xs">
+            <p>Typ nawierzchni: {translateCourtSurface(court.surface)}</p>
+            <p>Typ kortu: {translateCourtType(court.type)}</p>
+          </span>
+        </div>
         <MdEdit
           onClick={(e: any) => {
             e.preventDefault();

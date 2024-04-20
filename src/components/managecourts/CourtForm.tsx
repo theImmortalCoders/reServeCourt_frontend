@@ -3,7 +3,12 @@ import DashboardContainer from "@/components/common/dashboardContainer/Dashboard
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { Location, getClubDetails } from "@/hooks/club";
 import { uploadMultipleImages } from "@/hooks/image";
-import { AddCourtData, addCourt, getCourtDetails } from "@/hooks/court";
+import {
+  AddCourtData,
+  addCourt,
+  getCourtDetails,
+  updateCourt,
+} from "@/hooks/court";
 import {
   CourtSurfaceInput,
   CourtTypeInput,
@@ -127,24 +132,34 @@ export default function CourtForm({
     };
 
     try {
-      const result = await addCourt(clubID, newCourtData);
-      if (result === 200) {
-        setName("");
-        setDescription("");
-        setCourtType("");
-        setCourtSurface("");
-        setLocX(0);
-        setLocY(0);
-        setLocName("");
-        setLogoFiles([]);
-        const form = document.getElementById("logoInput") as HTMLFormElement;
-        if (form) {
-          form.reset();
+      if (!isUpdate) {
+        const result = await addCourt(clubID, newCourtData);
+        if (result === 200) {
+          setName("");
+          setDescription("");
+          setCourtType("");
+          setCourtSurface("");
+          setLocX(0);
+          setLocY(0);
+          setLocName("");
+          setLogoFiles([]);
+          const form = document.getElementById("logoInput") as HTMLFormElement;
+          if (form) {
+            form.reset();
+          }
+          setMessage("Dodano kortu");
+        } else {
+          console.error("Błąd dodawania kortu");
+          setMessage("Błąd dodawania kortu");
         }
-        setMessage("Dodano kortu");
       } else {
-        console.error("Błąd dodawania kortu");
-        setMessage("Błąd dodawania kortu");
+        const result = await updateCourt(tempId[0], newCourtData);
+        if (result === 200) {
+          setMessage("Zaktualizowano kort");
+        } else {
+          console.error("Błąd aktualizowania kortu");
+          setMessage("Błąd aktualizowania kortu");
+        }
       }
     } catch (error) {
       console.error("Błąd dodawania kortu", error);

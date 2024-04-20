@@ -23,7 +23,7 @@ export default function Login() {
     const result = await authenticateUser(userData);
     if (result === 200) {
       setLogged(true);
-      router.push("/dashboard");
+      router.push("/manageclubs");
     } else {
       setMessage(result);
       setLogged(false);

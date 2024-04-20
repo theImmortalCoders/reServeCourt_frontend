@@ -6,7 +6,7 @@ import APIImageComponent from "@/hooks/imageAPI";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import { MdEdit, MdDelete } from "react-icons/md";
 import Error500Page from "@/components/common/error/Error500Page";
-import AddCourtForm from "@/components/managecourts/AddCourtForm";
+import CourtForm from "@/components/managecourts/CourtForm";
 import { translateCourtSurface, translateCourtType } from "@/utils/courthelper";
 import DeleteWarningCourt from "@/components/managecourts/DeleteWarningCourt";
 
@@ -111,7 +111,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
           )}
         </>
       ) : (
-        <AddCourtForm
+        <CourtForm
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           clubID={parseInt(params.clubId)}

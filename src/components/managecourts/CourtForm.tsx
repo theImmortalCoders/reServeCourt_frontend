@@ -1,16 +1,16 @@
 "use client";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
-import {
-  ClubNameInput,
-  ClubDescriptionInput,
-  ClubLocationMap,
-} from "@/components/manageclubs/Inputs";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { Location } from "@/hooks/club";
 import { uploadMultipleImages } from "@/hooks/image";
 import { AddCourtData, addCourt } from "@/hooks/court";
+import {
+  ClubDescriptionInput,
+  ClubLocationMap,
+  ClubNameInput,
+} from "../manageclubs/ClubFormInputs";
 
-export default function AddCourtForm({
+export default function CourtForm({
   isOpen,
   setIsOpen,
   clubID,
@@ -138,7 +138,14 @@ export default function AddCourtForm({
       </div>
       <div className="space-y-1">
         <p className="text-sm">Wybierz lokalizację:</p>
-        <ClubLocationMap />
+        <ClubLocationMap
+          locX={locX}
+          setLocX={setLocX}
+          locY={locY}
+          setLocY={setLocY}
+          locName={locName}
+          setLocName={setLocName}
+        />
       </div>
       <div className="space-y-1">
         <p className="text-sm">Wczytaj logo:</p>

@@ -1,8 +1,8 @@
 import { useState, Dispatch, SetStateAction } from "react";
-import { deleteClub } from "@/hooks/club";
+import { deleteCourt } from "@/hooks/court";
 import { deleteImage } from "@/hooks/image";
 
-export default function DeleteWarning({
+export default function DeleteWarningCourt({
   deleteWarning,
   setDeleteWarning,
   tempId,
@@ -17,30 +17,29 @@ export default function DeleteWarning({
 
   const confirmDelete = async () => {
     try {
-      const result_1 = await deleteClub(tempId[0]);
+      const result_1 = await deleteCourt(tempId[0]);
       const result_2 = await deleteImage(tempId[1]);
       if (result_1 === 200 && result_2 === 200) {
         setTempId([-1, -1]);
         setDeleteWarning(false);
       } else {
-        console.error("Błąd usuwania klubu");
-        setMessage("Błąd usuwania klubu");
+        console.error("Błąd usuwania kortu");
+        setMessage("Błąd usuwania kortu");
       }
     } catch (error) {
-      console.error("Błąd dodawania klubu", error);
-      setMessage("Błąd usuwania klubu");
+      console.error("Błąd dodawania kortu", error);
+      setMessage("Błąd usuwania kortu");
     }
   };
   return (
     <div className="fixed flex items-center justify-center inset-0 z-10">
       <div className="absolute inset-0 bg-mainWhite opacity-80"></div>
-      <div className="flex flex-col justify-center items-center w-64 sm:w-96 border-2 border-darkGreen bg-mainWhite rounded space-y-2 p-4 z-20">
-        <h1 className="text-xl">Usuwanie klubu</h1>
+      <div className="flex flex-col justify-center items-center w-1/4 border-2 border-darkGreen bg-mainWhite rounded space-y-2 p-4 z-20">
+        <h1 className="text-xl">Usuwanie kortu</h1>
         <p className="text-sm text-center font-sans">
-          Czy na pewno chcesz usunąć wybrany klub?
+          Czy na pewno chcesz usunąć wybrany kort?
           <br />
-          Operacja jest nieodwracalna i spowoduje trwałe usunięcie klubu wraz ze
-          wszystkimi przypisanymi do niego kortami.
+          Operacja jest nieodwracalna i spowoduje trwałe usunięcie kortu.
         </p>
         <span className="space-x-4">
           <button

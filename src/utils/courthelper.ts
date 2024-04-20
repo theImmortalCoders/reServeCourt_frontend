@@ -13,7 +13,6 @@ export function translateCourtSurface(surface: string) {
   }
 }
 
-type CourtType = "INDOOR" | "OUTDOOR";
 export function translateCourtType(type: string) {
   switch (type) {
     case "INDOOR":

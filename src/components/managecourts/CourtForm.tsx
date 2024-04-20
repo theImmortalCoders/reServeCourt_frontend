@@ -31,8 +31,8 @@ export default function CourtForm({
 }) {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [courtType, setCourtType] = useState<string>("INDOOR");
-  const [courtSurface, setCourtSurface] = useState<string>("CLAY");
+  const [courtType, setCourtType] = useState<string>("");
+  const [courtSurface, setCourtSurface] = useState<string>("");
   const [locX, setLocX] = useState<number>(0);
   const [locY, setLocY] = useState<number>(0);
   const [locName, setLocName] = useState<string>("");

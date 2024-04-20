@@ -10,6 +10,7 @@ import "leaflet/dist/leaflet.css";
 import { useMap } from "react-leaflet";
 import dynamic from "next/dynamic";
 import axios from "axios";
+import { translateCourtSurface, translateCourtType } from "@/utils/courthelper";
 
 function FormInput({
   type,
@@ -272,8 +273,8 @@ export function CourtTypeInput({
         onChange={(e) => setCourtType(e.target.value)}
         className="border border-gray-300 rounded px-3 py-2"
       >
-        <option value="INDOOR">Indoor</option>
-        <option value="OUTDOOR">Outdoor</option>
+        <option value="INDOOR">{translateCourtType("INDOOR")}</option>
+        <option value="OUTDOOR">{translateCourtType("OUTDOOR")}</option>
       </select>
     </div>
   );
@@ -294,10 +295,10 @@ export function CourtSurfaceInput({
         onChange={(e) => setCourtSurface(e.target.value)}
         className="border border-gray-300 rounded px-3 py-2"
       >
-        <option value="CLAY">Clay</option>
-        <option value="CONCRETE">Concrete</option>
-        <option value="GRASS">Grass</option>
-        <option value="ACRYLIC">Acrylic</option>
+        <option value="CLAY">{translateCourtSurface("CLAY")}</option>
+        <option value="CONCRETE">{translateCourtSurface("CONCRETE")}</option>
+        <option value="GRASS">{translateCourtSurface("GRASS")}</option>
+        <option value="ACRYLIC">{translateCourtSurface("ACRYLIC")}</option>
       </select>
     </div>
   );

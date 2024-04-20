@@ -143,7 +143,6 @@ export function ClubLocationMap ({
 }) {
 
     const [position, setPosition] = useState<L.LatLng | null>(null);
-    console.log(position);
 
     useEffect(() => {
         import('leaflet').then((L) => {
@@ -152,7 +151,6 @@ export function ClubLocationMap ({
             } else {
                 setPosition(new L.LatLng(locX, locY));
             }
-            console.log(locX, locY);
         });
     }, [locX, locY])
       

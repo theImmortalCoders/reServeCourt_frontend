@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, Dispatch, SetStateAction, } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { getAllClubs } from "@/hooks/club";
 import APIImageComponent from "@/hooks/imageAPI";
@@ -40,7 +40,7 @@ export default function ManageClubs () {
                     ) : (
                         <div className="w-11/12 xl:w-3/5 space-y-8 md:space-y-2">
                             { clubsData && clubsData.content.map((club, index) => (
-                                <DashboardContainer key={index} onClick={() => window.location.replace(`/managecourts/${club.id}`)} className="flex flex-col md:flex-row md:h-36 cursor-pointer">
+                                <DashboardContainer key={index} className="flex flex-col md:flex-row md:h-36 cursor-pointer" clubId={club.id}>
                                     <div className="flex items-center w-40 p-4">
                                         <APIImageComponent imageId={club.logo.id} type={club.logo.path}/>
                                     </div>
@@ -64,8 +64,8 @@ export default function ManageClubs () {
                                             </span>
                                         </div>
                                         <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
-                                            <MdEdit onClick={(e: any) => { e.stopPropagation(); setIsUpdate(true);  setTempId([club.id, club.logo.id]); setIsOpen(true)}} className="cursor-pointer hover:text-mainGreen"/>
-                                            <MdDelete onClick={(e: any) => { e.stopPropagation(); setDeleteWarning(true); setTempId([club.id, club.logo.id]) }} className="cursor-pointer hover:text-red-600" /> 
+                                            <MdEdit onClick={(e: any) => { e.preventDefault(); setIsUpdate(true);  setTempId([club.id, club.logo.id]); setIsOpen(true)}} className="cursor-pointer hover:text-mainGreen"/>
+                                            <MdDelete onClick={(e: any) => { e.preventDefault(); setDeleteWarning(true); setTempId([club.id, club.logo.id]) }} className="cursor-pointer hover:text-red-600" /> 
                                         </span>  
                                     </span>
                                 </DashboardContainer>

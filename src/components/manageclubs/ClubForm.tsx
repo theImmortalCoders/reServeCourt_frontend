@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import { AddClubData, addClub, updateClub, getClubDetails, Location } from "@/hooks/club";
 import { uploadSingleImage } from "@/hooks/image";
 
-export default function AddClubForm ({
+export default function ClubForm ({
     isOpen,
     setIsOpen,
     isUpdate,
@@ -49,19 +49,21 @@ export default function AddClubForm ({
                         setDescription(clubData.description);
                         setLocX(clubData.location.locX);
                         setLocY(clubData.location.locY);
+                        setLocName(clubData.location.name);
                         setLogoId(clubData.logo.id);
                     } else {
                         setName("");
                         setDescription("");
                         setLocX(0);
                         setLocY(0);
+                        setLocName("");
                         setLogoId(-1);
                     }
                 } else {
                 console.log("Loading data error");
                 }
             }
-        }, [clubLoading, clubData, tempId[0]]);
+        }, [clubData, tempId[0]]);
     }
 
     useEffect(() => {
@@ -123,8 +125,6 @@ export default function AddClubForm ({
             else {
                 const result = await updateClub(tempId[0], newClubData);
                 if (result === 200) {
-                    console.log(tempId);
-                    console.log(isUpdate);
                     setMessage("Zaktualizowano klub");
                 }
                 else {
@@ -148,7 +148,7 @@ export default function AddClubForm ({
             <ClubDescriptionInput description={description} setDescription={setDescription}/>
             <div className="space-y-1">
                 <p className="text-sm">Wybierz lokalizację:</p>
-                <ClubLocationMap/>
+                <ClubLocationMap locX={locX} setLocX={setLocX} locY={locY} setLocY={setLocY} locName={locName} setLocName={setLocName}/>
             </div>
             
             <div className="space-y-1">
@@ -156,7 +156,7 @@ export default function AddClubForm ({
                 <ClubLogoInput logoFile={logoFile} setLogoFile={setLogoFile} isForm={true}/>                
             </div>
             <span className='flex justify-center space-x-4'>
-                <button onClick={() => { setIsUpdate(false); setIsOpen(false), setTempId([-1, -1]); console.log(tempId); }} className="text-right text-mainOrange text-sm sm:text-md">Zamknij</button>
+                <button onClick={() => { setTempId([-1, -1]); setIsOpen(false); setIsUpdate(false); }} className="text-right text-mainOrange text-sm sm:text-md">Zamknij</button>
                 <button onClick={submitForm} className="bg-darkGreen text-mainWhite text-sm rounded px-4 py-2 w-fit">{ isUpdate ? ("Zapisz") : ("Dodaj") }</button>
             </span>
             <div className="flex w-full justify-center">

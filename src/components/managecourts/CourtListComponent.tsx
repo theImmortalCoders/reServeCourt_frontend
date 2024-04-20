@@ -25,7 +25,7 @@ export default function CourtListComponent({
       </div>
       <div className="flex flex-col justify-center w-full p-4 ">
         <p className="text-base">{court.name}</p>
-        <p className="text-xs font-sans mb-2">{court.location.name}</p>
+        <p className="text-xs font-sans mb-2"></p>
         <p className="text-sm text-mainOrange">{court.location.name}</p>
         <div className="text-sm flex items-center">
           <h1>Typ nawierzchni:</h1>

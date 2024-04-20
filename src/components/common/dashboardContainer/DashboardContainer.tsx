@@ -12,14 +12,14 @@ export default function DashboardContainer({
     return (
       clubId ? (
         <Link href={`/managecourts/${clubId}`}
-        className={`bg-mainWhite rounded shadow-md ${className}`}
-      >
+          className={`bg-mainWhite rounded shadow-md ${className}`}
+        >
           {children}
       </Link>
       ) : (
         <div
-        className={`bg-mainWhite rounded shadow-md ${className}`}
-      >
+          className={`bg-mainWhite rounded shadow-md ${className}`}
+        >
           {children}
         </div>
       )

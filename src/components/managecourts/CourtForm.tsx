@@ -1,9 +1,9 @@
 "use client";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { Location } from "@/hooks/club";
+import { Location, getClubDetails } from "@/hooks/club";
 import { uploadMultipleImages } from "@/hooks/image";
-import { AddCourtData, addCourt } from "@/hooks/court";
+import { AddCourtData, addCourt, getCourtDetails } from "@/hooks/court";
 import {
   CourtSurfaceInput,
   CourtTypeInput,
@@ -11,6 +11,7 @@ import {
   LocationMap,
   NameInput,
 } from "../manageclubs/ClubFormInputs";
+import { useQuery } from "react-query";
 
 export default function CourtForm({
   isOpen,
@@ -41,6 +42,44 @@ export default function CourtForm({
 
   const [message, setMessage] = useState<string>("");
 
+  if (isUpdate) {
+    const {
+      data: courtData,
+      isLoading: courtLoading,
+      isError: courtError,
+      refetch: refetchCourt,
+    } = useQuery(["court", tempId[0]], () => getCourtDetails(tempId[0]));
+
+    useEffect(() => {
+      refetchCourt();
+      if (isUpdate && !courtLoading) {
+        if (typeof courtData !== "string" && !courtError) {
+          if (courtData) {
+            setName(courtData.name);
+            setDescription(courtData.description);
+            setCourtType(courtData.type);
+            setCourtSurface(courtData.surface);
+            setLocX(courtData.location.locX);
+            setLocY(courtData.location.locY);
+            setLocName(courtData.location.name);
+            setLogoIds(courtData.images.map((image) => image.id));
+          } else {
+            setName("");
+            setDescription("");
+            setCourtType("");
+            setCourtSurface("");
+            setLocX(0);
+            setLocY(0);
+            setLocName("");
+            setLogoIds([-1]);
+          }
+        } else {
+          console.log("Loading data error");
+        }
+      }
+    }, [courtData, tempId[0]]);
+  }
+
   useEffect(() => {
     const handleNewImages = async () => {
       try {
@@ -48,8 +87,7 @@ export default function CourtForm({
 
         const results = await uploadMultipleImages(logoFiles, false);
         if (typeof results !== "string") {
-          const ids = results.map((result) => result.id);
-          setLogoIds(ids);
+          setLogoIds(results.map((result) => result.id));
         }
       } catch (error) {
         console.error("Błąd dodawania obrazów", error);
@@ -116,7 +154,9 @@ export default function CourtForm({
 
   return (
     <DashboardContainer className="flex flex-col space-y-4 p-7 w-11/12 lg:w-3/5">
-      <h1 className="text-xl lg:text-2xl font-semibold">Dodawanie kortu</h1>
+      <h1 className="text-xl lg:text-2xl font-semibold">
+        {!isUpdate ? "Dodawanie kortu" : "Aktualizacja kortu"}
+      </h1>
       <NameInput name={name} setName={setName} />
       <DescriptionInput
         description={description}

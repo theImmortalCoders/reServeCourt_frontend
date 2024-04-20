@@ -5,18 +5,28 @@ import { Location } from "@/hooks/club";
 import { uploadMultipleImages } from "@/hooks/image";
 import { AddCourtData, addCourt } from "@/hooks/court";
 import {
-  ClubDescriptionInput,
-  ClubLocationMap,
-  ClubNameInput,
+  CourtSurfaceInput,
+  CourtTypeInput,
+  DescriptionInput,
+  LocationMap,
+  NameInput,
 } from "../manageclubs/ClubFormInputs";
 
 export default function CourtForm({
   isOpen,
   setIsOpen,
+  isUpdate,
+  setIsUpdate,
+  tempId,
+  setTempId,
   clubID,
 }: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  isUpdate: boolean;
+  setIsUpdate: Dispatch<SetStateAction<boolean>>;
+  tempId: number[];
+  setTempId: Dispatch<SetStateAction<number[]>>;
   clubID: number;
 }) {
   const [name, setName] = useState<string>("");
@@ -107,38 +117,19 @@ export default function CourtForm({
   return (
     <DashboardContainer className="flex flex-col space-y-4 p-7 w-11/12 lg:w-3/5">
       <h1 className="text-xl lg:text-2xl font-semibold">Dodawanie kortu</h1>
-      <ClubNameInput name={name} setName={setName} />
-      <ClubDescriptionInput
+      <NameInput name={name} setName={setName} />
+      <DescriptionInput
         description={description}
         setDescription={setDescription}
       />
-      <div className="space-y-1">
-        <p className="text-sm">Wybierz typ kortu:</p>
-        <select
-          value={courtType}
-          onChange={(e) => setCourtType(e.target.value)}
-          className="border border-gray-300 rounded px-3 py-2"
-        >
-          <option value="INDOOR">Indoor</option>
-          <option value="OUTDOOR">Outdoor</option>
-        </select>
-      </div>
-      <div className="space-y-1">
-        <p className="text-sm">Wybierz nawierzchnię kortu:</p>
-        <select
-          value={courtSurface}
-          onChange={(e) => setCourtSurface(e.target.value)}
-          className="border border-gray-300 rounded px-3 py-2"
-        >
-          <option value="CLAY">Clay</option>
-          <option value="CONCRETE">Concrete</option>
-          <option value="GRASS">Grass</option>
-          <option value="ACRYLIC">Acrylic</option>
-        </select>
-      </div>
+      <CourtTypeInput courtType={courtType} setCourtType={setCourtType} />
+      <CourtSurfaceInput
+        courtSurface={courtSurface}
+        setCourtSurface={setCourtSurface}
+      />
       <div className="space-y-1">
         <p className="text-sm">Wybierz lokalizację:</p>
-        <ClubLocationMap
+        <LocationMap
           locX={locX}
           setLocX={setLocX}
           locY={locY}
@@ -163,7 +154,11 @@ export default function CourtForm({
       </div>
       <span className="flex justify-center space-x-4">
         <button
-          onClick={() => setIsOpen(false)}
+          onClick={() => {
+            setTempId([-1, -1]);
+            setIsOpen(false);
+            setIsUpdate(false);
+          }}
           className="text-right text-mainOrange text-sm sm:text-md"
         >
           Zamknij
@@ -172,7 +167,7 @@ export default function CourtForm({
           onClick={submitForm}
           className="bg-darkGreen text-mainWhite text-sm rounded px-4 py-2 w-fit"
         >
-          Dodaj
+          {isUpdate ? "Zapisz" : "Dodaj"}
         </button>
       </span>
       <div className="flex w-full justify-center">

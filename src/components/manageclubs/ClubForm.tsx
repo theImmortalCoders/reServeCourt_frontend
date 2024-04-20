@@ -1,10 +1,10 @@
 "use client";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import {
-  ClubNameInput,
-  ClubDescriptionInput,
-  ClubLocationMap,
   ClubLogoInput,
+  DescriptionInput,
+  LocationMap,
+  NameInput,
 } from "@/components/manageclubs/ClubFormInputs";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useQuery } from "react-query";
@@ -150,14 +150,14 @@ export default function ClubForm({
       <h1 className="text-xl lg:text-2xl font-semibold">
         {!isUpdate ? "Dodawanie klubu" : "Aktualizacja klubu"}
       </h1>
-      <ClubNameInput name={name} setName={setName} />
-      <ClubDescriptionInput
+      <NameInput name={name} setName={setName} />
+      <DescriptionInput
         description={description}
         setDescription={setDescription}
       />
       <div className="space-y-1">
         <p className="text-sm">Wybierz lokalizację:</p>
-        <ClubLocationMap
+        <LocationMap
           locX={locX}
           setLocX={setLocX}
           locY={locY}

@@ -77,6 +77,10 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
         <CourtForm
           isOpen={isOpen}
           setIsOpen={setIsOpen}
+          isUpdate={isUpdate}
+          setIsUpdate={setIsUpdate}
+          tempId={tempId}
+          setTempId={setTempId}
           clubID={parseInt(params.clubId)}
         />
       )}

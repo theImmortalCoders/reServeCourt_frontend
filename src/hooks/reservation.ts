@@ -112,9 +112,9 @@ export interface ReservationData {
 export async function getAllReservationByCourtId(courtId: number, from?: string, to?: string) : Promise<ReservationData[] | string> {
     try {
         const response: AxiosResponse<ReservationData[] | string> = await appAPI.get(
+          (from && to) ? `/api/reservation/${courtId}?from=${from}&to=${to}` : 
           from ? `/api/reservation/${courtId}?from=${from}` : 
           to ? `/api/reservation/${courtId}?to=${to}` :
-          (from && to) ? `/api/reservation/${courtId}?from=${from}&to=${to}` : 
           `/api/reservation/${courtId}`,
           {
             withCredentials: true,

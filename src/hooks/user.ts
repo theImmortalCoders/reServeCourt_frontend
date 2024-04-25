@@ -23,7 +23,8 @@ export async function deleteAccount() {
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas usuwania konta");
+      return "Wystąpił błąd podczas usuwania konta";
     }
   }
 }
@@ -65,7 +66,8 @@ export async function getCurrentUser() {
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas pobierania danych użytkownika");
+      return "Wystąpił błąd podczas pobierania danych użytkownika";
     }
   }
 }
@@ -92,7 +94,8 @@ export async function logoutUser() {
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas wylogowywania użytkownika");
+      return "Wystąpił błąd podczas wylogowywania użytkownika";
     }
   }
 }
@@ -128,7 +131,8 @@ export async function changeUserRole(userId: number, newRole: string) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas zmiany roli użytkownika");
+      return "Wystąpił błąd podczas zmiany roli użytkownika";
     }
   }
 }
@@ -164,7 +168,8 @@ export async function banUser(userId: number) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas zablokowywania użytkownika");
+      return "Wystąpił błąd podczas zablokowywania użytkownika";
     }
   }
 }
@@ -197,7 +202,8 @@ export async function changeEmail(value: string) {
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas zmieniania e-mailu użytkownika");
+      return "Wystąpił błąd podczas zmieniania e-mailu użytkownika";
     }
   }
 }
@@ -233,7 +239,8 @@ export async function changePassword(passwordsData: changePasswordData) {
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas zmieniania hasła użytkownika");
+      return "Wystąpił błąd podczas zmieniania hasła użytkownika";
     }
   }
 }
@@ -424,7 +431,10 @@ export async function authenticateAsCourtOwner(
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
     } else {
-      throw new Error("Error500");
+      console.error(
+        "Wystąpił błąd podczas dodawnia użytkownikowi roli właściciela kortu"
+      );
+      return "Wystąpił błąd podczas dodawnia użytkownikowi roli właściciela kortu";
     }
   }
 }

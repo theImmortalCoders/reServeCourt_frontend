@@ -32,7 +32,8 @@ export async function deleteClub(clubId: number) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas usuwania klubu");
+      return "Wystąpił błąd podczas usuwania klubu";
     }
   }
 }
@@ -68,6 +69,21 @@ interface Owner {
   email: string;
 }
 
+export interface OpenClosedGetting {
+  open: string;
+  closed: string;
+}
+
+export interface DaysOpenGetting {
+  monday: OpenClosedGetting;
+  tuesday: OpenClosedGetting;
+  wednesday: OpenClosedGetting;
+  thursday: OpenClosedGetting;
+  friday: OpenClosedGetting;
+  saturday: OpenClosedGetting;
+  sunday: OpenClosedGetting;
+}
+
 export interface GetClubDetailsData {
   id: number;
   name: string;
@@ -77,6 +93,7 @@ export interface GetClubDetailsData {
   courts: Court[];
   owner: Owner;
   rating: number;
+  daysOpen: DaysOpenGetting;
 }
 
 export async function getClubDetails(
@@ -91,10 +108,12 @@ export async function getClubDetails(
       console.log("Szczegóły klubu pobrano poprawnie!");
       return response.data;
     } else {
-      throw new Error("Wystąpił błąd podczas pobierania szczegółów klubu");
+      console.error("Wystąpił błąd podczas pobierania szczegółów klubu");
+      return "Wystąpił błąd podczas pobierania szczegółów klubu";
     }
   } catch (error: any) {
-    throw new Error("Wystąpił błąd podczas pobierania szczegółów klubu");
+    console.error("Wystąpił błąd podczas pobierania szczegółów klubu");
+    return "Wystąpił błąd podczas pobierania szczegółów klubu";
   }
 }
 
@@ -156,11 +175,34 @@ export async function getAllClubs(): Promise<GetAllClubsData> {
   }
 }
 
+export interface HourMinuteSecondNano {
+  hour: number;
+  minute: number;
+  second: 0;
+  nano: 0;
+}
+
+export interface OpenClosedAdding {
+  open: HourMinuteSecondNano;
+  closed: HourMinuteSecondNano;
+}
+
+export interface DaysOpenAdding {
+  monday: OpenClosedAdding;
+  tuesday: OpenClosedAdding;
+  wednesday: OpenClosedAdding;
+  thursday: OpenClosedAdding;
+  friday: OpenClosedAdding;
+  saturday: OpenClosedAdding;
+  sunday: OpenClosedAdding;
+}
+
 export interface AddClubData {
   name: string;
   description: string;
   location: Location;
   logoId: number;
+  daysOpen: DaysOpenAdding;
 }
 
 export async function addClub(clubData: AddClubData) {
@@ -195,7 +237,8 @@ export async function addClub(clubData: AddClubData) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas dodawania klubu");
+      return "Wystąpił błąd podczas dodawania klubu";
     }
   }
 }
@@ -232,7 +275,8 @@ export async function updateClub(clubId: number, clubData: AddClubData) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas aktualizowania klubu");
+      return "Wystąpił błąd podczas aktualizowania klubu";
     }
   }
 }

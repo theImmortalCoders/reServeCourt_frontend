@@ -61,7 +61,7 @@ export interface GetReservationDetailsData {
     confirmed: boolean;
 }
 
-export async function getReservationDetails(reservationId: number) : Promise<GetReservationDetailsData | string> {
+export async function getReservationDetailsById(reservationId: number) : Promise<GetReservationDetailsData | string> {
     try {
         const response: AxiosResponse<GetReservationDetailsData | string> = await appAPI.get(
           `/api/reservation/${reservationId}/details`,
@@ -97,3 +97,70 @@ export async function getReservationDetails(reservationId: number) : Promise<Get
     }
 }
 
+export interface ReservationData {
+    id: number;
+    reservedByOwner: boolean;
+    timeFrom: string;
+    timeTo: string;
+    cancelled: boolean;
+    confirmed: boolean;
+}
+
+export async function getAllReservationByCourtId(courtId: number, from?: string, to?: string) : Promise<ReservationData[] | string> {
+    try {
+        const response: AxiosResponse<ReservationData[] | string> = await appAPI.get(
+          from ? `/api/reservation/${courtId}?from=${from}` : 
+          to ? `/api/reservation/${courtId}?to=${to}` :
+          (from && to) ? `/api/reservation/${courtId}?from=${from}&to=${to}` : 
+          `/api/reservation/${courtId}`,
+          {
+            withCredentials: true,
+          }
+        );
+        if (response.status === 200) {
+          console.log("Wszystkie rezerwacje w danym korcie pobrano poprawnie!");
+          return response.data;
+        } else {
+          console.error("Wystąpił błąd podczas pobierania rezerwacji w danym korcie");
+          return "Wystąpił błąd podczas pobierania rezerwacji w danym korcie";
+        }
+    } catch (error: any) {
+        throw new Error("Error500");
+    }
+}
+
+export async function getUpcomingReservationByClubId(clubId: number, confirmed?: boolean) : Promise<ReservationData[] | string> {
+    try {
+        const response: AxiosResponse<ReservationData[] | string> = await appAPI.get(
+          confirmed ? `/api/reservation/${clubId}/upcoming?confirmed=${confirmed}` : `/api/reservation/${clubId}/upcoming`,
+          {
+            withCredentials: true,
+          }
+        );
+        if (response.status === 200) {
+          console.log("Wszystkie nadchodzące rezerwacje w danym klubie pobrano poprawnie!");
+          return response.data;
+        } else if (response.status === 401) {
+          window.location.replace("/login");
+          console.error("Brak autoryzacji użytkownika");
+          return "Brak autoryzacji użytkownika";
+        } else if (response.status === 403) {
+          console.error("Brak dostępu");
+          return "Brak dostępu";
+        } else {
+          console.error("Wystąpił błąd podczas pobierania nadchodzących rezerwacji w danym klubie");
+          return "Wystąpił błąd podczas pobierania nadchodzących rezerwacji w danym klubie";
+        }
+    } catch (error: any) {
+        if (error.response.status === 401) {
+            window.location.replace("/login");
+            console.error("Brak autoryzacji użytkownika");
+            return "Brak autoryzacji użytkownika";
+          } else if (error.response.status === 403) {
+            console.error("Brak dostępu");
+            return "Brak dostępu";
+          } else {
+            throw new Error("Error500");
+          }
+    }
+}

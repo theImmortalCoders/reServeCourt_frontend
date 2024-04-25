@@ -39,7 +39,8 @@ export async function cancelReservation(reservationId: number) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas odwoływania rezerwacji");
+      return "Wystąpił błąd podczas odwoływania rezerwacji";
     }
   }
 }
@@ -93,7 +94,8 @@ export async function getReservationDetailsById(reservationId: number) : Promise
             console.error("Brak dostępu");
             return "Brak dostępu";
         } else {
-            throw new Error("Error500");
+          console.error("Wystąpił błąd podczas pobierania szczegółów rezerwacji");
+          return "Wystąpił błąd podczas pobierania szczegółów rezerwacji";
         }
     }
 }
@@ -126,7 +128,8 @@ export async function getAllReservationByCourtId(courtId: number, from?: string,
           return "Wystąpił błąd podczas pobierania rezerwacji w danym korcie";
         }
     } catch (error: any) {
-        throw new Error("Error500");
+      console.error("Wystąpił błąd podczas pobierania rezerwacji w danym korcie");
+      return "Wystąpił błąd podczas pobierania rezerwacji w danym korcie";
     }
 }
 
@@ -161,7 +164,8 @@ export async function getUpcomingReservationByClubId(clubId: number, confirmed?:
             console.error("Brak dostępu");
             return "Brak dostępu";
           } else {
-            throw new Error("Error500");
+            console.error("Wystąpił błąd podczas pobierania nadchodzących rezerwacji w danym klubie");
+            return "Wystąpił błąd podczas pobierania nadchodzących rezerwacji w danym klubie";
           }
     }
 }
@@ -197,7 +201,8 @@ export async function confirmReservation(reservationId: number) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas zatwierdzania rezerwacji");
+      return "Wystąpił błąd podczas zatwierdzania rezerwacji";
     }
   }
 }
@@ -242,7 +247,8 @@ export async function addReservation(courtId: number, reservationData: AddReserv
       console.error(polishErrorMesage);
       return polishErrorMesage;
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas dodawania rezerwacji");
+      return "Wystąpił błąd podczas dodawania rezerwacji";
     }
   }
 }
@@ -287,7 +293,8 @@ export async function editReservation(reservationId: number, reservationData: Ad
       console.error(polishErrorMesage);
       return polishErrorMesage;
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas aktualizowania rezerwacji");
+      return "Wystąpił błąd podczas aktualizowania rezerwacji";
     }
   }
 }

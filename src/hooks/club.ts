@@ -32,7 +32,8 @@ export async function deleteClub(clubId: number) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas usuwania klubu");
+      return "Wystąpił błąd podczas usuwania klubu";
     }
   }
 }
@@ -107,10 +108,12 @@ export async function getClubDetails(
       console.log("Szczegóły klubu pobrano poprawnie!");
       return response.data;
     } else {
-      throw new Error("Wystąpił błąd podczas pobierania szczegółów klubu");
+      console.error("Wystąpił błąd podczas pobierania szczegółów klubu");
+      return "Wystąpił błąd podczas pobierania szczegółów klubu";
     }
   } catch (error: any) {
-    throw new Error("Wystąpił błąd podczas pobierania szczegółów klubu");
+    console.error("Wystąpił błąd podczas pobierania szczegółów klubu");
+    return "Wystąpił błąd podczas pobierania szczegółów klubu";
   }
 }
 
@@ -234,7 +237,8 @@ export async function addClub(clubData: AddClubData) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas dodawania klubu");
+      return "Wystąpił błąd podczas dodawania klubu";
     }
   }
 }
@@ -271,7 +275,8 @@ export async function updateClub(clubId: number, clubData: AddClubData) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas aktualizowania klubu");
+      return "Wystąpił błąd podczas aktualizowania klubu";
     }
   }
 }

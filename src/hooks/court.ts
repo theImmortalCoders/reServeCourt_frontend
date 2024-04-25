@@ -32,7 +32,8 @@ export async function deleteCourt(courtId: number) {
         console.error("Brak dostępu");
         return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas usuwania kortu");
+      return "Wystąpił błąd podczas usuwania kortu";
     }
   }
 }
@@ -74,10 +75,12 @@ export async function getCourtDetails(courtId: number): Promise<GetCourtDetailsD
         console.log("Szczegóły kortu pobrano poprawnie!");
         return response.data;
       } else {
-        throw new Error("Wystąpił błąd podczas pobierania szczegółów kortu");
+        console.error("Wystąpił błąd podczas pobierania szczegółów kortu");
+        return "Wystąpił błąd podczas pobierania szczegółów kortu";
       }
     } catch (error: any) {
-        throw new Error("Wystąpił błąd podczas pobierania szczegółów kortu");
+      console.error("Wystąpił błąd podczas pobierania szczegółów kortu");
+      return "Wystąpił błąd podczas pobierania szczegółów kortu";
     }
 }
 
@@ -124,7 +127,10 @@ export async function addCourt(clubId: number, courtData: AddCourtData) {
           console.error("Brak dostępu");
           return "Brak dostępu";
         } else {
-          throw new Error("Error500");
+          console.error(
+            "Wystąpił błąd podczas dodawania kortu"
+          );
+          return "Wystąpił błąd podczas dodawania kortu";
         }
     }
 }
@@ -163,7 +169,10 @@ export async function updateCourt(courtId: number, courtData: AddCourtData) {
           console.error("Brak dostępu");
           return "Brak dostępu";
         } else {
-          throw new Error("Error500");
+          console.error(
+            "Wystąpił błąd podczas aktualizowania kortu"
+          );
+          return "Wystąpił błąd podczas aktualizowania kortu";
         }
     }
 }
@@ -201,7 +210,10 @@ export async function setCourtOpenness(courtId: number, closed: boolean) {
         console.error("Brak dostępu");
         return "Brak dostępu";
       } else {
-        throw new Error("Error500");
+        console.error(
+          "Wystąpił błąd podczas otwierania/zamykania kortu"
+        );
+        return "Wystąpił błąd podczas otwierania/zamykania kortu";
       }
   }
 }

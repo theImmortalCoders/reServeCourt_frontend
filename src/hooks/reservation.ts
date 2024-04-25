@@ -1,4 +1,5 @@
 import { appAPI } from "@/utils/appAPI";
+import { getPolishReservationErrorMessage } from "@/utils/reservationErrorMessageHelper";
 import { AxiosResponse } from "axios";
 
 export async function cancelReservation(reservationId: number) {
@@ -195,6 +196,94 @@ export async function confirmReservation(reservationId: number) {
     } else if (error.response.status === 403) {
       console.error("Brak dostępu");
       return "Brak dostępu";
+    } else {
+      throw new Error("Error500");
+    }
+  }
+}
+
+export interface AddReservationData {
+  timeFrom: string;
+  timeTo: string;
+  message: string;
+}
+
+export async function addReservation(courtId: number, reservationData: AddReservationData) : Promise<GetReservationDetailsData | string> {
+  try {
+    const response: AxiosResponse<GetReservationDetailsData | string> = await appAPI.post(
+      `/api/reservation?courtId=${courtId}`,
+      reservationData,
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.status === 200) {
+      console.log("Rezerwacja została dodana poprawnie!");
+      return response.data;
+    } else if (response.status === 400) {
+      console.error("Szczegóły rezerwacji nie są poprawne");
+      return "Szczegóły rezerwacji nie są poprawne";
+    } else if (response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else {
+      console.error("Wystąpił błąd podczas dodawania rezerwacji");
+      return "Wystąpił błąd podczas dodawania rezerwacji";
+    }
+  } catch (error: any) {
+    if (error.response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else if (error.response.status === 400) {
+      let polishErrorMesage = getPolishReservationErrorMessage(error.response.data.message);
+      console.error(polishErrorMesage);
+      return polishErrorMesage;
+    } else {
+      throw new Error("Error500");
+    }
+  }
+}
+
+export async function editReservation(reservationId: number, reservationData: AddReservationData) : Promise<GetReservationDetailsData | string> {
+  try {
+    const response: AxiosResponse<GetReservationDetailsData | string> = await appAPI.put(
+      `/api/reservation/${reservationId}`,
+      reservationData,
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.status === 200) {
+      console.log("Rezerwacja została zaktualizowana poprawnie!");
+      return response.data;
+    } else if (response.status === 400) {
+      console.error("Szczegóły rezerwacji nie są poprawne");
+      return "Szczegóły rezerwacji nie są poprawne";
+    } else if (response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else if (response.status === 403) {
+      console.error("Brak dostępu");
+      return "Brak dostępu";
+    } else {
+      console.error("Wystąpił błąd podczas aktualizowania rezerwacji");
+      return "Wystąpił błąd podczas aktualizowania rezerwacji";
+    }
+  } catch (error: any) {
+    if (error.response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else if (error.response.status === 403) {
+      console.error("Brak dostępu");
+      return "Brak dostępu";
+    } else if (error.response.status === 400) {
+      let polishErrorMesage = getPolishReservationErrorMessage(error.response.data.message);
+      console.error(polishErrorMesage);
+      return polishErrorMesage;
     } else {
       throw new Error("Error500");
     }

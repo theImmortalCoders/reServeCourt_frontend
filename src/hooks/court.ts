@@ -167,3 +167,41 @@ export async function updateCourt(courtId: number, courtData: AddCourtData) {
         }
     }
 }
+
+export async function setCourtOpenness(courtId: number, closed: boolean) {
+  try {
+      const response: AxiosResponse<void> = await appAPI.put(
+        `/api/court/${courtId}/active?closed=${closed}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        console.log("Kort został otwarty/zamknięty poprawnie!");
+        return response.status;
+      } else if (response.status === 401) {
+        window.location.replace("/login");
+        console.error("Brak autoryzacji użytkownika");
+        return "Brak autoryzacji użytkownika";
+      } else if (response.status === 403) {
+        console.error("Brak dostępu");
+        return "Brak dostępu";
+      } else {
+        console.error(
+          "Wystąpił błąd podczas otwierania/zamykania kortu"
+        );
+        return "Wystąpił błąd podczas otwierania/zamykania kortu";
+      }
+  } catch (error: any) {
+      if (error.response.status === 401) {
+        window.location.replace("/login");
+        console.error("Brak autoryzacji użytkownika");
+        return "Brak autoryzacji użytkownika";
+      } else if (error.response.status === 403) {
+        console.error("Brak dostępu");
+        return "Brak dostępu";
+      } else {
+        throw new Error("Error500");
+      }
+  }
+}

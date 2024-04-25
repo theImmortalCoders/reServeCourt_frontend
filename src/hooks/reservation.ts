@@ -219,6 +219,7 @@ export async function addReservation(courtId: number, reservationData: AddReserv
     );
     if (response.status === 200) {
       console.log("Rezerwacja została dodana poprawnie!");
+      //w przypadku poprawnego dodania można wyświetlić dane o tej rezerwajci z response.data
       return response.data;
     } else if (response.status === 400) {
       console.error("Szczegóły rezerwacji nie są poprawne");
@@ -257,6 +258,7 @@ export async function editReservation(reservationId: number, reservationData: Ad
     );
     if (response.status === 200) {
       console.log("Rezerwacja została zaktualizowana poprawnie!");
+      //w przypadku poprawnego zaktualizowania można wyświetlić dane o tej rezerwajci z response.data
       return response.data;
     } else if (response.status === 400) {
       console.error("Szczegóły rezerwacji nie są poprawne");

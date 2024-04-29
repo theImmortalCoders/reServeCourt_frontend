@@ -5,6 +5,7 @@ import {
   DescriptionInput,
   LocationMap,
   NameInput,
+  OpenHoursInput
 } from "@/components/manageclubs/ClubFormInputs";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useQuery } from "react-query";
@@ -174,6 +175,10 @@ export default function ClubForm({
           setLogoFile={setLogoFile}
           isForm={true}
         />
+      </div>
+      <div className="space-y-1">
+        <p className="text-sm">Podaj godziny otwarcia</p>
+        <OpenHoursInput/>
       </div>
       <span className="flex justify-center space-x-4">
         <button

@@ -258,6 +258,63 @@ export function ClubLogoInput({
   );
 }
 
+export function OpenHoursInput ({ className } : { className?: string }) {
+  return (
+    <div className={`flex flex-col items-center border text-sm lg:text-base border-gray-500 rounded w-fit px-3 py-2 space-y-1 ${className}`}>
+  
+      <span className="flex text-sm space-x-2">
+        <p className="w-24 xs:w-36">Poniedziałek</p>
+        <input className="bg-mainWhite" type="time" name="openMonday" id="openMonday" />
+        <p>:</p>
+        <input className="bg-mainWhite" type="time" name="closeMonday" id="openMonday" />
+      </span>  
+    
+      <span className="flex text-sm space-x-2">
+        <p className="w-24 xs:w-36">Wtorek</p>
+        <input className="bg-mainWhite" type="time" name="openTuesday" id="openTuesday" />
+        <p>:</p>
+        <input className="bg-mainWhite" type="time" name="closeTuesday" id="closeTuesday" /> 
+      </span>
+    
+      <span className="flex text-sm space-x-2">
+        <p className="w-24 xs:w-36">Środa</p>
+        <input className="bg-mainWhite" type="time" name="openWednesday" id="openWednesday" />
+        <p>:</p>
+        <input className="bg-mainWhite" type="time" name="closeWednesday" id="closeWednesday" />
+      </span>
+    
+      <span className="flex text-sm space-x-2">
+        <p className="w-24 xs:w-36">Czwartek</p>
+        <input className="bg-mainWhite" type="time" name="openThursday" id="openThursday" />
+        <p>:</p>
+        <input className="bg-mainWhite" type="time" name="closeThursday" id="closeThursday" /> 
+      </span>
+    
+      <span className="flex text-sm space-x-2">
+        <p className="w-24 xs:w-36">Piątek</p>
+        <input className="bg-mainWhite" type="time" name="openFriday" id="openFriday" />
+        <p>:</p>
+        <input className="bg-mainWhite" type="time" name="closeFriday" id="closeFriday" /> 
+      </span>
+    
+      <span className="flex text-sm space-x-2">
+        <p className="w-24 xs:w-36">Sobota</p>
+        <input className="bg-mainWhite" type="time" name="openSaturday" id="openSaturday" />
+        <p>:</p>
+        <input className="bg-mainWhite" type="time" name="closeSaturday" id="closeSaturday" />  
+      </span>
+    
+      <span className="flex text-sm space-x-2">
+        <p className="w-24 xs:w-36">Niedziela</p>
+        <input className="bg-mainWhite" type="time" name="openSunday" id="openSunday" />
+        <p>:</p>
+        <input className="bg-mainWhite" type="time" name="closeSunday" id="closeSunday" />  
+      </span>
+    
+    </div>
+  )
+}
+
 export function CourtTypeInput({
   courtType,
   setCourtType,

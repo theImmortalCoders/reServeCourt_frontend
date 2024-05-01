@@ -175,6 +175,11 @@ export async function getAllClubs(): Promise<GetAllClubsData> {
   }
 }
 
+// EXAMPLE VALUES FOR OPENING HOURS - SWAGGER SHOWS BAD REQUEST BODY
+//  monday: {
+//    open: "11:54",
+//    closed: "12:12"
+//  }
 export interface DaysOpenAdding {
   monday: OpenClosed;
   tuesday: OpenClosed;

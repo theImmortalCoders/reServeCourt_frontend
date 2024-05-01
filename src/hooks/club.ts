@@ -74,7 +74,13 @@ export interface OpenClosed {
   closed: string;
 }
 
-export interface DaysOpenGetting {
+// EXAMPLE VALUES FOR OPENING HOURS - SWAGGER SHOWS BAD REQUEST BODY
+//  monday: {
+//    open: "11:54",
+//    closed: "12:12"
+//  }
+
+export interface DaysOpen {
   monday: OpenClosed;
   tuesday: OpenClosed;
   wednesday: OpenClosed;
@@ -93,7 +99,7 @@ export interface GetClubDetailsData {
   courts: Court[];
   owner: Owner;
   rating: number;
-  daysOpen: DaysOpenGetting;
+  daysOpen: DaysOpen;
 }
 
 export async function getClubDetails(
@@ -175,27 +181,12 @@ export async function getAllClubs(): Promise<GetAllClubsData> {
   }
 }
 
-// EXAMPLE VALUES FOR OPENING HOURS - SWAGGER SHOWS BAD REQUEST BODY
-//  monday: {
-//    open: "11:54",
-//    closed: "12:12"
-//  }
-export interface DaysOpenAdding {
-  monday: OpenClosed;
-  tuesday: OpenClosed;
-  wednesday: OpenClosed;
-  thursday: OpenClosed;
-  friday: OpenClosed;
-  saturday: OpenClosed;
-  sunday: OpenClosed;
-}
-
 export interface AddClubData {
   name: string;
   description: string;
   location: Location;
   logoId: number;
-  daysOpen: DaysOpenAdding;
+  daysOpen: DaysOpen;
 }
 
 export async function addClub(clubData: AddClubData) {

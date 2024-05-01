@@ -15,6 +15,9 @@ import {
   updateClub,
   getClubDetails,
   Location,
+  DaysOpenAdding,
+  DaysOpenGetting,
+  OpenClosed
 } from "@/hooks/club";
 import { uploadSingleImage } from "@/hooks/image";
 
@@ -41,6 +44,21 @@ export default function ClubForm({
   const [logoId, setLogoId] = useState<number>(-1);
   const [logoFile, setLogoFile] = useState<File>(new File([], ""));
 
+  const defaultOpenClosed: OpenClosed = {
+    open: "08:00",
+    closed: "17:00"
+  }
+  const defaultDaysOpen: DaysOpenAdding = {
+    monday: defaultOpenClosed,
+    tuesday: defaultOpenClosed,
+    wednesday: defaultOpenClosed,
+    thursday: defaultOpenClosed,
+    friday: defaultOpenClosed,
+    saturday: defaultOpenClosed,
+    sunday: defaultOpenClosed
+  }
+  const [daysOpen, setDaysOpen] = useState<DaysOpenAdding>(defaultDaysOpen);
+
   const [message, setMessage] = useState<string>("");
 
   if (isUpdate) {
@@ -62,6 +80,7 @@ export default function ClubForm({
             setLocY(clubData.location.locY);
             setLocName(clubData.location.name);
             setLogoId(clubData.logo.id);
+            setDaysOpen(clubData.daysOpen);
           } else {
             setName("");
             setDescription("");
@@ -69,6 +88,7 @@ export default function ClubForm({
             setLocY(0);
             setLocName("");
             setLogoId(-1);
+            setDaysOpen(defaultDaysOpen);
           }
         } else {
           console.log("Loading data error");
@@ -109,6 +129,7 @@ export default function ClubForm({
       description: description,
       location: newLocation,
       logoId: logoId,
+      daysOpen: daysOpen
     };
 
     try {
@@ -126,6 +147,7 @@ export default function ClubForm({
           if (form) {
             form.reset();
           }
+          setDaysOpen(defaultDaysOpen);
           setMessage("Dodano klub");
         } else {
           console.error("Błąd dodawania klubu");
@@ -178,7 +200,7 @@ export default function ClubForm({
       </div>
       <div className="space-y-1">
         <p className="text-sm">Podaj godziny otwarcia</p>
-        <OpenHoursInput/>
+        <OpenHoursInput daysOpen={daysOpen} setDaysOpen={setDaysOpen}/>
       </div>
       <span className="flex justify-center space-x-4">
         <button

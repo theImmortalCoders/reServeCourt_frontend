@@ -278,55 +278,72 @@ export function OpenHoursInput ({
     }));
   };
 
+  const handleCheckboxChange = (day: keyof DaysOpenAdding, checked: boolean) => {
+    setDaysOpen(prevDaysOpen => ({
+      ...prevDaysOpen,
+      [day]: {
+        open: checked ? (prevDaysOpen[day].open || "08:00") : null,
+        closed: checked ? (prevDaysOpen[day].closed || "17:00") : null
+      }
+    }));
+  };
+
   return (
     <div className={`flex flex-col items-center border text-sm lg:text-base border-gray-500 rounded w-fit px-3 py-2 space-y-1 ${className}`}>
       <span className="flex text-sm space-x-2">
+        <input type="checkbox" checked={daysOpen.monday.open !== null} onChange={(e) => handleCheckboxChange('monday', e.target.checked)} />
         <p className="w-24 xs:w-36">Poniedziałek</p>
-        <input className="bg-mainWhite" type="time" name="openMonday" id="openMonday" value={daysOpen.monday.open} onChange={(e) => handleTimeChange('monday', true, e.target.value)}/>
+        <input className="bg-mainWhite" type="time" name="openMonday" id="openMonday" value={daysOpen.monday.open || ''} onChange={(e) => handleTimeChange('monday', true, e.target.value)} />
         <p>:</p>
-        <input className="bg-mainWhite" type="time" name="closeMonday" id="closeMonday" value={daysOpen.monday.closed} onChange={(e) => handleTimeChange('monday', false, e.target.value)} />
+        <input className="bg-mainWhite" type="time" name="closeMonday" id="closeMonday" value={daysOpen.monday.closed || ''} onChange={(e) => handleTimeChange('monday', false, e.target.value)} />
       </span>  
     
       <span className="flex text-sm space-x-2">
+        <input type="checkbox" checked={daysOpen.tuesday.open !== null} onChange={(e) => handleCheckboxChange('tuesday', e.target.checked)} />
         <p className="w-24 xs:w-36">Wtorek</p>
-        <input className="bg-mainWhite" type="time" name="openTuesday" id="openTuesday" value={daysOpen.tuesday.open} onChange={(e) => handleTimeChange('tuesday', true, e.target.value)}/>
+        <input className="bg-mainWhite" type="time" name="openTuesday" id="openTuesday" value={daysOpen.tuesday.open || ''} onChange={(e) => handleTimeChange('tuesday', true, e.target.value)}/>
         <p>:</p>
-        <input className="bg-mainWhite" type="time" name="closeTuesday" id="closeTuesday" value={daysOpen.tuesday.closed} onChange={(e) => handleTimeChange('tuesday', false, e.target.value)}/> 
+        <input className="bg-mainWhite" type="time" name="closeTuesday" id="closeTuesday" value={daysOpen.tuesday.closed || ''} onChange={(e) => handleTimeChange('tuesday', false, e.target.value)}/> 
       </span>
     
       <span className="flex text-sm space-x-2">
+        <input type="checkbox" checked={daysOpen.wednesday.open !== null} onChange={(e) => handleCheckboxChange('wednesday', e.target.checked)} />
         <p className="w-24 xs:w-36">Środa</p>
-        <input className="bg-mainWhite" type="time" name="openWednesday" id="openWednesday" value={daysOpen.wednesday.open} onChange={(e) => handleTimeChange('wednesday', true, e.target.value)}/>
+        <input className="bg-mainWhite" type="time" name="openWednesday" id="openWednesday" value={daysOpen.wednesday.open || ''} onChange={(e) => handleTimeChange('wednesday', true, e.target.value)}/>
         <p>:</p>
-        <input className="bg-mainWhite" type="time" name="closeWednesday" id="closeWednesday" value={daysOpen.wednesday.closed} onChange={(e) => handleTimeChange('wednesday', false, e.target.value)}/>
+        <input className="bg-mainWhite" type="time" name="closeWednesday" id="closeWednesday" value={daysOpen.wednesday.closed || ''} onChange={(e) => handleTimeChange('wednesday', false, e.target.value)}/>
       </span>
     
       <span className="flex text-sm space-x-2">
+        <input type="checkbox" checked={daysOpen.thursday.open !== null} onChange={(e) => handleCheckboxChange('thursday', e.target.checked)} />
         <p className="w-24 xs:w-36">Czwartek</p>
-        <input className="bg-mainWhite" type="time" name="openThursday" id="openThursday" value={daysOpen.thursday.open} onChange={(e) => handleTimeChange('thursday', true, e.target.value)}/>
+        <input className="bg-mainWhite" type="time" name="openThursday" id="openThursday" value={daysOpen.thursday.open || ''} onChange={(e) => handleTimeChange('thursday', true, e.target.value)}/>
         <p>:</p>
-        <input className="bg-mainWhite" type="time" name="closeThursday" id="closeThursday" value={daysOpen.thursday.closed} onChange={(e) => handleTimeChange('thursday', false, e.target.value)}/> 
+        <input className="bg-mainWhite" type="time" name="closeThursday" id="closeThursday" value={daysOpen.thursday.closed || ''} onChange={(e) => handleTimeChange('thursday', false, e.target.value)}/> 
       </span>
     
       <span className="flex text-sm space-x-2">
+        <input type="checkbox" checked={daysOpen.friday.open !== null} onChange={(e) => handleCheckboxChange('friday', e.target.checked)} />
         <p className="w-24 xs:w-36">Piątek</p>
-        <input className="bg-mainWhite" type="time" name="openFriday" id="openFriday" value={daysOpen.friday.open} onChange={(e) => handleTimeChange('friday', true, e.target.value)}/>
+        <input className="bg-mainWhite" type="time" name="openFriday" id="openFriday" value={daysOpen.friday.open || ''} onChange={(e) => handleTimeChange('friday', true, e.target.value)}/>
         <p>:</p>
-        <input className="bg-mainWhite" type="time" name="closeFriday" id="closeFriday" value={daysOpen.friday.closed} onChange={(e) => handleTimeChange('friday', false, e.target.value)}/> 
+        <input className="bg-mainWhite" type="time" name="closeFriday" id="closeFriday" value={daysOpen.friday.closed || ''} onChange={(e) => handleTimeChange('friday', false, e.target.value)}/> 
       </span>
     
       <span className="flex text-sm space-x-2">
+        <input type="checkbox" checked={daysOpen.saturday.open !== null} onChange={(e) => handleCheckboxChange('saturday', e.target.checked)} />
         <p className="w-24 xs:w-36">Sobota</p>
-        <input className="bg-mainWhite" type="time" name="openSaturday" id="openSaturday" value={daysOpen.saturday.open} onChange={(e) => handleTimeChange('saturday', true, e.target.value)}/>
+        <input className="bg-mainWhite" type="time" name="openSaturday" id="openSaturday" value={daysOpen.saturday.open || ''} onChange={(e) => handleTimeChange('saturday', true, e.target.value)}/>
         <p>:</p>
-        <input className="bg-mainWhite" type="time" name="closeSaturday" id="closeSaturday" value={daysOpen.saturday.closed} onChange={(e) => handleTimeChange('saturday', false, e.target.value)}/>  
+        <input className="bg-mainWhite" type="time" name="closeSaturday" id="closeSaturday" value={daysOpen.saturday.closed || ''} onChange={(e) => handleTimeChange('saturday', false, e.target.value)}/>  
       </span>
     
       <span className="flex text-sm space-x-2">
+        <input type="checkbox" checked={daysOpen.sunday.open !== null} onChange={(e) => handleCheckboxChange('sunday', e.target.checked)} />
         <p className="w-24 xs:w-36">Niedziela</p>
-        <input className="bg-mainWhite" type="time" name="openSunday" id="openSunday" value={daysOpen.sunday.open} onChange={(e) => handleTimeChange('sunday', true, e.target.value)}/>
+        <input className="bg-mainWhite" type="time" name="openSunday" id="openSunday" value={daysOpen.sunday.open || ''} onChange={(e) => handleTimeChange('sunday', true, e.target.value)}/>
         <p>:</p>
-        <input className="bg-mainWhite" type="time" name="closeSunday" id="closeSunday" value={daysOpen.sunday.closed} onChange={(e) => handleTimeChange('sunday', false, e.target.value)}/>  
+        <input className="bg-mainWhite" type="time" name="closeSunday" id="closeSunday" value={daysOpen.sunday.closed || ''} onChange={(e) => handleTimeChange('sunday', false, e.target.value)}/>  
       </span>
     </div>
   )

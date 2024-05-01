@@ -15,8 +15,7 @@ import {
   updateClub,
   getClubDetails,
   Location,
-  DaysOpenAdding,
-  DaysOpenGetting,
+  DaysOpen,
   OpenClosed
 } from "@/hooks/club";
 import { uploadSingleImage } from "@/hooks/image";
@@ -48,7 +47,7 @@ export default function ClubForm({
     open: "08:00",
     closed: "17:00"
   }
-  const defaultDaysOpen: DaysOpenAdding = {
+  const defaultDaysOpen: DaysOpen = {
     monday: defaultOpenClosed,
     tuesday: defaultOpenClosed,
     wednesday: defaultOpenClosed,
@@ -57,7 +56,7 @@ export default function ClubForm({
     saturday: defaultOpenClosed,
     sunday: defaultOpenClosed
   }
-  const [daysOpen, setDaysOpen] = useState<DaysOpenAdding>(defaultDaysOpen);
+  const [daysOpen, setDaysOpen] = useState<DaysOpen>(defaultDaysOpen);
 
   const [message, setMessage] = useState<string>("");
 
@@ -111,10 +110,27 @@ export default function ClubForm({
     handleNewImage();
   }, [logoFile]);
 
+  const validateDaysOpen = (daysOpen: DaysOpen) => {
+    for (const day in daysOpen) {
+      const openTime = new Date(`1970-01-01T${daysOpen[day as keyof DaysOpen].open}Z`);
+      const closeTime = new Date(`1970-01-01T${daysOpen[day as keyof DaysOpen].closed}Z`);
+  
+      if (openTime >= closeTime) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   const submitForm = async () => {
     if (!name || !description || locX === 0 || locY === 0) {
       console.error("Pola muszą być wypełnione");
       setMessage("Pola muszą być wypełnione");
+      return;
+    }
+
+    if (!validateDaysOpen(daysOpen)) {
+      setMessage("Nieprawidłowe godziny otwarcia");
       return;
     }
 

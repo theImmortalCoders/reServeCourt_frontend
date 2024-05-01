@@ -69,19 +69,19 @@ interface Owner {
   email: string;
 }
 
-export interface OpenClosedGetting {
+export interface OpenClosed {
   open: string;
   closed: string;
 }
 
 export interface DaysOpenGetting {
-  monday: OpenClosedGetting;
-  tuesday: OpenClosedGetting;
-  wednesday: OpenClosedGetting;
-  thursday: OpenClosedGetting;
-  friday: OpenClosedGetting;
-  saturday: OpenClosedGetting;
-  sunday: OpenClosedGetting;
+  monday: OpenClosed;
+  tuesday: OpenClosed;
+  wednesday: OpenClosed;
+  thursday: OpenClosed;
+  friday: OpenClosed;
+  saturday: OpenClosed;
+  sunday: OpenClosed;
 }
 
 export interface GetClubDetailsData {
@@ -175,26 +175,19 @@ export async function getAllClubs(): Promise<GetAllClubsData> {
   }
 }
 
-export interface HourMinuteSecondNano {
-  hour: number;
-  minute: number;
-  second: 0;
-  nano: 0;
-}
-
-export interface OpenClosedAdding {
-  open: HourMinuteSecondNano;
-  closed: HourMinuteSecondNano;
-}
-
+// EXAMPLE VALUES FOR OPENING HOURS - SWAGGER SHOWS BAD REQUEST BODY
+//  monday: {
+//    open: "11:54",
+//    closed: "12:12"
+//  }
 export interface DaysOpenAdding {
-  monday: OpenClosedAdding;
-  tuesday: OpenClosedAdding;
-  wednesday: OpenClosedAdding;
-  thursday: OpenClosedAdding;
-  friday: OpenClosedAdding;
-  saturday: OpenClosedAdding;
-  sunday: OpenClosedAdding;
+  monday: OpenClosed;
+  tuesday: OpenClosed;
+  wednesday: OpenClosed;
+  thursday: OpenClosed;
+  friday: OpenClosed;
+  saturday: OpenClosed;
+  sunday: OpenClosed;
 }
 
 export interface AddClubData {

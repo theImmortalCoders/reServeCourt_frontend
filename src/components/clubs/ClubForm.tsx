@@ -5,6 +5,7 @@ import {
   DescriptionInput,
   LocationMap,
   NameInput,
+  OpenHoursInput
 } from "@/components/clubs/ClubFormInputs";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useQuery } from "react-query";
@@ -14,6 +15,8 @@ import {
   updateClub,
   getClubDetails,
   Location,
+  DaysOpen,
+  OpenClosed
 } from "@/hooks/club";
 import { uploadSingleImage } from "@/hooks/image";
 
@@ -40,6 +43,21 @@ export default function ClubForm({
   const [logoId, setLogoId] = useState<number>(-1);
   const [logoFile, setLogoFile] = useState<File>(new File([], ""));
 
+  const defaultOpenClosed: OpenClosed = {
+    open: "08:00",
+    closed: "17:00"
+  }
+  const defaultDaysOpen: DaysOpen = {
+    monday: defaultOpenClosed,
+    tuesday: defaultOpenClosed,
+    wednesday: defaultOpenClosed,
+    thursday: defaultOpenClosed,
+    friday: defaultOpenClosed,
+    saturday: defaultOpenClosed,
+    sunday: defaultOpenClosed
+  }
+  const [daysOpen, setDaysOpen] = useState<DaysOpen>(defaultDaysOpen);
+
   const [message, setMessage] = useState<string>("");
 
   if (isUpdate) {
@@ -61,6 +79,7 @@ export default function ClubForm({
             setLocY(clubData.location.locY);
             setLocName(clubData.location.name);
             setLogoId(clubData.logo.id);
+            setDaysOpen(clubData.daysOpen);
           } else {
             setName("");
             setDescription("");
@@ -68,6 +87,7 @@ export default function ClubForm({
             setLocY(0);
             setLocName("");
             setLogoId(-1);
+            setDaysOpen(defaultDaysOpen);
           }
         } else {
           console.log("Loading data error");
@@ -90,10 +110,27 @@ export default function ClubForm({
     handleNewImage();
   }, [logoFile]);
 
+  const validateDaysOpen = (daysOpen: DaysOpen) => {
+    for (const day in daysOpen) {
+      const openTime = new Date(`1970-01-01T${daysOpen[day as keyof DaysOpen].open}Z`);
+      const closeTime = new Date(`1970-01-01T${daysOpen[day as keyof DaysOpen].closed}Z`);
+  
+      if (openTime >= closeTime) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   const submitForm = async () => {
     if (!name || !description || locX === 0 || locY === 0) {
       console.error("Pola muszą być wypełnione");
       setMessage("Pola muszą być wypełnione");
+      return;
+    }
+
+    if (!validateDaysOpen(daysOpen)) {
+      setMessage("Nieprawidłowe godziny otwarcia");
       return;
     }
 
@@ -108,6 +145,7 @@ export default function ClubForm({
       description: description,
       location: newLocation,
       logoId: logoId,
+      daysOpen: daysOpen
     };
 
     try {
@@ -125,6 +163,7 @@ export default function ClubForm({
           if (form) {
             form.reset();
           }
+          setDaysOpen(defaultDaysOpen);
           setMessage("Dodano klub");
         } else {
           console.error("Błąd dodawania klubu");
@@ -174,6 +213,10 @@ export default function ClubForm({
           setLogoFile={setLogoFile}
           isForm={true}
         />
+      </div>
+      <div className="space-y-1">
+        <p className="text-sm">Podaj godziny otwarcia</p>
+        <OpenHoursInput daysOpen={daysOpen} setDaysOpen={setDaysOpen}/>
       </div>
       <span className="flex justify-center space-x-4">
         <button

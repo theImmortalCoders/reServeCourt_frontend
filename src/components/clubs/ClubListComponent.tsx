@@ -11,12 +11,14 @@ export default function ClubListComponent({
   setIsOpen,
   setDeleteWarning,
   setTempId,
+  userRole
 }: {
   club: Content;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   setDeleteWarning: Dispatch<SetStateAction<boolean>>;
   setTempId: Dispatch<SetStateAction<number[]>>;
+  userRole: string | null;
 }) {
   return (
     <DashboardContainer
@@ -57,25 +59,27 @@ export default function ClubListComponent({
             </span>
           </span>
         </div>
-        <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
-          <MdEdit
-            onClick={(e: any) => {
-              e.preventDefault();
-              setIsUpdate(true);
-              setTempId([club.id, club.logo.id]);
-              setIsOpen(true);
-            }}
-            className="cursor-pointer hover:text-mainGreen"
-          />
-          <MdDelete
-            onClick={(e: any) => {
-              e.preventDefault();
-              setDeleteWarning(true);
-              setTempId([club.id, club.logo.id]);
-            }}
-            className="cursor-pointer hover:text-red-600"
-          />
-        </span>
+        { userRole === "ADMIN" && (
+          <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
+            <MdEdit
+              onClick={(e: any) => {
+                e.preventDefault();
+                setIsUpdate(true);
+                setTempId([club.id, club.logo.id]);
+                setIsOpen(true);
+              }}
+              className="cursor-pointer hover:text-mainGreen"
+            />
+            <MdDelete
+              onClick={(e: any) => {
+                e.preventDefault();
+                setDeleteWarning(true);
+                setTempId([club.id, club.logo.id]);
+              }}
+              className="cursor-pointer hover:text-red-600"
+            />
+          </span>
+        )}
       </span>
     </DashboardContainer>
   );

@@ -1,31 +1,29 @@
 "use client";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
-import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { Location, getClubDetails } from "@/hooks/club";
-import { uploadMultipleImages } from "@/hooks/image";
 import {
-  AddCourtData,
-  addCourt,
-  getCourtDetails,
-  updateCourt,
-} from "@/hooks/court";
-import {
-  CourtSurfaceInput,
-  CourtTypeInput,
+  ClubLogoInput,
   DescriptionInput,
   LocationMap,
   NameInput,
-} from "../manageclubs/ClubFormInputs";
+} from "@/components/clubs/ClubFormInputs";
+import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useQuery } from "react-query";
+import {
+  AddClubData,
+  addClub,
+  updateClub,
+  getClubDetails,
+  Location,
+} from "@/hooks/club";
+import { uploadSingleImage } from "@/hooks/image";
 
-export default function CourtForm({
+export default function ClubForm({
   isOpen,
   setIsOpen,
   isUpdate,
   setIsUpdate,
   tempId,
   setTempId,
-  clubID,
 }: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -33,84 +31,67 @@ export default function CourtForm({
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
   tempId: number[];
   setTempId: Dispatch<SetStateAction<number[]>>;
-  clubID: number;
 }) {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [courtType, setCourtType] = useState<string>("");
-  const [courtSurface, setCourtSurface] = useState<string>("");
   const [locX, setLocX] = useState<number>(0);
   const [locY, setLocY] = useState<number>(0);
   const [locName, setLocName] = useState<string>("");
-  const [logoIds, setLogoIds] = useState<number[]>([]);
-  const [logoFiles, setLogoFiles] = useState<File[]>([]);
+  const [logoId, setLogoId] = useState<number>(-1);
+  const [logoFile, setLogoFile] = useState<File>(new File([], ""));
 
   const [message, setMessage] = useState<string>("");
 
   if (isUpdate) {
     const {
-      data: courtData,
-      isLoading: courtLoading,
-      isError: courtError,
-      refetch: refetchCourt,
-    } = useQuery(["court", tempId[0]], () => getCourtDetails(tempId[0]));
+      data: clubData,
+      isLoading: clubLoading,
+      isError: clubError,
+      refetch: refetchClub,
+    } = useQuery(["club", tempId[0]], () => getClubDetails(tempId[0]));
 
     useEffect(() => {
-      refetchCourt();
-      if (isUpdate && !courtLoading) {
-        if (typeof courtData !== "string" && !courtError) {
-          if (courtData) {
-            setName(courtData.name);
-            setDescription(courtData.description);
-            setCourtType(courtData.type);
-            setCourtSurface(courtData.surface);
-            setLocX(courtData.location.locX);
-            setLocY(courtData.location.locY);
-            setLocName(courtData.location.name);
-            setLogoIds(courtData.images.map((image) => image.id));
+      refetchClub();
+      if (isUpdate && !clubLoading) {
+        if (typeof clubData !== "string" && !clubError) {
+          if (clubData) {
+            setName(clubData.name);
+            setDescription(clubData.description);
+            setLocX(clubData.location.locX);
+            setLocY(clubData.location.locY);
+            setLocName(clubData.location.name);
+            setLogoId(clubData.logo.id);
           } else {
             setName("");
             setDescription("");
-            setCourtType("");
-            setCourtSurface("");
             setLocX(0);
             setLocY(0);
             setLocName("");
-            setLogoIds([-1]);
+            setLogoId(-1);
           }
         } else {
           console.log("Loading data error");
         }
       }
-    }, [courtData, tempId[0]]);
+    }, [clubData, tempId[0]]);
   }
 
   useEffect(() => {
-    const handleNewImages = async () => {
+    const handleNewImage = async () => {
       try {
-        if (logoFiles.length === 0) return;
-
-        const results = await uploadMultipleImages(logoFiles, false);
-        if (typeof results !== "string") {
-          setLogoIds(results.map((result) => result.id));
-        }
+        if (!logoFile.name) return;
+        const result = await uploadSingleImage(logoFile, false);
+        if (typeof result !== "string") setLogoId(result.id);
       } catch (error) {
-        console.error("Błąd dodawania obrazów", error);
+        console.error("Błąd dodawania obrazu", error);
       }
     };
 
-    handleNewImages();
-  }, [logoFiles]);
+    handleNewImage();
+  }, [logoFile]);
 
   const submitForm = async () => {
-    if (
-      !name ||
-      !description ||
-      !courtType ||
-      !courtSurface ||
-      locX === null ||
-      locY === null
-    ) {
+    if (!name || !description || locX === 0 || locY === 0) {
       console.error("Pola muszą być wypełnione");
       setMessage("Pola muszą być wypełnione");
       return;
@@ -122,65 +103,57 @@ export default function CourtForm({
       name: locName,
     };
 
-    const newCourtData: AddCourtData = {
+    const newClubData: AddClubData = {
       name: name,
       description: description,
-      type: courtType,
-      surface: courtSurface,
       location: newLocation,
-      imagesIds: logoIds,
+      logoId: logoId,
     };
 
     try {
       if (!isUpdate) {
-        const result = await addCourt(clubID, newCourtData);
+        const result = await addClub(newClubData);
         if (result === 200) {
           setName("");
           setDescription("");
-          setCourtType("");
-          setCourtSurface("");
           setLocX(0);
           setLocY(0);
           setLocName("");
-          setLogoFiles([]);
+          setLogoId(-1);
+          setLogoFile(new File([], ""));
           const form = document.getElementById("logoInput") as HTMLFormElement;
           if (form) {
             form.reset();
           }
-          setMessage("Dodano kortu");
+          setMessage("Dodano klub");
         } else {
-          console.error("Błąd dodawania kortu");
-          setMessage("Błąd dodawania kortu");
+          console.error("Błąd dodawania klubu");
+          setMessage("Błąd dodawania klubu");
         }
       } else {
-        const result = await updateCourt(tempId[0], newCourtData);
+        const result = await updateClub(tempId[0], newClubData);
         if (result === 200) {
-          setMessage("Zaktualizowano kort");
+          setMessage("Zaktualizowano klub");
         } else {
-          console.error("Błąd aktualizowania kortu");
-          setMessage("Błąd aktualizowania kortu");
+          console.error("Błąd aktualizowania klubu");
+          setMessage("Błąd aktualizowania klubu");
         }
       }
     } catch (error) {
-      console.error("Błąd dodawania kortu", error);
-      setMessage("Błąd dodawania kortu");
+      console.error("Błąd dodawania klubu", error);
+      setMessage("Błąd dodawania klubu");
     }
   };
 
   return (
     <DashboardContainer className="flex flex-col space-y-4 p-7 w-11/12 lg:w-3/5">
       <h1 className="text-xl lg:text-2xl font-semibold">
-        {!isUpdate ? "Dodawanie kortu" : "Aktualizacja kortu"}
+        {!isUpdate ? "Dodawanie klubu" : "Aktualizacja klubu"}
       </h1>
       <NameInput name={name} setName={setName} />
       <DescriptionInput
         description={description}
         setDescription={setDescription}
-      />
-      <CourtTypeInput courtType={courtType} setCourtType={setCourtType} />
-      <CourtSurfaceInput
-        courtSurface={courtSurface}
-        setCourtSurface={setCourtSurface}
       />
       <div className="space-y-1">
         <p className="text-sm">Wybierz lokalizację:</p>
@@ -193,18 +166,13 @@ export default function CourtForm({
           setLocName={setLocName}
         />
       </div>
+
       <div className="space-y-1">
         <p className="text-sm">Wczytaj logo:</p>
-        <input
-          type="file"
-          multiple
-          onChange={(e) => {
-            const files = e.target.files;
-            if (files) {
-              setLogoFiles(Array.from(files));
-            }
-          }}
-          className="border border-gray-300 rounded px-3 py-2"
+        <ClubLogoInput
+          logoFile={logoFile}
+          setLogoFile={setLogoFile}
+          isForm={true}
         />
       </div>
       <span className="flex justify-center space-x-4">

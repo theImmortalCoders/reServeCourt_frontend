@@ -11,12 +11,14 @@ export default function CourtListComponent({
   setIsOpen,
   setDeleteWarning,
   setTempId,
+  userRole
 }: {
   court: Court;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   setDeleteWarning: Dispatch<SetStateAction<boolean>>;
   setTempId: Dispatch<SetStateAction<number[]>>;
+  userRole: string | null;
 }) {
   return (
     <DashboardContainer className="flex flex-col md:flex-row md:h-36 cursor-pointer">
@@ -45,23 +47,27 @@ export default function CourtListComponent({
             <p>Typ kortu: {translateCourtType(court.type)}</p>
           </span>
         </div>
-        <MdEdit
-          onClick={(e: any) => {
-            e.preventDefault();
-            setIsUpdate(true);
-            setTempId([court.id, court.image.id]);
-            setIsOpen(true);
-          }}
-          className="cursor-pointer hover:text-mainGreen"
-        />
-        <MdDelete
-          onClick={(e: any) => {
-            e.stopPropagation();
-            setDeleteWarning(true);
-            setTempId([court.id, court.image.id]);
-          }}
-          className="cursor-pointer hover:text-red-600"
-        />
+        { userRole === "ADMIN" && (
+          <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
+            <MdEdit
+              onClick={(e: any) => {
+                e.preventDefault();
+                setIsUpdate(true);
+                setTempId([court.id, court.image.id]);
+                setIsOpen(true);
+              }}
+              className="cursor-pointer hover:text-mainGreen"
+            />
+            <MdDelete
+              onClick={(e: any) => {
+                e.stopPropagation();
+                setDeleteWarning(true);
+                setTempId([court.id, court.image.id]);
+              }}
+              className="cursor-pointer hover:text-red-600"
+            />
+          </span>
+        )}  
       </span>
     </DashboardContainer>
   );

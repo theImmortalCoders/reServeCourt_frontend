@@ -160,6 +160,19 @@ export function LocationMap({
   locName: string;
   setLocName: Dispatch<SetStateAction<string>>;
 }) {
+  let markerIcon : L.Icon;
+
+    if (typeof window !== 'undefined') {
+      const L = require('leaflet');
+      markerIcon = new L.Icon({
+          iconUrl: '/marker-icon-2x.png',
+          shadowUrl: '/marker-shadow.png',
+          iconSize: [25, 41],
+          iconAnchor: [12.5, 41],
+          popupAnchor: [0, -38]
+      });
+    }
+
   const [position, setPosition] = useState<L.LatLng | null>(null);
 
   useEffect(() => {
@@ -211,10 +224,10 @@ export function LocationMap({
     });
 
     return position ? (
-      <Marker position={position}>
-        <Popup>Wybrana lokalizacja: {locName}</Popup>
-      </Marker>
-    ) : null;
+        <Marker position={position} icon={markerIcon}>
+          <Popup>Wybrana lokalizacja: {locName}</Popup>
+        </Marker>
+      ) : null;
   };
 
   return (

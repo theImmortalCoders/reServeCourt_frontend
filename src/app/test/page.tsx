@@ -2,6 +2,7 @@
 import {StompSessionProvider, useStompClient} from "react-stomp-hooks";
 import {useState, useEffect} from "react";
 import { NEXT_PUBLIC_WEBSOCKET_URL } from "@/utils/appWebsocket";
+import { markNotificationAsRead } from "@/hooks/notification";
 
 export interface Message {
     id: number;
@@ -30,10 +31,26 @@ const Notifications = () => {
         }
     }, [stompClient]);
 
+    async function markNotification(notificationId: number) {
+        try{
+            const result = await markNotificationAsRead(notificationId);
+            if(result === 200) {
+                console.log("Przeczytano powiadomienie");
+            } else {
+                console.error("Błąd odznaczania powiadomienia");
+            }
+        } catch (error) {
+            console.error("Błąd odznaczania powiadomienia", error);
+        }
+    }
+
     return (
         <div>
             {messages.map((message, index) => (
-                <div key={index}>Received message: {message.message}</div>
+                <div key={index}>
+                    <p>Received message: {message.message}</p>
+                    <p onClick={() => markNotification(message.id)}>zatwierdz</p>
+                </div>
             ))}
         </div>
     );

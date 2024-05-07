@@ -30,9 +30,11 @@ export default function ClubListComponent({
       </div>
       <div className="flex flex-col justify-center w-full p-4">
         <p className="text-base">{club.name}</p>
-        <p className="text-xs font-sans mb-2 text-wrap min-h-12 md:h-fit">
-          {club.description}
-        </p>
+        <div className="">
+          <p className="flex w-full h-full items-center text-xs font-sans mb-2 text-wrap min-h-12 md:h-fit ">
+            {club.description}
+          </p>
+        </div>
         <div className="hidden md:flex flex-col justify-end space-y-1 h-full">
           <p className="text-sm text-mainOrange text-wrap">
             {club.location.name}

@@ -21,7 +21,7 @@ export default function CourtListComponent({
   userRole: string | null;
 }) {
   return (
-    <DashboardContainer className="flex flex-col md:flex-row md:h-36 cursor-pointer">
+    <DashboardContainer className="flex flex-col md:flex-row md:h-36">
       <div className="flex items-center w-40 p-4">
         <APIImageComponent imageId={court.image.id} type={court.image.path} />
       </div>

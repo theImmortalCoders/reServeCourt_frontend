@@ -113,7 +113,11 @@ export function DescriptionInput({
         className="w-full h-16 outline-none focus:outline-none bg-inherit"
         onChange={(e) => {
           const value = e.target.value;
-          setDescription(value);
+          const isValid = /^[\w\s\/\d\WąęłńóśźżĄĘŁŃÓŚŹŻ]{0,255}$/i.test(value);
+
+          if (isValid) {
+            setDescription(value);
+          }
         }}
       />
     </div>
@@ -299,9 +303,9 @@ function OpenHoursSpan({
     <span className="flex text-xs xs:text-sm space-x-2">
       <input type="checkbox" checked={openTime !== null} onChange={(e) => handleCheckboxChange(day as keyof DaysOpen, e.target.checked)} />
       <p className="w-20 xs:w-36">{dayNames[day]}</p>
-      <input className="bg-mainWhite" type="time" name={`open${day}`} id={`open${day}`} value={openTime || '00:00'} onChange={(e) => handleTimeChange(day as keyof DaysOpen, true, e.target.value)} />
+      <input className="bg-mainWhite" type="time" name={`open${day}`} id={`open${day}`} value={openTime ? openTime.substring(0, 5) : '00:00'} onChange={(e) => handleTimeChange(day as keyof DaysOpen, true, e.target.value)} />
       <p>:</p>
-      <input className="bg-mainWhite" type="time" name={`close${day}`} id={`close${day}`} value={closeTime || '00:00'} onChange={(e) => handleTimeChange(day as keyof DaysOpen, false, e.target.value)} />
+      <input className="bg-mainWhite" type="time" name={`close${day}`} id={`close${day}`} value={closeTime ? closeTime.substring(0, 5) : '00:00'} onChange={(e) => handleTimeChange(day as keyof DaysOpen, false, e.target.value)} />
   </span>
   )
 }

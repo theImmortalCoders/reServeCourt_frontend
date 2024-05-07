@@ -1,17 +1,28 @@
+import Link from "next/link";
+
 export default function DashboardContainer({
     children,
     className,
-    onClick
+    clubId,
   }: Readonly<{
     children: React.ReactNode;
     className?: string;
-    onClick?:  React.MouseEventHandler<HTMLDivElement>;
+    clubId?: number;
   }>) {
     return (
-      <div onClick={onClick}
-        className={`bg-mainWhite rounded shadow-md ${className}`}
-      >
-        {children}
-      </div>
+      clubId ? (
+        <Link href={`/courts/${clubId}`}
+          className={`bg-mainWhite rounded shadow-md ${className}`}
+        >
+          {children}
+      </Link>
+      ) : (
+        <div
+          className={`bg-mainWhite rounded shadow-md ${className}`}
+        >
+          {children}
+        </div>
+      )
+      
     );
   }

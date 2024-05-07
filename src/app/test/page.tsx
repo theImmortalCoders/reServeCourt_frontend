@@ -1,9 +1,10 @@
 "use client"
 import {StompSessionProvider, useStompClient} from "react-stomp-hooks";
 import {useState, useEffect} from "react";
+import { NEXT_PUBLIC_WEBSOCKET_URL } from "@/utils/appWebsocket";
 
 const Notifications = () => {
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState<string[]>([]);
     const stompClient = useStompClient();
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const Notifications = () => {
 
 export default function NotificationComponent() {
     return (
-        <StompSessionProvider url={'http://localhost:8080/ws-endpoint'}>
+        <StompSessionProvider url={`${NEXT_PUBLIC_WEBSOCKET_URL}`}>
             <Notifications/>
         </StompSessionProvider>
     );

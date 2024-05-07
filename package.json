@@ -19,7 +19,8 @@
     "react-dom": "^18",
     "react-icons": "^5.0.1",
     "react-leaflet": "^4.2.1",
-    "react-query": "^3.39.3"
+    "react-query": "^3.39.3",
+    "react-stomp-hooks": "^2.2.1"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.11",

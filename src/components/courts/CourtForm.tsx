@@ -15,7 +15,7 @@ import {
   DescriptionInput,
   LocationMap,
   NameInput,
-} from "../manageclubs/ClubFormInputs";
+} from "../clubs/ClubFormInputs";
 import { useQuery } from "react-query";
 
 export default function CourtForm({

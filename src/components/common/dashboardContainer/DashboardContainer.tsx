@@ -11,7 +11,7 @@ export default function DashboardContainer({
   }>) {
     return (
       clubId ? (
-        <Link href={`/managecourts/${clubId}`}
+        <Link href={`/courts/${clubId}`}
           className={`bg-mainWhite rounded shadow-md ${className}`}
         >
           {children}

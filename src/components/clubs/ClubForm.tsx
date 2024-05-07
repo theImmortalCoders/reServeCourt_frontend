@@ -6,7 +6,7 @@ import {
   LocationMap,
   NameInput,
   OpenHoursInput
-} from "@/components/manageclubs/ClubFormInputs";
+} from "@/components/clubs/ClubFormInputs";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import {

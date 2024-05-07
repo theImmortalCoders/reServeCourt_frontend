@@ -47,7 +47,7 @@ const Notifications = () => {
     return (
         <div>
             {messages.map((message, index) => (
-                <div key={index}>
+                <div key={index} className="w-96 bg-red-600">
                     <p>Received message: {message.message}</p>
                     <p onClick={() => markNotification(message.id)}>zatwierdz</p>
                 </div>

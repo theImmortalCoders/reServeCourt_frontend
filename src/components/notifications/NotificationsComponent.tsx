@@ -45,11 +45,13 @@ const Notifications = () => {
     }
 
     return (
-        <div>
+        <div className="fixed bottom-0 right-0 m-6 space-y-2 min-w-48 max-w-80 text-wrap">
             {messages.map((message, index) => (
-                <div key={index} className="w-96 bg-red-600">
-                    <p>Received message: {message.message}</p>
-                    <p onClick={() => markNotification(message.id)}>zatwierdz</p>
+                <div key={index} className="flex flex-col justify-center items-center p-4 bg-white rounded shadow-md shadow-lightGrey">
+                    <p className="mb-2 text-center">{message.message}</p>
+                    <div onClick={() => markNotification(message.id)} className="bg-mainOrange cursor-pointer text-center border-[1px] border-mainOrange text-mainWhite rounded-full h-8 max-w-48 w-full flex items-center justify-center">
+                        <p>OK</p>
+                    </div>
                 </div>
             ))}
         </div>

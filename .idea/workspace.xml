@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="feat: #40 basic notification workflow">
+    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="feat: #40 working notification component">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/reServeCourt_frontend.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/test/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/test/page.tsx" afterDir="false" />
@@ -104,7 +106,7 @@
       <workItem from="1713862156599" duration="12000" />
       <workItem from="1714935543098" duration="3882000" />
       <workItem from="1715014837827" duration="98000" />
-      <workItem from="1715067296491" duration="4917000" />
+      <workItem from="1715067296491" duration="5321000" />
     </task>
     <task id="LOCAL-00001" summary="feat: #40 basic notification workflow">
       <option name="closed" value="true" />
@@ -114,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713557471287</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: #40 working notification component">
+      <option name="closed" value="true" />
+      <created>1715074108939</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715074108939</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,6 +132,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: #40 basic notification workflow" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: #40 basic notification workflow" />
+    <MESSAGE value="feat: #40 working notification component" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: #40 working notification component" />
   </component>
 </project>

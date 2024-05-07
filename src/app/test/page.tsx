@@ -3,16 +3,23 @@ import {StompSessionProvider, useStompClient} from "react-stomp-hooks";
 import {useState, useEffect} from "react";
 import { NEXT_PUBLIC_WEBSOCKET_URL } from "@/utils/appWebsocket";
 
+export interface Message {
+    id: number;
+    message: string;
+    receiverId: number;
+    read: boolean;
+}
+
 const Notifications = () => {
-    const [messages, setMessages] = useState<string[]>([]);
+    
+    const [messages, setMessages] = useState<Message[]>([]);
     const stompClient = useStompClient();
 
     useEffect(() => {
         if (stompClient) {
             const subscription = stompClient.subscribe('/user/queue/reply', (message) => {
-                const parsedMessage = message.body;
-                setMessages(prevMessages => [...prevMessages, parsedMessage]);
-                console.log(parsedMessage)
+                const parsedMessage = JSON.parse(message.body);
+                setMessages(prevMessages => [...prevMessages, ...parsedMessage]);
             });
 
             stompClient.publish({destination: '/app/broadcast', body: "0"});
@@ -26,7 +33,7 @@ const Notifications = () => {
     return (
         <div>
             {messages.map((message, index) => (
-                <div key={index}>Received message: {message}</div>
+                <div key={index}>Received message: {message.message}</div>
             ))}
         </div>
     );

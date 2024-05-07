@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="feat: #40 basic notification workflow">
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/test/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/test/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/test/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +98,23 @@
       <workItem from="1713535312717" duration="1359000" />
       <workItem from="1713536676197" duration="6679000" />
       <workItem from="1713557280081" duration="17000" />
+      <workItem from="1713557316679" duration="164000" />
+      <workItem from="1713606728763" duration="1759000" />
+      <workItem from="1713717027426" duration="3000" />
+      <workItem from="1713862156599" duration="12000" />
+      <workItem from="1714935543098" duration="3882000" />
+      <workItem from="1715014837827" duration="98000" />
+      <workItem from="1715067296491" duration="4917000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: #40 basic notification workflow">
+      <option name="closed" value="true" />
+      <created>1713557471287</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1713557471287</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

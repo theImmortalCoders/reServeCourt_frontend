@@ -1,43 +1,40 @@
 "use client"
-import {StompSessionProvider, useStompClient, useSubscription} from "react-stomp-hooks";
+import {StompSessionProvider, useStompClient} from "react-stomp-hooks";
 import {useState, useEffect} from "react";
 
-const ChildComponent = () => {
-    const [messages, setMessages] = useState<NotificationSingleResponse[]>([]);
+const Notifications = () => {
+    const [messages, setMessages] = useState([]);
     const stompClient = useStompClient();
-
-    interface NotificationSingleResponse {
-        id: number;
-        message: string;
-        receiverId: number;
-        read: boolean;
-    }
 
     useEffect(() => {
         if (stompClient) {
-            const subscription = stompClient.subscribe('/topic/reply', (message) => {
-                const parsedMessages: NotificationSingleResponse[] = JSON.parse(message.body);
-                setMessages(parsedMessages)
+            const subscription = stompClient.subscribe('/user/queue/reply', (message) => {
+                const parsedMessage = message.body;
+                setMessages(prevMessages => [...prevMessages, parsedMessage]);
+                console.log(parsedMessage)
             });
+
             stompClient.publish({destination: '/app/broadcast', body: "0"});
-            return () => subscription.unsubscribe();
+
+            return () => {
+                subscription.unsubscribe();
+            }
         }
     }, [stompClient]);
 
     return (
         <div>
             {messages.map((message, index) => (
-                <div key={index}>The broadcast message from websocket broker is {message.message}</div>
+                <div key={index}>Received message: {message}</div>
             ))}
         </div>
     );
 };
 
-export default function Page() {
+export default function NotificationComponent() {
     return (
-        <StompSessionProvider
-            url={'http://localhost:8080/ws-endpoint'}>
-            <ChildComponent/>
+        <StompSessionProvider url={'http://localhost:8080/ws-endpoint'}>
+            <Notifications/>
         </StompSessionProvider>
     );
 }

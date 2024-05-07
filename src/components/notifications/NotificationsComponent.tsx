@@ -20,7 +20,7 @@ const Notifications = () => {
         if (stompClient) {
             const subscription = stompClient.subscribe('/user/queue/reply', (message) => {
                 const parsedMessage = JSON.parse(message.body);
-                setMessages(prevMessages => [...prevMessages, ...parsedMessage]);
+                setMessages(prevMessages => [...prevMessages, ...(Array.isArray(parsedMessage) ? parsedMessage : [parsedMessage])]);
             });
 
             stompClient.publish({ destination: '/app/broadcast', body: "0" });

@@ -264,20 +264,6 @@ export function ClubLogoInput({
   logoId?: number;
 }) {
   return (
-    // <FormInput
-    //   type="file"
-    //   id="logoInput"
-    //   name="logoFile"
-    //   placeholder="Logo"
-    //   accept=".png, .jpg, .jpeg"
-    //   icon={<MdImage className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />}
-    //   onChange={(e) => {
-    //     if (e.target.files) {
-    //       setLogoFile(e.target.files[0]);
-    //     }
-    //   }}
-    //   isForm={isForm}
-    // />
     <div
       className={`flex items-center border text-sm lg:text-base border-gray-500 rounded px-3 pt-1 pb-10`}
     >
@@ -291,10 +277,6 @@ export function ClubLogoInput({
           <div className="w-[120px]">
             <APIImageComponent imageId={logoId ? logoId : 0} type="clubLogo" />
           </div>
-          {/* <MdOutlineDeleteForever
-            className="h-8 w-8 text-darkblue cursor-pointer"
-            onClick={handleDeleteImage}
-          /> */}
         </div>
     </div>
   );

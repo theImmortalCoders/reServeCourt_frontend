@@ -147,7 +147,7 @@ export default function CourtForm({
           if (form) {
             form.reset();
           }
-          setMessage("Dodano kortu");
+          setMessage("Dodano kort");
         } else {
           console.error("Błąd dodawania kortu");
           setMessage("Błąd dodawania kortu");

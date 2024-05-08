@@ -2,6 +2,7 @@ import {
   MdDriveFileRenameOutline,
   MdOutlineShortText,
   MdImage,
+  MdOutlineDeleteForever,
 } from "react-icons/md";
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useMapEvents } from "react-leaflet";
@@ -12,6 +13,8 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import { translateCourtSurface, translateCourtType } from "@/utils/courthelper";
 import { DaysOpen } from "@/hooks/club";
+import { ImageCropFrame } from "../common/imageCrop/ImageCropFrame";
+import APIImageComponent from "@/hooks/imageAPI";
 
 function FormInput({
   type,
@@ -253,26 +256,47 @@ export function ClubLogoInput({
   logoFile,
   setLogoFile,
   isForm,
+  logoId
 }: {
   logoFile: File;
   setLogoFile: Dispatch<SetStateAction<File>>;
   isForm?: boolean;
+  logoId?: number;
 }) {
   return (
-    <FormInput
-      type="file"
-      id="logoInput"
-      name="logoFile"
-      placeholder="Logo"
-      accept=".png, .jpg, .jpeg"
-      icon={<MdImage className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />}
-      onChange={(e) => {
-        if (e.target.files) {
-          setLogoFile(e.target.files[0]);
-        }
-      }}
-      isForm={isForm}
-    />
+    // <FormInput
+    //   type="file"
+    //   id="logoInput"
+    //   name="logoFile"
+    //   placeholder="Logo"
+    //   accept=".png, .jpg, .jpeg"
+    //   icon={<MdImage className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />}
+    //   onChange={(e) => {
+    //     if (e.target.files) {
+    //       setLogoFile(e.target.files[0]);
+    //     }
+    //   }}
+    //   isForm={isForm}
+    // />
+    <div
+      className={`flex items-center border text-sm lg:text-base border-gray-500 rounded px-3 pt-1 pb-10`}
+    >
+      <ImageCropFrame 
+          formName="logoInput"
+          croppingRatio={16/16}
+          imageFile={logoFile} 
+          setImageFile={setLogoFile}
+        />
+        <div className="flex flex-row items-center mt-10 justify-center space-x-12 pt-2 bg-close2White pr-0 sm:pr-10 lg:pr-20">
+          <div className="w-[120px]">
+            <APIImageComponent imageId={logoId ? logoId : 0} type="clubLogo" />
+          </div>
+          {/* <MdOutlineDeleteForever
+            className="h-8 w-8 text-darkblue cursor-pointer"
+            onClick={handleDeleteImage}
+          /> */}
+        </div>
+    </div>
   );
 }
 

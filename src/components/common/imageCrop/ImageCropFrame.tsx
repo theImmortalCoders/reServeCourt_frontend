@@ -2,6 +2,7 @@
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { CropperProps, Area } from "react-easy-crop";
 import Cropper from 'react-easy-crop';
+import { MdImage } from "react-icons/md";
 
 export function ImageCropFrame(
     {
@@ -13,7 +14,7 @@ export function ImageCropFrame(
     } 
     : 
     {
-    inputDescription : string, 
+    inputDescription ?: string, 
     formName : string,
     croppingRatio : number,
     imageFile: File;
@@ -114,12 +115,15 @@ export function ImageCropFrame(
     
     return (
         <div className="w-full">
-            <p className="w-full outline-none focus:outline-none bg-close2White text-darkblue font-bold">
-                {inputDescription}
-            </p>
+            {inputDescription && 
+                <p className="w-full outline-none focus:outline-none bg-close2White text-darkblue font-bold">
+                    {inputDescription}
+                </p>
+            }
             <div className="flex flex-row items-center justify-center py-2 bg-close2White min-w-[50%]">
                 <div className='z-50 w-full h-64 flex flex-col items-start'>
                 <form id={`${formName}`} className="flex items-center w-full">
+                    <MdImage className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
                     <input type="file" accept=".png, .jpg, .jpeg" onChange={onSelectFile} className="max-w-60 outline-none focus:outline-none bg-close2White text-blue"/>
                 </form>
                 {image && (
@@ -136,7 +140,7 @@ export function ImageCropFrame(
                             />
                         </div>
                         <button
-                            className="bg-blue text-close2White rounded-b-3xl mt-2 px-2 py-1 w-52"
+                            className="bg-darkGreen text-mainWhite rounded-b-3xl mt-2 px-2 py-1 w-52"
                             onClick={changePhoto}
                         >
                             WYBIERZ

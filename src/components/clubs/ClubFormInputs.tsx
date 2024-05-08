@@ -261,11 +261,11 @@ export function ClubLogoInput({
   logoFile: File;
   setLogoFile: Dispatch<SetStateAction<File>>;
   isForm?: boolean;
-  logoId?: number;
+  logoId: number;
 }) {
   return (
     <div
-      className={`flex items-center border text-sm lg:text-base border-gray-500 rounded px-3 pt-1 pb-10`}
+      className={`flex flex-col sm:flex-row items-center border text-sm lg:text-base border-gray-500 rounded px-3 pt-1 pb-10`}
     >
       <ImageCropFrame 
           formName="logoInput"
@@ -275,7 +275,7 @@ export function ClubLogoInput({
         />
         <div className="flex flex-row items-center mt-10 justify-center space-x-12 pt-2 bg-close2White pr-0 sm:pr-10 lg:pr-20">
           <div className="w-[120px]">
-            <APIImageComponent imageId={logoId ? logoId : 0} type="clubLogo" />
+            <APIImageComponent imageId={logoId === -1 ? 0 : logoId} type="clubLogo" />
           </div>
         </div>
     </div>

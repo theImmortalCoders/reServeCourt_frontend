@@ -124,7 +124,7 @@ export function ImageCropFrame(
                 <div className='z-50 w-full h-64 flex flex-col items-start'>
                 <form id={`${formName}`} className="flex items-center w-full">
                     <MdImage className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
-                    <input type="file" accept=".png, .jpg, .jpeg" onChange={onSelectFile} className="max-w-60 outline-none focus:outline-none bg-close2White text-blue"/>
+                    <input type="file" accept=".png, .jpg, .jpeg" onChange={onSelectFile} className="max-w-48 sm:max-w-60 outline-none focus:outline-none bg-close2White text-blue"/>
                 </form>
                 {image && (
                     <div className="flex flex-col items-center justify-start w-full">

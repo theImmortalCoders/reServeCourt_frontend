@@ -212,10 +212,11 @@ export default function ClubForm({
           logoFile={logoFile}
           setLogoFile={setLogoFile}
           isForm={true}
+          logoId={logoId}
         />
       </div>
       <div className="space-y-1">
-        <p className="text-sm">Podaj godziny otwarcia</p>
+        <p className="text-sm">Podaj godziny otwarcia:</p>
         <OpenHoursInput daysOpen={daysOpen} setDaysOpen={setDaysOpen}/>
       </div>
       <span className="flex justify-center space-x-4">

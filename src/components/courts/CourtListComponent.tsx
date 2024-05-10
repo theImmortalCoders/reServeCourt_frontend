@@ -4,6 +4,7 @@ import DashboardContainer from "../common/dashboardContainer/DashboardContainer"
 import { MdDelete, MdEdit } from "react-icons/md";
 import { translateCourtSurface, translateCourtType } from "@/utils/courthelper";
 import APIImageComponent from "@/hooks/imageAPI";
+import { ReservationButton } from "../reservation/ReservationButton";
 
 export default function CourtListComponent({
   court,
@@ -11,7 +12,7 @@ export default function CourtListComponent({
   setIsOpen,
   setDeleteWarning,
   setTempId,
-  userRole
+  userRole,
 }: {
   court: Court;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
@@ -47,27 +48,30 @@ export default function CourtListComponent({
             <p>Typ kortu: {translateCourtType(court.type)}</p>
           </span>
         </div>
-        { userRole === "ADMIN" && (
-          <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
-            <MdEdit
-              onClick={(e: any) => {
-                e.preventDefault();
-                setIsUpdate(true);
-                setTempId([court.id, court.image.id]);
-                setIsOpen(true);
-              }}
-              className="cursor-pointer hover:text-mainGreen"
-            />
-            <MdDelete
-              onClick={(e: any) => {
-                e.stopPropagation();
-                setDeleteWarning(true);
-                setTempId([court.id, court.image.id]);
-              }}
-              className="cursor-pointer hover:text-red-600"
-            />
-          </span>
-        )}  
+        <div className="flex-col">
+          <ReservationButton />
+          {userRole === "ADMIN" && (
+            <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl justify-end pt-2">
+              <MdEdit
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  setIsUpdate(true);
+                  setTempId([court.id, court.image.id]);
+                  setIsOpen(true);
+                }}
+                className="cursor-pointer hover:text-mainGreen"
+              />
+              <MdDelete
+                onClick={(e: any) => {
+                  e.stopPropagation();
+                  setDeleteWarning(true);
+                  setTempId([court.id, court.image.id]);
+                }}
+                className="cursor-pointer hover:text-red-600"
+              />
+            </span>
+          )}
+        </div>
       </span>
     </DashboardContainer>
   );

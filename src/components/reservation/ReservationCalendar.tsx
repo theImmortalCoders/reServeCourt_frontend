@@ -67,6 +67,7 @@ export default function ReservationCalendar() {
         toolbar={true}
         onNavigate={handleNavigate}
         date={currentDate}
+        views={["week"]}
       />
     </div>
   );

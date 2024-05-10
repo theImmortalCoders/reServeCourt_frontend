@@ -6,10 +6,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 const localizer = momentLocalizer(moment);
 
 export default function ReservationCalendar() {
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedStartTime, setSelectedStartTime] = useState<Date | null>(null);
   const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(null);
-  const [selectedTime, setSelectedTime] = useState<string>("");
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
   const courtStartTime = 9;
   const courtEndTime = 20;
@@ -25,13 +24,18 @@ export default function ReservationCalendar() {
     }
     setSelectedStartTime(start);
     setSelectedEndTime(end);
-    setSelectedTime(
-      `${moment(start).format("HH:mm")} - ${moment(end).format("HH:mm")}`
-    );
   };
 
-  const handleNavigate = (date: Date) => {
-    setSelectedDate(date);
+  const handleToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  const handlePrev = () => {
+    setCurrentDate(moment(currentDate).subtract(1, "week").toDate());
+  };
+
+  const handleNext = () => {
+    setCurrentDate(moment(currentDate).add(1, "week").toDate());
   };
 
   console.log("selectedStartTime", selectedStartTime);
@@ -52,23 +56,29 @@ export default function ReservationCalendar() {
         defaultView="week"
         min={
           new Date(
-            selectedDate.getFullYear(),
-            selectedDate.getMonth(),
-            selectedDate.getDate(),
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate(),
             courtStartTime
           )
         }
         max={
           new Date(
-            selectedDate.getFullYear(),
-            selectedDate.getMonth(),
-            selectedDate.getDate(),
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate(),
             courtEndTime
           )
         }
-        defaultDate={selectedDate}
+        defaultDate={currentDate}
         onSelectSlot={handleSelectSlot}
-        onNavigate={handleNavigate}
+        toolbar={true}
+        onView={handleToday}
+        onNavigate={setCurrentDate}
+        date={currentDate}
+        onNavigateBack={handlePrev}
+        onNavigateNext={handleNext}
+        onNavigateToday={handleToday}
       />
     </div>
   );

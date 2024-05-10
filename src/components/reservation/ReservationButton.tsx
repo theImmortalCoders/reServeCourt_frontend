@@ -1,11 +1,11 @@
 "use client";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import DashboardContainer from "../common/dashboardContainer/DashboardContainer";
+import ReservationCalendar from "./ReservationCalendar"; // Importujemy nasz komponent kalendarza
 
 export function ReservationButton() {
-  const [isReservationModalOpen, setIsReservationModalOpen] =
-    useState<boolean>(false);
+  const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
+  const [selectedTime, setSelectedTime] = useState("");
 
   const handleButtonClick = () => {
     setIsReservationModalOpen(true);
@@ -15,8 +15,12 @@ export function ReservationButton() {
     setIsReservationModalOpen(false);
   };
 
-  const handleReservationSubmit = () => {};
-  const [selectedTime, setSelectedTime] = useState<string>("");
+  const handleReservationSubmit = () => {
+    // Logika obsługi przesłanej rezerwacji
+    console.log("Rezerwacja dla godziny:", selectedTime);
+    // Dodaj tu logikę wysłania rezerwacji, np. do serwera
+  };
+
   return (
     <>
       <button
@@ -30,7 +34,8 @@ export function ReservationButton() {
           <DashboardContainer className="flex flex-col space-y-4 p-7 w-11/12 lg:w-3/5">
             <div className="flex flex-col space-y-4">
               <h2 className="text-2xl font-bold">Zarezerwuj Kort</h2>
-              <ReservationTimeSelector setSelectedTime={setSelectedTime} />
+              {/* Wstawiamy nasz komponent kalendarza */}
+              <ReservationCalendar />
             </div>
             <span className="flex justify-center space-x-4">
               <button
@@ -53,31 +58,5 @@ export function ReservationButton() {
         </div>
       )}
     </>
-  );
-}
-
-function ReservationTimeSelector({ setSelectedTime }: any) {
-  // Function to handle time selection
-  const handleTimeSelect = (time: string) => {
-    setSelectedTime(time);
-  };
-
-  // Placeholder array of available reservation times
-  const availableTimes = ["08:00", "09:00", "10:00", "11:00", "12:00"];
-
-  return (
-    <div className="flex flex-col space-y-2">
-      <h3 className="text-lg font-semibold">Wybierz Godzinę:</h3>
-      {/* Display available times as buttons */}
-      {availableTimes.map((time) => (
-        <button
-          key={time}
-          onClick={() => handleTimeSelect(time)}
-          className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded"
-        >
-          {time}
-        </button>
-      ))}
-    </div>
   );
 }

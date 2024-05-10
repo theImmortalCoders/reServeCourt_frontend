@@ -18,8 +18,8 @@ export default function ReservationCalendar({
 }) {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
-  const courtStartTime = 9;
-  const courtEndTime = 20;
+  const courtStartTime = 8;
+  const courtEndTime = 17;
 
   const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
     if (start < new Date()) {

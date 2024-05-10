@@ -8,6 +8,8 @@ export function ReservationButton() {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [selectedStartTime, setSelectedStartTime] = useState<Date | null>(null);
   const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(null);
+  const [message, setMessage] = useState<string>("");
+  const courtId = 1;
 
   const handleButtonClick = () => {
     setIsReservationModalOpen(true);
@@ -28,7 +30,6 @@ export function ReservationButton() {
       const startTimeUTC = startTimeWithOffset.toISOString();
       const endTimeUTC = endTimeWithOffset.toISOString();
 
-      const courtId = 110;
       const reservationData: AddReservationData = {
         timeFrom: startTimeUTC,
         timeTo: endTimeUTC,
@@ -37,9 +38,16 @@ export function ReservationButton() {
 
       try {
         const result = await addReservation(courtId, reservationData);
-        console.log("Rezerwacja została pomyślnie dodana:", result);
+        //console.log("result", result);
+        if (result === "200") {
+          //console.log("Rezerwacja została pomyślnie dodana", result);
+          setMessage("Rezerwacja została pomyślnie dodana");
+        } else {
+          setMessage("Wystąpił błąd podczas dodawania rezerwacji");
+        }
       } catch (error) {
         console.error("Wystąpił błąd podczas dodawania rezerwacji:", error);
+        setMessage("Wystąpił błąd podczas dodawania rezerwacji");
       }
     }
   };
@@ -79,7 +87,7 @@ export function ReservationButton() {
               </button>
             </span>
             <div className="flex w-full justify-center">
-              <p className="text-xs text-center">wiadomosc sadasd</p>
+              <p className="text-xs text-center">{message}</p>
             </div>
           </DashboardContainer>
         </div>

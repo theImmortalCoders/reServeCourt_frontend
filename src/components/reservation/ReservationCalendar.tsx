@@ -26,16 +26,8 @@ export default function ReservationCalendar() {
     setSelectedEndTime(end);
   };
 
-  const handleToday = () => {
-    setCurrentDate(new Date());
-  };
-
-  const handlePrev = () => {
-    setCurrentDate(moment(currentDate).subtract(1, "week").toDate());
-  };
-
-  const handleNext = () => {
-    setCurrentDate(moment(currentDate).add(1, "week").toDate());
+  const handleNavigate = (newDate: Date) => {
+    setCurrentDate(newDate);
   };
 
   console.log("selectedStartTime", selectedStartTime);
@@ -73,12 +65,8 @@ export default function ReservationCalendar() {
         defaultDate={currentDate}
         onSelectSlot={handleSelectSlot}
         toolbar={true}
-        onView={handleToday}
-        onNavigate={setCurrentDate}
+        onNavigate={handleNavigate}
         date={currentDate}
-        onNavigateBack={handlePrev}
-        onNavigateNext={handleNext}
-        onNavigateToday={handleToday}
       />
     </div>
   );

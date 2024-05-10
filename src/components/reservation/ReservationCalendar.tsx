@@ -7,8 +7,8 @@ const localizer = momentLocalizer(moment);
 
 export default function ReservationCalendar() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [selectedStartTime, setSelectedStartTime] = useState<Date>(new Date());
-  const [selectedEndTime, setSelectedEndTime] = useState<Date>(new Date());
+  const [selectedStartTime, setSelectedStartTime] = useState<Date | null>(null);
+  const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string>("");
 
   const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
@@ -32,8 +32,8 @@ export default function ReservationCalendar() {
         localizer={localizer}
         events={[
           {
-            start: selectedStartTime,
-            end: selectedEndTime,
+            start: selectedStartTime!,
+            end: selectedEndTime!,
             title: "Twoja rezerwacja",
           },
         ]}

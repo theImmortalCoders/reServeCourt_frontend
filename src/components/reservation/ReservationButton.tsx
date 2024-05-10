@@ -1,8 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardContainer from "../common/dashboardContainer/DashboardContainer";
 import ReservationCalendar from "./ReservationCalendar";
-import { AddReservationData, addReservation } from "@/hooks/reservation";
+import {
+  AddReservationData,
+  ReservationData,
+  addReservation,
+  getAllReservationByCourtId,
+} from "@/hooks/reservation";
 
 export function ReservationButton() {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
@@ -10,6 +15,23 @@ export function ReservationButton() {
   const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(null);
   const [message, setMessage] = useState<string>("");
   const courtId = 1;
+  const [reservations, setReservations] = useState<ReservationData[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await getAllReservationByCourtId(courtId);
+        if (typeof result !== "string") {
+          setReservations(result);
+        } else {
+          console.error("Błąd:");
+        }
+      } catch (error) {
+        console.error("Błąd podczas pobierania rezerwacji:", error);
+      }
+    };
+    fetchData();
+  }, [isReservationModalOpen]);
 
   const handleButtonClick = () => {
     setIsReservationModalOpen(true);
@@ -42,6 +64,8 @@ export function ReservationButton() {
         if (result === "200") {
           //console.log("Rezerwacja została pomyślnie dodana", result);
           setMessage("Rezerwacja została pomyślnie dodana");
+          setSelectedStartTime(null);
+          setSelectedEndTime(null);
         } else {
           setMessage("Wystąpił błąd podczas dodawania rezerwacji");
         }
@@ -70,6 +94,7 @@ export function ReservationButton() {
                 setSelectedStartTime={setSelectedStartTime}
                 selectedEndTime={selectedEndTime}
                 setSelectedEndTime={setSelectedEndTime}
+                reservations={reservations}
               />
             </div>
             <span className="flex justify-center space-x-4">

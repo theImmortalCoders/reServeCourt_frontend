@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { ReservationData } from "@/hooks/reservation";
 
 const localizer = momentLocalizer(moment);
 
@@ -10,11 +11,13 @@ export default function ReservationCalendar({
   setSelectedStartTime,
   selectedEndTime,
   setSelectedEndTime,
+  reservations,
 }: {
   selectedStartTime: Date | null;
   setSelectedStartTime: React.Dispatch<React.SetStateAction<Date | null>>;
   selectedEndTime: Date | null;
   setSelectedEndTime: React.Dispatch<React.SetStateAction<Date | null>>;
+  reservations: ReservationData[];
 }) {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
@@ -38,18 +41,27 @@ export default function ReservationCalendar({
     setCurrentDate(newDate);
   };
 
+  const mapReservationsToEvents = () => {
+    const reservedEvents = reservations.map((reservation) => ({
+      start: new Date(reservation.timeFrom),
+      end: new Date(reservation.timeTo),
+      title: "Zarezerwowano",
+    }));
+    const userEvent = selectedStartTime &&
+      selectedEndTime && {
+        start: selectedStartTime!,
+        end: selectedEndTime!,
+        title: "Twoja rezerwacja",
+      };
+    return [...reservedEvents, userEvent].filter(Boolean);
+  };
+
   return (
     <div>
       <h2>Wybierz dostępne godziny</h2>
       <Calendar
         localizer={localizer}
-        events={[
-          {
-            start: selectedStartTime!,
-            end: selectedEndTime!,
-            title: "Twoja rezerwacja",
-          },
-        ]}
+        events={mapReservationsToEvents()}
         selectable
         defaultView="week"
         min={
@@ -74,6 +86,12 @@ export default function ReservationCalendar({
         onNavigate={handleNavigate}
         date={currentDate}
         views={["week"]}
+        onSelectEvent={(event) => {
+          if (event.title === "Twoja rezerwacja") {
+            setSelectedStartTime(event.start);
+            setSelectedEndTime(event.end);
+          }
+        }}
       />
     </div>
   );

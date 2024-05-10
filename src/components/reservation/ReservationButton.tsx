@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import DashboardContainer from "../common/dashboardContainer/DashboardContainer";
-import ReservationCalendar from "./ReservationCalendar"; // Importujemy nasz komponent kalendarza
+import ReservationCalendar from "./ReservationCalendar";
+import { AddReservationData, addReservation } from "@/hooks/reservation";
 
 export function ReservationButton() {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
@@ -16,9 +17,31 @@ export function ReservationButton() {
     setIsReservationModalOpen(false);
   };
 
-  const handleReservationSubmit = () => {
-    console.log("Rezerwacja start:", selectedStartTime);
-    console.log("Rezerwacja end:", selectedEndTime);
+  const handleReservationSubmit = async () => {
+    if (selectedEndTime && selectedStartTime) {
+      const startTimeWithOffset = new Date(
+        selectedStartTime.getTime() + 2 * 60 * 60 * 1000
+      );
+      const endTimeWithOffset = new Date(
+        selectedEndTime.getTime() + 2 * 60 * 60 * 1000
+      );
+      const startTimeUTC = startTimeWithOffset.toISOString();
+      const endTimeUTC = endTimeWithOffset.toISOString();
+
+      const courtId = 110;
+      const reservationData: AddReservationData = {
+        timeFrom: startTimeUTC,
+        timeTo: endTimeUTC,
+        message: "asdasd",
+      };
+
+      try {
+        const result = await addReservation(courtId, reservationData);
+        console.log("Rezerwacja została pomyślnie dodana:", result);
+      } catch (error) {
+        console.error("Wystąpił błąd podczas dodawania rezerwacji:", error);
+      }
+    }
   };
 
   return (

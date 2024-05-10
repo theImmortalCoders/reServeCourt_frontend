@@ -11,7 +11,18 @@ export default function ReservationCalendar() {
   const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string>("");
 
+  const courtStartTime = 9;
+  const courtEndTime = 20;
+
   const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
+    if (start < new Date()) {
+      return;
+    }
+    const startHour = start.getHours();
+    const endHour = end.getHours();
+    if (startHour < courtStartTime || endHour > courtEndTime) {
+      return;
+    }
     setSelectedStartTime(start);
     setSelectedEndTime(end);
     setSelectedTime(
@@ -44,7 +55,7 @@ export default function ReservationCalendar() {
             selectedDate.getFullYear(),
             selectedDate.getMonth(),
             selectedDate.getDate(),
-            9
+            courtStartTime
           )
         }
         max={
@@ -52,7 +63,7 @@ export default function ReservationCalendar() {
             selectedDate.getFullYear(),
             selectedDate.getMonth(),
             selectedDate.getDate(),
-            20
+            courtEndTime
           )
         }
         defaultDate={selectedDate}

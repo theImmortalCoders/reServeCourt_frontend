@@ -5,9 +5,17 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);
 
-export default function ReservationCalendar() {
-  const [selectedStartTime, setSelectedStartTime] = useState<Date | null>(null);
-  const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(null);
+export default function ReservationCalendar({
+  selectedStartTime,
+  setSelectedStartTime,
+  selectedEndTime,
+  setSelectedEndTime,
+}: {
+  selectedStartTime: Date | null;
+  setSelectedStartTime: React.Dispatch<React.SetStateAction<Date | null>>;
+  selectedEndTime: Date | null;
+  setSelectedEndTime: React.Dispatch<React.SetStateAction<Date | null>>;
+}) {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
   const courtStartTime = 9;
@@ -30,8 +38,6 @@ export default function ReservationCalendar() {
     setCurrentDate(newDate);
   };
 
-  console.log("selectedStartTime", selectedStartTime);
-  console.log("selectedEndTime", selectedEndTime);
   return (
     <div>
       <h2>Wybierz dostępne godziny</h2>

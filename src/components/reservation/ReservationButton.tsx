@@ -5,7 +5,8 @@ import ReservationCalendar from "./ReservationCalendar"; // Importujemy nasz kom
 
 export function ReservationButton() {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedStartTime, setSelectedStartTime] = useState<Date | null>(null);
+  const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(null);
 
   const handleButtonClick = () => {
     setIsReservationModalOpen(true);
@@ -16,9 +17,8 @@ export function ReservationButton() {
   };
 
   const handleReservationSubmit = () => {
-    // Logika obsługi przesłanej rezerwacji
-    console.log("Rezerwacja dla godziny:", selectedTime);
-    // Dodaj tu logikę wysłania rezerwacji, np. do serwera
+    console.log("Rezerwacja start:", selectedStartTime);
+    console.log("Rezerwacja end:", selectedEndTime);
   };
 
   return (
@@ -34,8 +34,12 @@ export function ReservationButton() {
           <DashboardContainer className="flex flex-col space-y-4 p-7 w-11/12 lg:w-3/5">
             <div className="flex flex-col space-y-4">
               <h2 className="text-2xl font-bold">Zarezerwuj Kort</h2>
-              {/* Wstawiamy nasz komponent kalendarza */}
-              <ReservationCalendar />
+              <ReservationCalendar
+                selectedStartTime={selectedStartTime}
+                setSelectedStartTime={setSelectedStartTime}
+                selectedEndTime={selectedEndTime}
+                setSelectedEndTime={setSelectedEndTime}
+              />
             </div>
             <span className="flex justify-center space-x-4">
               <button

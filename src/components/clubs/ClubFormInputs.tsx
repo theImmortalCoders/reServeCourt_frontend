@@ -76,16 +76,18 @@ function FormInput({
 export function NameInput({
   name,
   setName,
+  placeholder,
 }: {
   name: string;
   setName: Dispatch<SetStateAction<string>>;
+  placeholder?: string;
 }) {
   return (
     <FormInput
       type="text"
       id="nameInput"
       name="name"
-      placeholder="Nazwa"
+      placeholder={placeholder || "Nazwa"}
       value={name}
       icon={
         <MdDriveFileRenameOutline className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 mr-2" />
@@ -167,18 +169,18 @@ export function LocationMap({
   locName: string;
   setLocName: Dispatch<SetStateAction<string>>;
 }) {
-  let markerIcon : L.Icon;
+  let markerIcon: L.Icon;
 
-    if (typeof window !== 'undefined') {
-      const L = require('leaflet');
-      markerIcon = new L.Icon({
-          iconUrl: '/marker-icon-2x.png',
-          shadowUrl: '/marker-shadow.png',
-          iconSize: [25, 41],
-          iconAnchor: [12.5, 41],
-          popupAnchor: [0, -38]
-      });
-    }
+  if (typeof window !== "undefined") {
+    const L = require("leaflet");
+    markerIcon = new L.Icon({
+      iconUrl: "/marker-icon-2x.png",
+      shadowUrl: "/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12.5, 41],
+      popupAnchor: [0, -38],
+    });
+  }
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
 
@@ -231,10 +233,10 @@ export function LocationMap({
     });
 
     return position ? (
-        <Marker position={position} icon={markerIcon}>
-          <Popup>Wybrana lokalizacja: {locName}</Popup>
-        </Marker>
-      ) : null;
+      <Marker position={position} icon={markerIcon}>
+        <Popup>Wybrana lokalizacja: {locName}</Popup>
+      </Marker>
+    ) : null;
   };
 
   return (
@@ -256,7 +258,7 @@ export function ClubLogoInput({
   logoFile,
   setLogoFile,
   isForm,
-  logoId
+  logoId,
 }: {
   logoFile: File;
   setLogoFile: Dispatch<SetStateAction<File>>;
@@ -267,17 +269,20 @@ export function ClubLogoInput({
     <div
       className={`flex flex-col sm:flex-row items-center border text-sm lg:text-base border-gray-500 rounded px-3 pt-1 pb-10`}
     >
-      <ImageCropFrame 
-          formName="logoInput"
-          croppingRatio={16/16}
-          imageFile={logoFile} 
-          setImageFile={setLogoFile}
-        />
-        <div className="flex flex-row items-center mt-10 justify-center space-x-12 pt-2 bg-close2White pr-0 sm:pr-10 lg:pr-20">
-          <div className="w-[120px]">
-            <APIImageComponent imageId={logoId === -1 ? 0 : logoId} type="clubLogo" />
-          </div>
+      <ImageCropFrame
+        formName="logoInput"
+        croppingRatio={16 / 16}
+        imageFile={logoFile}
+        setImageFile={setLogoFile}
+      />
+      <div className="flex flex-row items-center mt-10 justify-center space-x-12 pt-2 bg-close2White pr-0 sm:pr-10 lg:pr-20">
+        <div className="w-[120px]">
+          <APIImageComponent
+            imageId={logoId === -1 ? 0 : logoId}
+            type="clubLogo"
+          />
         </div>
+      </div>
     </div>
   );
 }
@@ -287,85 +292,161 @@ function OpenHoursSpan({
   openTime,
   closeTime,
   handleTimeChange,
-  handleCheckboxChange
-}:{
+  handleCheckboxChange,
+}: {
   day: string;
   openTime: string;
   closeTime: string;
-  handleTimeChange: (day: keyof DaysOpen, openTime: boolean, value: string) => void;
+  handleTimeChange: (
+    day: keyof DaysOpen,
+    openTime: boolean,
+    value: string
+  ) => void;
   handleCheckboxChange: (day: keyof DaysOpen, checked: boolean) => void;
 }) {
   const dayNames: { [key: string]: string } = {
-    monday: 'Poniedziałek',
-    tuesday: 'Wtorek',
-    wednesday: 'Środa',
-    thursday: 'Czwartek',
-    friday: 'Piątek',
-    saturday: 'Sobota',
-    sunday: 'Niedziela'
+    monday: "Poniedziałek",
+    tuesday: "Wtorek",
+    wednesday: "Środa",
+    thursday: "Czwartek",
+    friday: "Piątek",
+    saturday: "Sobota",
+    sunday: "Niedziela",
   };
 
   return (
     <span className="flex text-xs xs:text-sm space-x-2">
-      <input type="checkbox" checked={openTime !== null} onChange={(e) => handleCheckboxChange(day as keyof DaysOpen, e.target.checked)} />
+      <input
+        type="checkbox"
+        checked={openTime !== null}
+        onChange={(e) =>
+          handleCheckboxChange(day as keyof DaysOpen, e.target.checked)
+        }
+      />
       <p className="w-20 xs:w-36">{dayNames[day]}</p>
-      <input className="bg-mainWhite" type="time" name={`open${day}`} id={`open${day}`} value={openTime ? openTime.substring(0, 5) : '00:00'} onChange={(e) => handleTimeChange(day as keyof DaysOpen, true, e.target.value)} />
+      <input
+        className="bg-mainWhite"
+        type="time"
+        name={`open${day}`}
+        id={`open${day}`}
+        value={openTime ? openTime.substring(0, 5) : "00:00"}
+        onChange={(e) =>
+          handleTimeChange(day as keyof DaysOpen, true, e.target.value)
+        }
+      />
       <p>:</p>
-      <input className="bg-mainWhite" type="time" name={`close${day}`} id={`close${day}`} value={closeTime ? closeTime.substring(0, 5) : '00:00'} onChange={(e) => handleTimeChange(day as keyof DaysOpen, false, e.target.value)} />
-  </span>
-  )
+      <input
+        className="bg-mainWhite"
+        type="time"
+        name={`close${day}`}
+        id={`close${day}`}
+        value={closeTime ? closeTime.substring(0, 5) : "00:00"}
+        onChange={(e) =>
+          handleTimeChange(day as keyof DaysOpen, false, e.target.value)
+        }
+      />
+    </span>
+  );
 }
 
-export function OpenHoursInput ({
+export function OpenHoursInput({
   className,
   daysOpen,
-  setDaysOpen
- } : {
+  setDaysOpen,
+}: {
   className?: string;
   daysOpen: DaysOpen;
   setDaysOpen: Dispatch<SetStateAction<DaysOpen>>;
 }) {
-  const handleTimeChange = (day: keyof DaysOpen, openTime: boolean, value: string) => {
-    setDaysOpen(prevDaysOpen => {
+  const handleTimeChange = (
+    day: keyof DaysOpen,
+    openTime: boolean,
+    value: string
+  ) => {
+    setDaysOpen((prevDaysOpen) => {
       const updatedDay = {
         ...prevDaysOpen[day],
-        [openTime ? 'open' : 'closed']: value
+        [openTime ? "open" : "closed"]: value,
       };
-  
+
       if (openTime && updatedDay.closed === null) {
-        updatedDay.closed = '17:00';
+        updatedDay.closed = "17:00";
       } else if (!openTime && updatedDay.open === null) {
-        updatedDay.open = '08:00';
+        updatedDay.open = "08:00";
       }
-  
+
       return {
         ...prevDaysOpen,
-        [day]: updatedDay
+        [day]: updatedDay,
       };
     });
   };
 
   const handleCheckboxChange = (day: keyof DaysOpen, checked: boolean) => {
-    setDaysOpen(prevDaysOpen => ({
+    setDaysOpen((prevDaysOpen) => ({
       ...prevDaysOpen,
       [day]: {
-        open: checked ? (prevDaysOpen[day].open || "08:00") : null,
-        closed: checked ? (prevDaysOpen[day].closed || "17:00") : null
-      }
+        open: checked ? prevDaysOpen[day].open || "08:00" : null,
+        closed: checked ? prevDaysOpen[day].closed || "17:00" : null,
+      },
     }));
   };
 
   return (
-    <div className={`flex flex-col items-center border text-sm lg:text-base border-gray-500 rounded w-fit px-3 py-2 space-y-1 ${className}`}>
-      <OpenHoursSpan day="monday" openTime={daysOpen.monday.open} closeTime={daysOpen.monday.closed} handleTimeChange={handleTimeChange} handleCheckboxChange={handleCheckboxChange} /> 
-      <OpenHoursSpan day="tuesday" openTime={daysOpen.tuesday.open} closeTime={daysOpen.tuesday.closed} handleTimeChange={handleTimeChange} handleCheckboxChange={handleCheckboxChange} />
-      <OpenHoursSpan day="wednesday" openTime={daysOpen.wednesday.open} closeTime={daysOpen.wednesday.closed} handleTimeChange={handleTimeChange} handleCheckboxChange={handleCheckboxChange} />
-      <OpenHoursSpan day="thursday" openTime={daysOpen.thursday.open} closeTime={daysOpen.thursday.closed} handleTimeChange={handleTimeChange} handleCheckboxChange={handleCheckboxChange} />
-      <OpenHoursSpan day="friday" openTime={daysOpen.friday.open} closeTime={daysOpen.friday.closed} handleTimeChange={handleTimeChange} handleCheckboxChange={handleCheckboxChange} />
-      <OpenHoursSpan day="saturday" openTime={daysOpen.saturday.open} closeTime={daysOpen.saturday.closed} handleTimeChange={handleTimeChange} handleCheckboxChange={handleCheckboxChange} />
-      <OpenHoursSpan day="sunday" openTime={daysOpen.sunday.open} closeTime={daysOpen.sunday.closed} handleTimeChange={handleTimeChange} handleCheckboxChange={handleCheckboxChange} />
+    <div
+      className={`flex flex-col items-center border text-sm lg:text-base border-gray-500 rounded w-fit px-3 py-2 space-y-1 ${className}`}
+    >
+      <OpenHoursSpan
+        day="monday"
+        openTime={daysOpen.monday.open}
+        closeTime={daysOpen.monday.closed}
+        handleTimeChange={handleTimeChange}
+        handleCheckboxChange={handleCheckboxChange}
+      />
+      <OpenHoursSpan
+        day="tuesday"
+        openTime={daysOpen.tuesday.open}
+        closeTime={daysOpen.tuesday.closed}
+        handleTimeChange={handleTimeChange}
+        handleCheckboxChange={handleCheckboxChange}
+      />
+      <OpenHoursSpan
+        day="wednesday"
+        openTime={daysOpen.wednesday.open}
+        closeTime={daysOpen.wednesday.closed}
+        handleTimeChange={handleTimeChange}
+        handleCheckboxChange={handleCheckboxChange}
+      />
+      <OpenHoursSpan
+        day="thursday"
+        openTime={daysOpen.thursday.open}
+        closeTime={daysOpen.thursday.closed}
+        handleTimeChange={handleTimeChange}
+        handleCheckboxChange={handleCheckboxChange}
+      />
+      <OpenHoursSpan
+        day="friday"
+        openTime={daysOpen.friday.open}
+        closeTime={daysOpen.friday.closed}
+        handleTimeChange={handleTimeChange}
+        handleCheckboxChange={handleCheckboxChange}
+      />
+      <OpenHoursSpan
+        day="saturday"
+        openTime={daysOpen.saturday.open}
+        closeTime={daysOpen.saturday.closed}
+        handleTimeChange={handleTimeChange}
+        handleCheckboxChange={handleCheckboxChange}
+      />
+      <OpenHoursSpan
+        day="sunday"
+        openTime={daysOpen.sunday.open}
+        closeTime={daysOpen.sunday.closed}
+        handleTimeChange={handleTimeChange}
+        handleCheckboxChange={handleCheckboxChange}
+      />
     </div>
-  )
+  );
 }
 
 export function CourtTypeInput({

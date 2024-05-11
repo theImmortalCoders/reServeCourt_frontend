@@ -45,7 +45,7 @@ export default function ReservationCalendar({
     const reservedEvents = reservations.map((reservation) => ({
       start: new Date(reservation.timeFrom),
       end: new Date(reservation.timeTo),
-      title: "Zarezerwowano",
+      title: "Zajęte",
     }));
     const userEvent = selectedStartTime &&
       selectedEndTime && {

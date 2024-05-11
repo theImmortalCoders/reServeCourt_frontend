@@ -8,16 +8,22 @@ import {
   addReservation,
   getAllReservationByCourtId,
 } from "@/hooks/reservation";
+import { NameInput } from "../clubs/ClubFormInputs";
 
 export function ReservationButton() {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [selectedStartTime, setSelectedStartTime] = useState<Date | null>(null);
   const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(null);
   const [message, setMessage] = useState<string>("");
+  const [reservationMessage, setReservationMessage] = useState<string>("");
   const courtId = 1;
   const [reservations, setReservations] = useState<ReservationData[]>([]);
 
   useEffect(() => {
+    setMessage("");
+    setReservationMessage("");
+    setSelectedStartTime(null);
+    setSelectedEndTime(null);
     const fetchData = async () => {
       try {
         const result = await getAllReservationByCourtId(courtId);
@@ -42,7 +48,11 @@ export function ReservationButton() {
   };
 
   const handleReservationSubmit = async () => {
-    if (selectedEndTime && selectedStartTime) {
+    if (
+      selectedEndTime instanceof Date &&
+      selectedStartTime instanceof Date &&
+      reservationMessage
+    ) {
       const startTimeWithOffset = new Date(
         selectedStartTime.getTime() + 2 * 60 * 60 * 1000
       );
@@ -55,7 +65,7 @@ export function ReservationButton() {
       const reservationData: AddReservationData = {
         timeFrom: startTimeUTC,
         timeTo: endTimeUTC,
-        message: "asdasd",
+        message: reservationMessage,
       };
 
       try {
@@ -66,6 +76,8 @@ export function ReservationButton() {
           setMessage("Rezerwacja została pomyślnie dodana");
           setSelectedStartTime(null);
           setSelectedEndTime(null);
+        } else if (result === "Brak autoryzacji użytkownika") {
+          setMessage("Brak autoryzacji użytkownika");
         } else {
           setMessage("Wystąpił błąd podczas dodawania rezerwacji");
         }
@@ -73,6 +85,11 @@ export function ReservationButton() {
         console.error("Wystąpił błąd podczas dodawania rezerwacji:", error);
         setMessage("Wystąpił błąd podczas dodawania rezerwacji");
       }
+    } else {
+      setMessage("Brak tytułu i/lub daty rezerwacji");
+      setTimeout(() => {
+        setMessage("");
+      }, 4000);
     }
   };
 
@@ -97,6 +114,11 @@ export function ReservationButton() {
                 reservations={reservations}
               />
             </div>
+            <NameInput
+              name={reservationMessage}
+              setName={setReservationMessage}
+              placeholder="Nazwa rezerwacji"
+            />
             <span className="flex justify-center space-x-4">
               <button
                 className="text-right text-mainOrange text-sm sm:text-md"

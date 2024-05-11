@@ -24,7 +24,7 @@ export function ReservationButton({
   const [message, setMessage] = useState<string>("");
   const [reservationMessage, setReservationMessage] = useState<string>("");
   const [reservations, setReservations] = useState<ReservationData[]>([]);
-  console.log("daysOpenaaa", daysOpen);
+
   useEffect(() => {
     setMessage("");
     setReservationMessage("");
@@ -116,6 +116,7 @@ export function ReservationButton({
                 selectedEndTime={selectedEndTime}
                 setSelectedEndTime={setSelectedEndTime}
                 reservations={reservations}
+                daysOpen={daysOpen}
               />
             </div>
             <NameInput

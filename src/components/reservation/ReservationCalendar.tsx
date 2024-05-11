@@ -3,6 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { ReservationData } from "@/hooks/reservation";
+import { DaysOpen } from "@/hooks/club";
 
 const localizer = momentLocalizer(moment);
 
@@ -12,15 +13,17 @@ export default function ReservationCalendar({
   selectedEndTime,
   setSelectedEndTime,
   reservations,
+  daysOpen,
 }: {
   selectedStartTime: Date | null;
   setSelectedStartTime: React.Dispatch<React.SetStateAction<Date | null>>;
   selectedEndTime: Date | null;
   setSelectedEndTime: React.Dispatch<React.SetStateAction<Date | null>>;
   reservations: ReservationData[];
+  daysOpen: DaysOpen;
 }) {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
-
+  console.log("daysOpen", daysOpen);
   const courtStartTime = 8;
   const courtEndTime = 17;
 

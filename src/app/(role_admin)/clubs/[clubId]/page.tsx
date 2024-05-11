@@ -47,7 +47,6 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
 
   if (clubDetailsError) return <Error500Page />;
 
-  console.log("clubDetailsData", clubDetailsData);
   return (
     <div className="flex flex-col items-center bg-mainWhite min-h-max p-4 md:p-8">
       {!isOpen ? (

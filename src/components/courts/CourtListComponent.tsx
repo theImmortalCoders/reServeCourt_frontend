@@ -1,4 +1,4 @@
-import { Content, Court } from "@/hooks/club";
+import { Content, Court, DaysOpen } from "@/hooks/club";
 import { Dispatch, SetStateAction } from "react";
 import DashboardContainer from "../common/dashboardContainer/DashboardContainer";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -13,6 +13,7 @@ export default function CourtListComponent({
   setDeleteWarning,
   setTempId,
   userRole,
+  daysOpen,
 }: {
   court: Court;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
@@ -20,6 +21,7 @@ export default function CourtListComponent({
   setDeleteWarning: Dispatch<SetStateAction<boolean>>;
   setTempId: Dispatch<SetStateAction<number[]>>;
   userRole: string | null;
+  daysOpen: DaysOpen;
 }) {
   return (
     <DashboardContainer className="flex flex-col md:flex-row md:h-36">
@@ -49,7 +51,7 @@ export default function CourtListComponent({
           </span>
         </div>
         <div className="flex-col">
-          <ReservationButton />
+          <ReservationButton courtId={court.id} daysOpen={daysOpen} />
           {userRole === "ADMIN" && (
             <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl justify-end pt-2">
               <MdEdit

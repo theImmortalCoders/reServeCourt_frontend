@@ -52,7 +52,6 @@ export async function getCurrentUser() {
       }
     );
     if (response.status === 200) {
-      console.log("Dane użytkownika pobrano poprawnie!");
       return response.data;
     } else if (response.status === 401) {
       console.error("Brak autoryzacji użytkownika");

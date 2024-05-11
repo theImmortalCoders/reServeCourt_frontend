@@ -11,7 +11,7 @@ import APIImageComponent from "@/hooks/imageAPI";
 
 async function getRole() {
   const userData = await getCurrentUser();
-  if (userData && typeof userData === 'object' && 'role' in userData) {
+  if (userData && typeof userData === "object" && "role" in userData) {
     return userData.role;
   }
   return null;
@@ -47,6 +47,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
 
   if (clubDetailsError) return <Error500Page />;
 
+  console.log("clubDetailsData", clubDetailsData);
   return (
     <div className="flex flex-col items-center bg-mainWhite min-h-max p-4 md:p-8">
       {!isOpen ? (
@@ -104,6 +105,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                         setDeleteWarning={setDeleteWarning}
                         setTempId={setTempId}
                         userRole={userRole}
+                        daysOpen={clubDetailsData.daysOpen}
                       />
                     ))}
                   </div>

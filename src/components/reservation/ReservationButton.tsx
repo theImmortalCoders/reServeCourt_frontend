@@ -9,16 +9,22 @@ import {
   getAllReservationByCourtId,
 } from "@/hooks/reservation";
 import { NameInput } from "../clubs/ClubFormInputs";
+import { DaysOpen } from "@/hooks/club";
 
-export function ReservationButton() {
+export function ReservationButton({
+  courtId,
+  daysOpen,
+}: {
+  courtId: number;
+  daysOpen: DaysOpen;
+}) {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [selectedStartTime, setSelectedStartTime] = useState<Date | null>(null);
   const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(null);
   const [message, setMessage] = useState<string>("");
   const [reservationMessage, setReservationMessage] = useState<string>("");
-  const courtId = 1;
   const [reservations, setReservations] = useState<ReservationData[]>([]);
-
+  console.log("daysOpenaaa", daysOpen);
   useEffect(() => {
     setMessage("");
     setReservationMessage("");
@@ -70,9 +76,7 @@ export function ReservationButton() {
 
       try {
         const result = await addReservation(courtId, reservationData);
-        //console.log("result", result);
         if (result === "200") {
-          //console.log("Rezerwacja została pomyślnie dodana", result);
           setMessage("Rezerwacja została pomyślnie dodana");
           setSelectedStartTime(null);
           setSelectedEndTime(null);

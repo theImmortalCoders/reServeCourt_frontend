@@ -23,7 +23,7 @@ export default function ReservationCalendar({
   daysOpen: DaysOpen;
 }) {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
-  console.log("daysOpen", daysOpen);
+  //console.log("daysOpen", daysOpen);
   const courtStartTime = 8;
   const courtEndTime = 17;
 
@@ -31,6 +31,16 @@ export default function ReservationCalendar({
     if (start < new Date()) {
       return;
     }
+
+    const isOverlapping = reservations.some(
+      (reservation) =>
+        start < new Date(reservation.timeTo) &&
+        end > new Date(reservation.timeFrom)
+    );
+    if (isOverlapping) {
+      return;
+    }
+
     const startHour = start.getHours();
     const endHour = end.getHours();
     if (startHour < courtStartTime || endHour > courtEndTime) {
@@ -49,6 +59,7 @@ export default function ReservationCalendar({
       start: new Date(reservation.timeFrom),
       end: new Date(reservation.timeTo),
       title: "Zajęte",
+      className: "reserved-event",
     }));
     const userEvent = selectedStartTime &&
       selectedEndTime && {
@@ -95,7 +106,16 @@ export default function ReservationCalendar({
             setSelectedEndTime(event.end);
           }
         }}
+        eventPropGetter={(event) => ({
+          className: event.className,
+        })}
       />
+      <style>{`
+        .reserved-event {
+          background-color: #cccccc; /* szary */
+          color: #000000; /* czarny */
+        }
+      `}</style>
     </div>
   );
 }

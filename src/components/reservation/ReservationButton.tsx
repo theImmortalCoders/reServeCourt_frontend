@@ -63,7 +63,10 @@ export function ReservationButton({
         selectedStartTime.getTime() + 2 * 60 * 60 * 1000
       );
       const endTimeWithOffset = new Date(
-        selectedEndTime.getTime() + 2 * 60 * 60 * 1000
+        selectedEndTime.getTime() +
+          1 * 60 * 60 * 1000 +
+          59 * 60 * 1000 +
+          59 * 1000 // 1h 59min 59s
       );
       const startTimeUTC = startTimeWithOffset.toISOString();
       const endTimeUTC = endTimeWithOffset.toISOString();
@@ -76,12 +79,13 @@ export function ReservationButton({
 
       try {
         const result = await addReservation(courtId, reservationData);
+        console.log(result);
         if (result === "200") {
           setMessage("Rezerwacja została pomyślnie dodana");
           setSelectedStartTime(null);
           setSelectedEndTime(null);
-        } else if (result === "Brak autoryzacji użytkownika") {
-          setMessage("Brak autoryzacji użytkownika");
+        } else if (typeof result == "string") {
+          setMessage(result);
         } else {
           setMessage("Wystąpił błąd podczas dodawania rezerwacji");
         }

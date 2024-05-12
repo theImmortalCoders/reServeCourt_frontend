@@ -37,8 +37,8 @@ export default function CourtForm({
 }) {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [courtType, setCourtType] = useState<string>("");
-  const [courtSurface, setCourtSurface] = useState<string>("");
+  const [courtType, setCourtType] = useState<string>("INDOOR");
+  const [courtSurface, setCourtSurface] = useState<string>("CLAY");
   const [locX, setLocX] = useState<number>(0);
   const [locY, setLocY] = useState<number>(0);
   const [locName, setLocName] = useState<string>("");
@@ -71,8 +71,8 @@ export default function CourtForm({
           } else {
             setName("");
             setDescription("");
-            setCourtType("");
-            setCourtSurface("");
+            setCourtType("INDOOR");
+            setCourtSurface("CLAY");
             setLocX(0);
             setLocY(0);
             setLocName("");
@@ -108,8 +108,8 @@ export default function CourtForm({
       !description ||
       !courtType ||
       !courtSurface ||
-      locX === null ||
-      locY === null
+      locX === 0 ||
+      locY === 0
     ) {
       console.error("Pola muszą być wypełnione");
       setMessage("Pola muszą być wypełnione");
@@ -137,8 +137,8 @@ export default function CourtForm({
         if (result === 200) {
           setName("");
           setDescription("");
-          setCourtType("");
-          setCourtSurface("");
+          setCourtType("INDOOR");
+          setCourtSurface("CLAY");
           setLocX(0);
           setLocY(0);
           setLocName("");
@@ -197,6 +197,7 @@ export default function CourtForm({
         <p className="text-sm">Wczytaj logo:</p>
         <input
           type="file"
+          required
           multiple
           onChange={(e) => {
             const files = e.target.files;

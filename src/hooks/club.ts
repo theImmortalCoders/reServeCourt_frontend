@@ -22,7 +22,7 @@ export async function deleteClub(clubId: number) {
     } else {
       console.error("Wystąpił błąd podczas usuwania klubu");
       return "Wystąpił błąd podczas usuwania klubu";
-    } 
+    }
   } catch (error: any) {
     if (error.response.status === 401) {
       window.location.replace("/login");
@@ -111,7 +111,6 @@ export async function getClubDetails(
         withCredentials: true,
       });
     if (response.status === 200) {
-      console.log("Szczegóły klubu pobrano poprawnie!");
       return response.data;
     } else {
       console.error("Wystąpił błąd podczas pobierania szczegółów klubu");

@@ -11,7 +11,7 @@ export default function ClubListComponent({
   setIsOpen,
   setDeleteWarning,
   setTempId,
-  userRole
+  userRole,
 }: {
   club: Content;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
@@ -23,7 +23,7 @@ export default function ClubListComponent({
   return (
     <DashboardContainer
       className="flex flex-col md:flex-row md:h-36 cursor-pointer"
-      clubId={club.id}
+      href={`/clubs/${club.id}`}
     >
       <div className="flex items-center w-40 p-4">
         <APIImageComponent imageId={club.logo.id} type={club.logo.path} />
@@ -61,7 +61,7 @@ export default function ClubListComponent({
             </span>
           </span>
         </div>
-        { userRole === "ADMIN" && (
+        {userRole === "ADMIN" && (
           <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
             <MdEdit
               onClick={(e: any) => {

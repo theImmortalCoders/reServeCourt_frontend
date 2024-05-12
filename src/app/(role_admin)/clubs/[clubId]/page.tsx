@@ -11,7 +11,7 @@ import APIImageComponent from "@/hooks/imageAPI";
 
 async function getRole() {
   const userData = await getCurrentUser();
-  if (userData && typeof userData === 'object' && 'role' in userData) {
+  if (userData && typeof userData === "object" && "role" in userData) {
     return userData.role;
   }
   return null;
@@ -104,6 +104,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                         setDeleteWarning={setDeleteWarning}
                         setTempId={setTempId}
                         userRole={userRole}
+                        daysOpen={clubDetailsData.daysOpen}
                       />
                     ))}
                   </div>

@@ -63,10 +63,7 @@ export function ReservationButton({
         selectedStartTime.getTime() + 2 * 60 * 60 * 1000
       );
       const endTimeWithOffset = new Date(
-        selectedEndTime.getTime() +
-          1 * 60 * 60 * 1000 +
-          59 * 60 * 1000 +
-          59 * 1000 // 1h 59min 59s
+        selectedEndTime.getTime() + 2 * 60 * 60 * 1000
       );
       const startTimeUTC = startTimeWithOffset.toISOString();
       const endTimeUTC = endTimeWithOffset.toISOString();
@@ -111,9 +108,9 @@ export function ReservationButton({
       </button>
       {isReservationModalOpen && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-40">
-          <DashboardContainer className="flex flex-col space-y-4 p-7 w-11/12 lg:w-3/5">
-            <div className="flex flex-col space-y-4">
-              <h2 className="text-2xl font-bold">Zarezerwuj Kort</h2>
+          <DashboardContainer className="flex flex-col space-y-4 p-3 sm:p-7 w-full sm:w-11/12 lg:w-3/5">
+            <div className="flex flex-col space-y-0 sm:space-y-4 ">
+              <h2 className="text-2xl font-bold ">Zarezerwuj Kort</h2>
               <ReservationCalendar
                 selectedStartTime={selectedStartTime}
                 setSelectedStartTime={setSelectedStartTime}

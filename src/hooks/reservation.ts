@@ -105,7 +105,7 @@ export interface ReservationData {
   reservedByOwner: boolean;
   timeFrom: string;
   timeTo: string;
-  cancelled: boolean;
+  canceled: boolean;
   confirmed: boolean;
 }
 
@@ -188,6 +188,51 @@ export async function getUpcomingReservationByClubId(
         "Wystąpił błąd podczas pobierania nadchodzących rezerwacji w danym klubie"
       );
       return "Wystąpił błąd podczas pobierania nadchodzących rezerwacji w danym klubie";
+    }
+  }
+}
+
+export async function getAllReservationByCurrentUser(
+  from?: string,
+  to?: string
+): Promise<ReservationData[] | string> {
+  try {
+    const response: AxiosResponse<ReservationData[] | string> =
+      await appAPI.get(
+        from && to
+          ? `/api/reservation/my?from=${from}&to=${to}`
+          : from
+          ? `/api/reservation/my?from=${from}`
+          : to
+          ? `/api/reservation/my?to=${to}`
+          : `/api/reservation/my`,
+        {
+          withCredentials: true,
+        }
+      );
+    if (response.status === 200) {
+      console.log("Wszystkie rezerwacje danego użytkownika pobrano poprawnie!");
+      return response.data;
+    } else if (response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else {
+      console.error(
+        "Wystąpił błąd podczas pobierania rezerwacji danego użytkownika"
+      );
+      return "Wystąpił błąd podczas pobierania rezerwacji danego użytkownika";
+    }
+  } catch (error: any) {
+    if (error.response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else {
+      console.error(
+        "Wystąpił błąd podczas pobierania rezerwacji danego użytkownika"
+      );
+      return "Wystąpił błąd podczas pobierania rezerwacji danego użytkownika";
     }
   }
 }

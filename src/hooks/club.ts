@@ -226,6 +226,44 @@ export async function addClub(clubData: AddClubData) {
   }
 }
 
+export async function rateClub(clubId: number, rate: number) {
+  try {
+    const response: AxiosResponse<void> = await appAPI.post(
+      `/api/club/${clubId}/rate?rate=${rate}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.status === 200) {
+      console.log("Klub został oceniony poprawnie!");
+      return response.status;
+    } else if (response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else if (response.status === 400) {
+      console.error("Ocena musi być pomiędzy 0 a 5");
+      return "Ocena musi być pomiędzy 0 a 5";
+    } else {
+      console.error("Wystąpił błąd podczas oceniania klubu");
+      return "Wystąpił błąd podczas oceniania klubu";
+    }
+  } catch (error: any) {
+    if (error.response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else if (error.response.status === 400) {
+      console.error("Ocena musi być pomiędzy 0 a 5");
+      return "Ocena musi być pomiędzy 0 a 5";
+    } else {
+      console.error("Wystąpił błąd podczas oceniania klubu");
+      return "Wystąpił błąd podczas oceniania klubu";
+    }
+  }
+}
+
 export async function updateClub(clubId: number, clubData: AddClubData) {
   try {
     const response: AxiosResponse<void> = await appAPI.put(

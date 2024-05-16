@@ -9,7 +9,8 @@ import {
 } from "react-icons/io5";
 import Link from "next/link";
 import { GetCurrentUserData, getCurrentUser, logoutUser } from "@/hooks/user";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
+import { useRouter } from "next/navigation";
 
 function Navbox() {
   return (
@@ -28,16 +29,21 @@ export default function Navbar() {
 
   const [showUserMenu, setShowUserMenu] = useState(false);
 
+  const router = useRouter();
+
   const handleLogout = async () => {
     try {
       const result = await logoutUser();
       if (result === 200) {
         console.log("Wylogowano poprawnie!");
+        router.push("/");
       } else {
         console.log(result);
       }
+      queryClient.invalidateQueries("currentUser");
     } catch (error) {
       console.error(error);
+      queryClient.invalidateQueries("currentUser");
     }
   };
 
@@ -50,6 +56,8 @@ export default function Navbar() {
     isLoading: boolean;
     isError: any;
   } = useQuery("currentUser", getCurrentUser, {});
+
+  const queryClient = useQueryClient();
 
   return (
     <nav className="max-w-screen h-navbar bg-mainWhite font-extralight flex items-center justify-between px-4 md:px-8 shadow-navbarShadow sticky z-20">

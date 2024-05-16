@@ -13,7 +13,7 @@ import Box from "@/components/common/box/Box";
 import Link from "next/link";
 import { InputPassword, InputEmail } from "@/components/login/molecules/Inputs";
 import LoginMessage from "@/components/login/atoms/LoginMessage";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import Error500Page from "@/components/common/error/Error500Page";
 
 export default function Login() {
@@ -28,12 +28,15 @@ export default function Login() {
     isError,
   } = useQuery("currentUser", getCurrentUser, { staleTime: 0 });
 
+  const queryClient = useQueryClient();
+
   if (isError) return <Error500Page />;
 
   useEffect(() => {
     if (!isLoading && !isError && currentUserData) {
       if (currentUserData !== "Brak autoryzacji użytkownika") {
         router.push("/");
+        queryClient.invalidateQueries("currentUser");
       }
     }
     setShowLogin(true);
@@ -48,6 +51,7 @@ export default function Login() {
     if (result === 200) {
       setLogged(true);
       router.push("/clubs");
+      queryClient.invalidateQueries("currentUser");
     } else {
       setMessage(result);
       setLogged(false);

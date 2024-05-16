@@ -36,6 +36,7 @@ export default function Navbar() {
       const result = await logoutUser();
       if (result === 200) {
         console.log("Wylogowano poprawnie!");
+        setShowUserMenu(false);
         router.push("/");
       } else {
         console.log(result);
@@ -85,21 +86,30 @@ export default function Navbar() {
             <IoPersonCircleOutline className="w-8 h-8 text-darkGreen" />
           </Link>
         ) : (
-          <div
-            className="relative"
-            onClick={() => {
-              setShowUserMenu(!showUserMenu);
-            }}
-          >
-            <IoPersonCircleOutline className="w-8 h-8 text-darkGreen cursor-pointer" />
+          <div className="relative">
+            <IoPersonCircleOutline
+              className="w-8 h-8 text-darkGreen cursor-pointer"
+              onClick={() => {
+                setShowUserMenu(!showUserMenu);
+              }}
+            />
             <div
-              className={`absolute space-y-1 -right-5 w-36 py-2 flex-col opacity-95 bg-mainWhite shadow-logoMenuShadow rounded-b-lg ${
+              className={`absolute space-y-1 -right-5 top-[56px] w-36 py-2 flex-col opacity-95 bg-mainWhite shadow-logoMenuShadow rounded-b-lg ${
                 showUserMenu ? "flex" : "hidden"
               } items-center justify-start text-sm`}
             >
-              <p>USER</p>
+              <p className="text-mainBlack">
+                {currentUserData.role === "USER"
+                  ? "Użytkownik"
+                  : currentUserData.role === "ADMIN"
+                  ? "Admin"
+                  : "Super Admin"}
+              </p>
               <hr className="size-[2px] bg-mainBlack w-3/4" />
-              <p onClick={handleLogout} className="cursor-pointer">
+              <p
+                onClick={handleLogout}
+                className="cursor-pointer text-mainOrange"
+              >
                 WYLOGUJ
               </p>
             </div>

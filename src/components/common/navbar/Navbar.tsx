@@ -8,6 +8,8 @@ import {
   IoCloseOutline,
 } from "react-icons/io5";
 import Link from "next/link";
+import { GetCurrentUserData, getCurrentUser, logoutUser } from "@/hooks/user";
+import { useQuery } from "react-query";
 
 function Navbox() {
   return (
@@ -24,6 +26,31 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      const result = await logoutUser();
+      if (result === 200) {
+        console.log("Wylogowano poprawnie!");
+      } else {
+        console.log(result);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const {
+    data: currentUserData,
+    isLoading,
+    isError,
+  }: {
+    data?: GetCurrentUserData | string;
+    isLoading: boolean;
+    isError: any;
+  } = useQuery("currentUser", getCurrentUser, {});
+
   return (
     <nav className="max-w-screen h-navbar bg-mainWhite font-extralight flex items-center justify-between px-4 md:px-8 shadow-navbarShadow sticky z-20">
       <Link href="/">
@@ -37,13 +64,39 @@ export default function Navbar() {
       <div className="flex flex-row gap-4 md:gap-8 items-center">
         <Link
           href="/book"
-          className="text-mainWhite bg-darkGreen py-1 px-6 rounded-lg text-md md:text-lg"
+          className="text-mainWhite bg-darkGreen py-[2px] px-6 rounded-lg text-md md:text-lg"
         >
           Rezerwuj
         </Link>
-        <Link href="/login">
-          <IoPersonCircleOutline className="w-8 h-8 text-darkGreen" />
-        </Link>
+        {typeof currentUserData === "string" ||
+        !currentUserData ||
+        currentUserData === null ||
+        isLoading ||
+        isError ? (
+          <Link href="/login">
+            <IoPersonCircleOutline className="w-8 h-8 text-darkGreen" />
+          </Link>
+        ) : (
+          <div
+            className="relative"
+            onClick={() => {
+              setShowUserMenu(!showUserMenu);
+            }}
+          >
+            <IoPersonCircleOutline className="w-8 h-8 text-darkGreen cursor-pointer" />
+            <div
+              className={`absolute space-y-1 -right-5 w-36 py-2 flex-col opacity-95 bg-mainWhite shadow-logoMenuShadow rounded-b-lg ${
+                showUserMenu ? "flex" : "hidden"
+              } items-center justify-start text-sm`}
+            >
+              <p>USER</p>
+              <hr className="size-[2px] bg-mainBlack w-3/4" />
+              <p onClick={handleLogout} className="cursor-pointer">
+                WYLOGUJ
+              </p>
+            </div>
+          </div>
+        )}
 
         <button
           onClick={toggleMenu}

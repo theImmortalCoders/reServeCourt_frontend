@@ -58,7 +58,7 @@ const config: Config = {
       },
       boxShadow: {
         navbarShadow: "0px 6px 20px 3px rgba(186, 182, 182, 1)",
-        logoMenuShadow: "0px 10px 20px 4px rgba(186, 182, 182, 1)",
+        logoMenuShadow: "0px 20px 20px 2px rgba(186, 182, 182, 1)",
       },
     },
   },

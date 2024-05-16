@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        '2xs' : '375px',
+        "2xs": "375px",
         xs: "475px",
         mds: "799px",
         mdl: "910px",
@@ -58,6 +58,7 @@ const config: Config = {
       },
       boxShadow: {
         navbarShadow: "0px 6px 20px 3px rgba(186, 182, 182, 1)",
+        logoMenuShadow: "0px 10px 20px 4px rgba(186, 182, 182, 1)",
       },
     },
   },

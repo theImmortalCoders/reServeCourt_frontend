@@ -104,9 +104,9 @@ export async function getAllAvailableCourtsByDate(
 ): Promise<GetAllAvailableCourtsByDateData | string> {
   try {
     let url = `/api/court/available?from=${from}&to=${to}`;
-    courtType ? url.concat("&courtType=", courtType) : null;
-    surface ? url.concat("&surface=", surface) : null;
-    locationName ? url.concat("&locationName=", locationName) : null;
+    url = courtType ? url.concat("&courtType=", courtType) : url
+    url = surface ? url.concat("&surface=", surface) : url
+    url = locationName ? url.concat("&locationName=", locationName) : url
     const response: AxiosResponse<GetAllAvailableCourtsByDateData | string> =
       await appAPI.get(`${url}`, {
         withCredentials: true,

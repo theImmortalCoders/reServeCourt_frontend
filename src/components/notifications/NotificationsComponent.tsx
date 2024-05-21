@@ -3,7 +3,6 @@ import { StompSessionProvider, useStompClient } from "react-stomp-hooks";
 import { useState, useEffect } from "react";
 import { NEXT_PUBLIC_WEBSOCKET_URL } from "@/utils/appWebsocket";
 import { markNotificationAsRead } from "@/hooks/notification";
-import { headers } from "next/headers";
 
 export interface Message {
   id: number;
@@ -29,6 +28,16 @@ const Notifications = () => {
             ...prevMessages,
             ...(Array.isArray(parsedMessage) ? parsedMessage : [parsedMessage]),
           ]);
+
+          localStorage.setItem(
+            "messages",
+            JSON.stringify([
+              ...messages,
+              ...(Array.isArray(parsedMessage)
+                ? parsedMessage
+                : [parsedMessage]),
+            ])
+          );
         }
       );
 
@@ -40,6 +49,20 @@ const Notifications = () => {
     }
   }, [stompClient]);
 
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "messages" && e.newValue) {
+        setMessages(JSON.parse(e.newValue));
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
   async function markNotification(notificationId: number) {
     try {
       const result = await markNotificationAsRead(notificationId);
@@ -47,9 +70,11 @@ const Notifications = () => {
         console.log("Przeczytano powiadomienie");
         setRemovedNotifications((prev) => [...prev, notificationId]);
         setTimeout(() => {
-          setMessages(
-            messages.filter((message) => message.id !== notificationId)
+          const newMessages = messages.filter(
+            (message) => message.id !== notificationId
           );
+          setMessages(newMessages);
+          localStorage.setItem("messages", JSON.stringify(newMessages));
           setRemovedNotifications((prev) =>
             prev.filter((id) => id !== notificationId)
           );

@@ -1,6 +1,7 @@
 import { appAPI } from "@/utils/appAPI";
 import { getPolishReservationErrorMessage } from "@/utils/reservationErrorMessageHelper";
 import { AxiosResponse } from "axios";
+import { GetAllAvailableCourtsByDateData } from "./court";
 
 export async function cancelReservation(reservationId: number) {
   try {
@@ -58,6 +59,7 @@ export interface GetReservationDetailsData {
   reservedByOwner: boolean;
   timeFrom: string;
   timeTo: string;
+  court: GetAllAvailableCourtsByDateData;
   message: string;
   canceled: boolean;
   confirmed: boolean;
@@ -105,6 +107,7 @@ export interface ReservationData {
   reservedByOwner: boolean;
   timeFrom: string;
   timeTo: string;
+  court: GetAllAvailableCourtsByDateData;
   canceled: boolean;
   confirmed: boolean;
 }

@@ -95,7 +95,7 @@ export default function PasswordChangePage() {
                 <PasswordChangeInput value={newPass} setValue={setNewPass} placeholder="Nowe hasło"/>
                 <PasswordChangeInput value={repNewPass} setValue={setRepNewPass} placeholder="Powtórz nowe hasło"/>
                 <button onClick={handleChangePassword} disabled={isLoading} className="bg-darkGreen text-mainWhite rounded px-3 lg:px-4 py-2 w-full">
-                    {isLoading ? 'Aktualizowanie...' : 'Zmień hasło'}
+                    {isLoading ? 'Zapisywanie...' : 'Zmień hasło'}
                 </button>
                 {message && (
                     message === "Zaktualizowano hasło" ? (

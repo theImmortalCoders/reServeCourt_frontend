@@ -29,7 +29,7 @@ export default function BookPage() {
     }, { enabled: loadData });
 
     const searchCourts = async () => {
-        if (loadData === false) {
+        if (loadData === false && dateFrom !== '' && dateTo !== '') {
             setLoadData(true);
         }
         else {
@@ -64,10 +64,13 @@ export default function BookPage() {
                 searchCourts={searchCourts}
             />
             <div className="w-11/12 lg:w-3/5 space-y-2">
-            {isLoading || isError ? (
-                <div>Trwa ładowanie danych...</div>
-                ) : (
-                    Array.isArray(courtsData) && clubDetails && courtsData.map((court: GetAllAvailableCourtsByDateData, index) => (
+            {isLoading ? (
+                <div className="flex justify-center">Trwa ładowanie danych...</div>
+            ) : isError ? (
+                <div className="flex justify-center">Wystąpił błąd podczas ładowania danych.</div>
+            ) : (
+                Array.isArray(courtsData) && clubDetails && courtsData.length > 0 ? (
+                    courtsData.map((court: GetAllAvailableCourtsByDateData, index) => (
                         <CourtListComponent
                             key={court.id}
                             court={court}
@@ -75,7 +78,10 @@ export default function BookPage() {
                             daysOpen={clubDetails[index]?.daysOpen}
                         />
                     ))
-                )}
+                ) : loadData && Array.isArray(courtsData) && courtsData.length === 0 && (
+                    <div className="flex justify-center">Brak dostępnych kortów</div>
+                )
+            )}
             </div>
         </div>
     )

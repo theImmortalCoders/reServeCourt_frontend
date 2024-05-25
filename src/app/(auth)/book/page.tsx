@@ -75,7 +75,7 @@ function SearchBar({
                         className="my-2 font-sans w-24 border border-darkGreen rounded px-1 outline-none"
                         onChange={(e) => setType(e.target.value)}
                     >
-                        <option value="">-</option>
+                        <option value="">Dowolny</option>
                         <option value="INDOOR">{translateCourtType("INDOOR")}</option>
                         <option value="OUTDOOR">{translateCourtType("OUTDOOR")}</option>
                     </select>
@@ -86,7 +86,7 @@ function SearchBar({
                         className="my-2 font-sans w-24 border border-darkGreen rounded px-1 outline-none"
                         onChange={(e) => setSurface(e.target.value)}
                     >
-                        <option value="">-</option>
+                        <option value="">Dowolna</option>
                         <option value="CLAY">{translateCourtSurface("CLAY")}</option>
                         <option value="CONCRETE">{translateCourtSurface("CONCRETE")}</option>
                         <option value="GRASS">{translateCourtSurface("GRASS")}</option>
@@ -95,7 +95,14 @@ function SearchBar({
                 </div>
                 <div>
                     <p>Lokalizacja:</p>
-                    <input type="text" name="" id="" className="my-2 border border-darkGreen rounded font-sans outline-none"/>
+                    <input 
+                        type="text" 
+                        name="" 
+                        id=""
+                        onChange={(e) => setLocation(e.target.value)}
+                        className="my-2 border border-darkGreen rounded font-sans outline-none"
+                        placeholder="Dowolna"
+                    />
                 </div>
             </span>
         </span>
@@ -125,7 +132,7 @@ export default function BookPage() {
         if (dateFrom === '' || dateTo === '') {
             return;
         }
-        return getAllAvailableCourtsByDate(dateFrom, dateTo);
+        return getAllAvailableCourtsByDate(dateFrom, dateTo, type && (type), surface && (surface), location && (location));
     }, { enabled: loadData });
 
     const searchCourts = async () => {
@@ -164,14 +171,18 @@ export default function BookPage() {
                 searchCourts={searchCourts}
             />
             <div className="w-11/12 lg:w-3/5 space-y-2">
-                {Array.isArray(courtsData) && clubDetails && courtsData.map((court: GetAllAvailableCourtsByDateData, index) => (
-                    <CourtListComponent
-                        key={court.id}
-                        court={court}
-                        userRole={"USER"}
-                        daysOpen={clubDetails[index]?.daysOpen}
-                    />
-                ))}
+            {isLoading || isError ? (
+                <div>Trwa ładowanie danych...</div>
+                ) : (
+                    Array.isArray(courtsData) && clubDetails && courtsData.map((court: GetAllAvailableCourtsByDateData, index) => (
+                        <CourtListComponent
+                            key={court.id}
+                            court={court}
+                            userRole={"USER"}
+                            daysOpen={clubDetails[index]?.daysOpen}
+                        />
+                    ))
+                )}
             </div>
         </div>
     )

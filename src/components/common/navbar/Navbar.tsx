@@ -106,6 +106,12 @@ export default function Navbar() {
                   : "Super Admin"}
               </p>
               <hr className="size-[2px] bg-mainBlack w-3/4" />
+              <Link href="/my-reservations">
+                <p className="cursor-pointer">Moje rezerwacje</p>
+              </Link>
+              <Link href="/password-change">
+                <p className="cursor-pointer">Zmień hasło</p>
+              </Link>
               <p
                 onClick={handleLogout}
                 className="cursor-pointer text-mainOrange"

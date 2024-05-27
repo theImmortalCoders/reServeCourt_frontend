@@ -5,6 +5,7 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { translateCourtSurface, translateCourtType } from "@/utils/courthelper";
 import APIImageComponent from "@/hooks/imageAPI";
 import { ReservationButton } from "../reservation/ReservationButton";
+import Link from "next/link";
 
 export default function CourtListComponent({
   court,
@@ -50,10 +51,11 @@ export default function CourtListComponent({
             <p>Typ kortu: {translateCourtType(court.type)}</p>
           </span>
         </div>
-        <div className="flex-col">
+        <div className="flex-col w-auto">
           <ReservationButton courtId={court.id} daysOpen={daysOpen} />
           {userRole === "ADMIN" && (
             <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl justify-end pt-2">
+              <Link className="w-auto h-auto bg-mainGreen text-mainWhite text-sm lg:text-md px-1 lg:px-2 py-1 rounded" href={`/reservation/${court.id}`}>Zobacz rezerwację</Link>
               <MdEdit
                 onClick={(e: any) => {
                   e.preventDefault();

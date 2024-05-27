@@ -87,7 +87,6 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                     </div>
                     {userRole === "ADMIN" && (
                       <button
-                        onClick={() => setIsOpen(true)}
                         className="w-auto h-auto bg-mainGreen text-mainWhite text-md md:text-lg lg:text-xl px-2 lg:px-4 py-1 lg:py-2 rounded"
                       >
                         Dodaj kort

@@ -16,10 +16,10 @@ export default function CourtListComponent({
   daysOpen,
 }: {
   court: Court;
-  setIsUpdate: Dispatch<SetStateAction<boolean>>;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  setDeleteWarning: Dispatch<SetStateAction<boolean>>;
-  setTempId: Dispatch<SetStateAction<number[]>>;
+  setIsUpdate?: Dispatch<SetStateAction<boolean>>;
+  setIsOpen?: Dispatch<SetStateAction<boolean>>;
+  setDeleteWarning?: Dispatch<SetStateAction<boolean>>;
+  setTempId?: Dispatch<SetStateAction<number[]>>;
   userRole: string | null;
   daysOpen: DaysOpen;
 }) {
@@ -57,17 +57,21 @@ export default function CourtListComponent({
               <MdEdit
                 onClick={(e: any) => {
                   e.preventDefault();
-                  setIsUpdate(true);
-                  setTempId([court.id, court.image.id]);
-                  setIsOpen(true);
+                  if (setIsUpdate && setTempId && setIsOpen) {
+                    setIsUpdate(true);
+                    setTempId([court.id, court.image.id]);
+                    setIsOpen(true);
+                  }
                 }}
                 className="cursor-pointer hover:text-mainGreen"
               />
               <MdDelete
                 onClick={(e: any) => {
                   e.stopPropagation();
-                  setDeleteWarning(true);
-                  setTempId([court.id, court.image.id]);
+                  if (setDeleteWarning && setTempId) {
+                    setDeleteWarning(true);
+                    setTempId([court.id, court.image.id]);
+                  }
                 }}
                 className="cursor-pointer hover:text-red-600"
               />

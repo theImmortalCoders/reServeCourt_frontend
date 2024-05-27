@@ -66,11 +66,11 @@ export default function SearchBar({
             />
           </span>
         </div>
-        <span className="flex flex-col sm:flex-row sm:space-x-4">
-          <div>
-            <p>Typ:</p>
+        <div className="flex flex-col sm:flex-row sm:space-x-4 items-center sm:items-start">
+          <div className="w-full">
+            <p className="text-start">Typ:</p>
             <select
-              className="my-2 font-sans w-24 border border-darkGreen rounded px-1 outline-none"
+              className="my-2 font-sans w-full sm:w-24 border border-darkGreen rounded px-1 outline-none"
               onChange={(e) => setType(e.target.value)}
             >
               <option value="">Dowolny</option>
@@ -78,10 +78,10 @@ export default function SearchBar({
               <option value="OUTDOOR">{translateCourtType("OUTDOOR")}</option>
             </select>
           </div>
-          <div>
-            <p>Nawierzchnia:</p>
+          <div className="w-full">
+            <p className="text-start">Nawierzchnia:</p>
             <select
-              className="my-2 font-sans w-24 border border-darkGreen rounded px-1 outline-none"
+              className="my-2 font-sans w-full sm:w-24 border border-darkGreen rounded px-1 outline-none"
               onChange={(e) => setSurface(e.target.value)}
             >
               <option value="">Dowolna</option>
@@ -95,18 +95,18 @@ export default function SearchBar({
               </option>
             </select>
           </div>
-          <div>
-            <p>Lokalizacja:</p>
+          <div className="w-full">
+            <p className="text-start">Lokalizacja:</p>
             <input
               type="text"
               name=""
               id=""
               onChange={(e) => setLocation(e.target.value)}
-              className="my-2 border border-darkGreen rounded font-sans outline-none"
+              className="my-2 px-1 border border-darkGreen rounded font-sans outline-none w-full sm:w-auto"
               placeholder="Dowolna"
             />
           </div>
-        </span>
+        </div>
       </span>
       <span className="flex items-center justify-center">
         <button

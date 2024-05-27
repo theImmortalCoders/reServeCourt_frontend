@@ -71,7 +71,7 @@ export default function CourtListComponent({
                   if (setDeleteWarning && setTempId) {
                     setDeleteWarning(true);
                     setTempId([court.id, court.image.id]);
-                  }  
+                  }
                 }}
                 className="cursor-pointer hover:text-red-600"
               />

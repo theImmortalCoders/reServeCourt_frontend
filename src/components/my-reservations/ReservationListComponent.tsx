@@ -1,18 +1,35 @@
-import { Dispatch, SetStateAction } from "react";
-import { ReservationData } from "@/hooks/reservation";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
+import {confirmReservation, ReservationData} from "@/hooks/reservation";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import APIImageComponent from "@/hooks/imageAPI";
-import { MdCancel } from "react-icons/md";
+import {MdCancel, MdVerified} from "react-icons/md";
+import {getRole} from "@/app/(role_admin)/clubs/[clubId]/page";
 
 export default function ReservationListComponent({
     reservation,
     setCancelWarning,
-    setTempId
+    setTempId,
+    setVerifyWarning,
 }:{
     reservation: ReservationData;
     setCancelWarning: Dispatch<SetStateAction<boolean>>;
     setTempId: Dispatch<SetStateAction<number>>;
+    setVerifyWarning: Dispatch<SetStateAction<boolean>>;
 }) {
+    const [userRole, setUserRole] = useState('')
+
+    useEffect(() => {
+        const fetchRole = async () => {
+            const role = await getRole();
+            if(typeof role === "string"){
+                setUserRole(role)
+            }
+
+        };
+        fetchRole();
+    }, []);
+
+    console.log(reservation)
     return (
         <DashboardContainer className="flex flex-col md:flex-row md:h-36">
             <div className="flex items-center w-40 p-4">
@@ -38,6 +55,12 @@ export default function ReservationListComponent({
                     </p> 
                 </div>
                 <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
+                    {userRole === "ADMIN" && !reservation.confirmed &&
+                    <MdVerified onClick={() => {
+                        setTempId(reservation.id);
+                        setVerifyWarning(true)
+                    }} className="cursor-pointer hover:text-mainGreen"/>
+                    }
                     <MdCancel onClick={() => {
                         setTempId(reservation.id);
                         setCancelWarning(true);

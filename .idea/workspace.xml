@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="feat: #40 working notification component">
-      <change afterPath="$PROJECT_DIR$/src/app/(auth)/reservation/[courtId]/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(role_admin)/admin-panel/page.tsx" afterDir="false" />
+    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #73 some fix with workspace.xml">
+      <change afterPath="$PROJECT_DIR$/src/components/my-reservations/VerifyWarning.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/reservation/[courtId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/reservation/[courtId]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(role_admin)/clubs/[clubId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(role_admin)/clubs/[clubId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/clubs/ClubForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clubs/ClubForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/navbar/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/courts/CourtListComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/CourtListComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/reservation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/reservation.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715074108939</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix: #73 some fix with workspace.xml">
+      <option name="closed" value="true" />
+      <created>1716893028015</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1716893028015</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +153,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: #40 basic notification workflow" />
     <MESSAGE value="feat: #40 working notification component" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: #40 working notification component" />
+    <MESSAGE value="feat: #73 add reservation page for court used by admin" />
+    <MESSAGE value="fix: #73 some fix with workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: #73 some fix with workspace.xml" />
   </component>
 </project>

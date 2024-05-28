@@ -9,7 +9,7 @@ import DeleteWarningCourt from "@/components/courts/DeleteWarningCourt";
 import CourtListComponent from "@/components/courts/CourtListComponent";
 import APIImageComponent from "@/hooks/imageAPI";
 
-async function getRole() {
+export async function getRole() {
   const userData = await getCurrentUser();
   if (userData && typeof userData === "object" && "role" in userData) {
     return userData.role;

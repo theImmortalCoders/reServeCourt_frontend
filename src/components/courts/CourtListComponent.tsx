@@ -1,7 +1,7 @@
-import { Content, Court, DaysOpen } from "@/hooks/club";
+import { Court, DaysOpen } from "@/hooks/club";
 import { Dispatch, SetStateAction } from "react";
 import DashboardContainer from "../common/dashboardContainer/DashboardContainer";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdBuild, MdDelete, MdEdit} from "react-icons/md";
 import { translateCourtSurface, translateCourtType } from "@/utils/courthelper";
 import APIImageComponent from "@/hooks/imageAPI";
 import { ReservationButton } from "../reservation/ReservationButton";
@@ -67,6 +67,16 @@ export default function CourtListComponent({
                 }}
                 className="cursor-pointer hover:text-mainGreen"
               />
+               <MdBuild
+                   onClick={(e: any) => {
+                     e.preventDefault();
+                     if (setIsUpdate && setTempId && setIsOpen) {
+                       setIsUpdate(true);
+                       setTempId([court.id, court.image.id]);
+                       setIsOpen(true);
+                     }
+                   }}
+                   className="cursor-pointer hover:text-mainOrange"/>
               <MdDelete
                 onClick={(e: any) => {
                   e.stopPropagation();

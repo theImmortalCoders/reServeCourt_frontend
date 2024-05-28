@@ -8,6 +8,9 @@ import CourtForm from "@/components/courts/CourtForm";
 import DeleteWarningCourt from "@/components/courts/DeleteWarningCourt";
 import CourtListComponent from "@/components/courts/CourtListComponent";
 import APIImageComponent from "@/hooks/imageAPI";
+import ActiveWarning from "@/components/my-reservations/ActiveWarning";
+import {cancelReservation} from "@/hooks/reservation";
+import {setCourtOpenness} from "@/hooks/court";
 
 export async function getRole() {
   const userData = await getCurrentUser();
@@ -22,6 +25,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [deleteWarning, setDeleteWarning] = useState<boolean>(false);
+  const [activeWarning, setActiveWarning] = useState<boolean>(false);
   const [tempId, setTempId] = useState<number[]>([-1, -1]);
 
   useEffect(() => {
@@ -46,6 +50,20 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
   }, [isOpen, tempId]);
 
   if (clubDetailsError) return <Error500Page />;
+
+  const handleActiveClub = async (id:number) => {
+    try {
+      const result = await setCourtOpenness(id, true);
+      if (result === 200) {
+        refetchClubs();
+        setTempId([-1, -1]);
+      } else {
+        console.error(result);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="flex flex-col items-center bg-mainWhite min-h-max p-4 md:p-8">
@@ -119,6 +137,12 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
               setTempId={setTempId}
             />
           )}
+          {activeWarning && (<ActiveWarning
+              setActiveWarning={setActiveWarning}
+              tempId={tempId}
+              handleActiveClub={handleActiveClub}
+              isActive={true}
+          />)}
         </>
       ) : (
         <CourtForm

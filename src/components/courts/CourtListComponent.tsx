@@ -12,6 +12,7 @@ export default function CourtListComponent({
   setIsUpdate,
   setIsOpen,
   setDeleteWarning,
+  setActiveWarning,
   setTempId,
   userRole,
   daysOpen,
@@ -20,6 +21,7 @@ export default function CourtListComponent({
   setIsUpdate?: Dispatch<SetStateAction<boolean>>;
   setIsOpen?: Dispatch<SetStateAction<boolean>>;
   setDeleteWarning?: Dispatch<SetStateAction<boolean>>;
+  setActiveWarning?: Dispatch<SetStateAction<boolean>>;
   setTempId?: Dispatch<SetStateAction<number[]>>;
   userRole: string | null;
   daysOpen: DaysOpen;
@@ -70,10 +72,9 @@ export default function CourtListComponent({
                <MdBuild
                    onClick={(e: any) => {
                      e.preventDefault();
-                     if (setIsUpdate && setTempId && setIsOpen) {
-                       setIsUpdate(true);
+                     if (setActiveWarning && setTempId) {
+                       setActiveWarning(true);
                        setTempId([court.id, court.image.id]);
-                       setIsOpen(true);
                      }
                    }}
                    className="cursor-pointer hover:text-mainOrange"/>

@@ -9,8 +9,6 @@ import DeleteWarningCourt from "@/components/courts/DeleteWarningCourt";
 import CourtListComponent from "@/components/courts/CourtListComponent";
 import APIImageComponent from "@/hooks/imageAPI";
 import ActiveWarning from "@/components/my-reservations/ActiveWarning";
-import {cancelReservation} from "@/hooks/reservation";
-import {setCourtOpenness} from "@/hooks/court";
 
 export async function getRole() {
   const userData = await getCurrentUser();
@@ -50,20 +48,6 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
   }, [isOpen, tempId]);
 
   if (clubDetailsError) return <Error500Page />;
-
-  const handleActiveClub = async (id:number) => {
-    try {
-      const result = await setCourtOpenness(id, true);
-      if (result === 200) {
-        refetchClubs();
-        setTempId([-1, -1]);
-      } else {
-        console.error(result);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   return (
     <div className="flex flex-col items-center bg-mainWhite min-h-max p-4 md:p-8">
@@ -119,6 +103,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                         setIsUpdate={setIsUpdate}
                         setIsOpen={setIsOpen}
                         setDeleteWarning={setDeleteWarning}
+                        setActiveWarning={setActiveWarning}
                         setTempId={setTempId}
                         userRole={userRole}
                         daysOpen={clubDetailsData.daysOpen}
@@ -131,16 +116,17 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
           )}
           {deleteWarning && (
             <DeleteWarningCourt
-              deleteWarning={deleteWarning}
+                deleteWarning={deleteWarning}
               setDeleteWarning={setDeleteWarning}
               tempId={tempId}
               setTempId={setTempId}
             />
           )}
-          {activeWarning && (<ActiveWarning
+          {activeWarning && (
+              <ActiveWarning
               setActiveWarning={setActiveWarning}
               tempId={tempId}
-              handleActiveClub={handleActiveClub}
+              setTempId={setTempId}
               isActive={true}
           />)}
         </>

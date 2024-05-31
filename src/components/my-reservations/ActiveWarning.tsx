@@ -1,16 +1,35 @@
-import { Dispatch, SetStateAction } from "react";
+import {Dispatch, SetStateAction, useState} from "react";
+import {setCourtOpenness} from "@/hooks/court";
 
 export default function ActiveWarning({
     setActiveWarning,
     tempId,
-                                          handleActiveClub,
+    setTempId,
     isActive,
   }: {
     setActiveWarning: Dispatch<SetStateAction<boolean>>;
-    tempId: number;
-    handleActiveClub: (id:number) => void;
+    tempId: number[];
+    setTempId: Dispatch<SetStateAction<number[]>>;
     isActive: boolean
   }) {
+
+    const [message, setMessage] = useState<string>("");
+
+    const handleActiveClub = async () => {
+        try {
+            const result = await setCourtOpenness(tempId[0], false);
+            if (result === 200) {
+                setActiveWarning(false);
+            } else {
+                console.error("Błąd aktywacji kortu");
+                setMessage("Błąd aktywacji kortu");
+            }
+        } catch (error) {
+            console.error("Błąd aktywacji kortu", error);
+            setMessage("Błąd aktywacji kortu");
+        }
+    };
+
     return (
       <div className="fixed flex items-center justify-center inset-0 z-10">
         <div className="absolute inset-0 bg-mainWhite opacity-80"></div>
@@ -27,10 +46,7 @@ export default function ActiveWarning({
               Anuluj
             </button>
             <button
-              onClick={() => {
-                  handleActiveClub(tempId);
-                setActiveWarning(false);
-            }}
+                onClick={handleActiveClub}
               className="bg-red-600 text-mainWhite text-sm rounded px-4 py-2 w-fit"
             >
               Tak

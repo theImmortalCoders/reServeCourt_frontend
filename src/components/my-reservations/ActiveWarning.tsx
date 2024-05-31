@@ -5,7 +5,7 @@ export default function ActiveWarning({
     setActiveWarning,
     tempId,
     setTempId,
-                                          isClosed,
+    isClosed,
   }: {
     setActiveWarning: Dispatch<SetStateAction<boolean>>;
     tempId: number[];
@@ -14,8 +14,7 @@ export default function ActiveWarning({
   }) {
 
     const [message, setMessage] = useState<string>("");
-console.log("tempId[0]", tempId[0])
-    console.log("isClosed", isClosed)
+
     const handleActiveClub = async () => {
         try {
             const result = await setCourtOpenness(tempId[0], !isClosed);

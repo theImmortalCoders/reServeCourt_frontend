@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #73 active court workflow: isActive">
+    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #73 active court workflow: isActive change to isClosed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(auth)/book/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/book/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(auth)/my-reservations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/my-reservations/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/book/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/book/SearchBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/courts/CourtListComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/CourtListComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/reservation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/reservation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/court.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/court.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +71,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Merging issue-73",
+    "git-widget-placeholder": "issue-73",
     "last_opened_file_path": "/home/wiktor/Dokumenty/Git/reServeCourt/reServeCourt_frontend/src/components/my-reservations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -189,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717151709792</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix: #73 active court workflow: isActive change to isClosed">
+      <option name="closed" value="true" />
+      <created>1717153639627</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1717153639627</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +208,7 @@
     <MESSAGE value="feat: #73 active court workflow" />
     <MESSAGE value="fix: #73 active court workflow" />
     <MESSAGE value="fix: #73 active court workflow: isActive" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: #73 active court workflow: isActive" />
+    <MESSAGE value="fix: #73 active court workflow: isActive change to isClosed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: #73 active court workflow: isActive change to isClosed" />
   </component>
 </project>

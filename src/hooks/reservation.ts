@@ -244,6 +244,7 @@ export async function confirmReservation(reservationId: number) {
   try {
     const response: AxiosResponse<void> = await appAPI.patch(
       `/api/reservation/${reservationId}`,
+      {},
       {
         withCredentials: true,
       }

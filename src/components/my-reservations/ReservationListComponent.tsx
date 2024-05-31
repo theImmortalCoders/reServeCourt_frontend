@@ -15,7 +15,9 @@ export default function ReservationListComponent({
     setCancelWarning: Dispatch<SetStateAction<boolean>>;
     setTempId: Dispatch<SetStateAction<number>>;
     setVerifyWarning: Dispatch<SetStateAction<boolean>>;
-}) {
+
+})  {
+
     const [userRole, setUserRole] = useState('')
 
     useEffect(() => {
@@ -43,7 +45,8 @@ export default function ReservationListComponent({
                 <div className="hidden md:flex flex-col w-full md:h-full justify-end min-h-12">
                     <p className="text-sm font-bold">Zarezerwowano:</p>
                     <p className="text-xs font-sans text-nowrap">
-                        {reservation.timeFrom.slice(0, -3).replace('T', ' ')} : {reservation.timeTo.slice(11, -3).replace('T', ' ')}
+                        {reservation.timeFrom.slice(0, -3).replace("T", " ")} :{" "}
+                        {reservation.timeTo.slice(11, -3).replace("T", " ")}
                     </p>
                 </div>
             </div>
@@ -51,12 +54,15 @@ export default function ReservationListComponent({
                 <div className="flex md:hidden flex-col justify-end space-y-1 h-full w-full">
                     <p className="text-sm font-bold">Zarezerwowano:</p>
                     <p className="text-xs font-sans text-nowrap">
-                        {reservation.timeFrom.slice(0, -3).replace('T', ' ')} : {reservation.timeTo.slice(11, -3).replace('T', ' ')}
-                    </p> 
+            {reservation.timeFrom.slice(0, -3).replace("T", " ")} :{" "}
+                        {reservation.timeTo.slice(11, -3).replace("T", " ")}
+          </p>
                 </div>
+                {reservation.timeTo >
+                    new Date().toISOString().slice(0, -5).toString() && (
                 <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
                     {userRole === "ADMIN" && !reservation.confirmed &&
-                    <MdVerified onClick={() => {
+                        <MdVerified onClick={() => {
                         setTempId(reservation.id);
                         setVerifyWarning(true)
                     }} className="cursor-pointer hover:text-mainGreen"/>
@@ -66,6 +72,7 @@ export default function ReservationListComponent({
                         setCancelWarning(true);
                     }} className="cursor-pointer hover:text-red-600"/>
                 </span>
+                    )}
             </span>
         </DashboardContainer>
     )

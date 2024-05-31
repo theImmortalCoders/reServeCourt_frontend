@@ -249,6 +249,7 @@ export async function confirmReservation(reservationId: number) {
         withCredentials: true,
       }
     );
+    console.log("dsadas", response)
     if (response.status === 200) {
       console.log("Rezerwacja została zatwierdzona poprawnie!");
       return response.status;

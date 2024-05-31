@@ -150,7 +150,9 @@ export default function ClubForm({
 
     try {
       if (!isUpdate) {
+        console.log("newClubData", newClubData)
         const result = await addClub(newClubData);
+        console.log("result", result)
         if (result === 200) {
           setName("");
           setDescription("");

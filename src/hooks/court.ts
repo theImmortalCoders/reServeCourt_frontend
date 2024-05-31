@@ -217,6 +217,7 @@ export async function setCourtOpenness(courtId: number, closed: boolean) {
   try {
     const response: AxiosResponse<void> = await appAPI.put(
       `/api/court/${courtId}/active?closed=${closed}`,
+        {},
       {
         withCredentials: true,
       }

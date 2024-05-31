@@ -1,7 +1,7 @@
 "use client";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { Location, getClubDetails } from "@/hooks/club";
+import { Location } from "@/hooks/club";
 import { uploadMultipleImages } from "@/hooks/image";
 import {
   AddCourtData,

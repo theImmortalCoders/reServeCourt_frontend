@@ -106,6 +106,11 @@ export default function Navbar() {
                   : "Super Admin"}
               </p>
               <hr className="size-[2px] bg-mainBlack w-3/4" />
+              {(currentUserData.role === "ADMIN") &&
+              <Link href="/admin-panel">
+                <p className="cursor-pointer">Panel Admina</p>
+              </Link>
+              }
               <Link href="/my-reservations">
                 <p className="cursor-pointer">Moje rezerwacje</p>
               </Link>

@@ -177,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716901678461</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix: #73 active court workflow: isActive">
+      <option name="closed" value="true" />
+      <created>1717151709792</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1717151709792</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

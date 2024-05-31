@@ -5,19 +5,20 @@ export default function ActiveWarning({
     setActiveWarning,
     tempId,
     setTempId,
-    isActive,
+                                          isClosed,
   }: {
     setActiveWarning: Dispatch<SetStateAction<boolean>>;
     tempId: number[];
     setTempId: Dispatch<SetStateAction<number[]>>;
-    isActive: boolean
+    isClosed: boolean
   }) {
 
     const [message, setMessage] = useState<string>("");
-console.log("isActive", isActive)
+console.log("tempId[0]", tempId[0])
+    console.log("isClosed", isClosed)
     const handleActiveClub = async () => {
         try {
-            const result = await setCourtOpenness(tempId[0], !isActive);
+            const result = await setCourtOpenness(tempId[0], !isClosed);
             if (result === 200) {
                 setActiveWarning(false);
             } else {
@@ -25,8 +26,8 @@ console.log("isActive", isActive)
                 setMessage(result);
             }
         } catch (error) {
-            console.error(`Błąd ${isActive ? 'Dezaktywacja' : 'Aktywacja'} kortu`, error);
-            setMessage(`Błąd ${isActive ? 'Dezaktywacja' : 'Aktywacja'} kortu`);
+            console.error(`Błąd ${isClosed ? 'Aktywacja' : 'Dezaktywacja'} kortu`, error);
+            setMessage(`Błąd ${isClosed ? 'Aktywacja' : 'Dezaktywacja'} kortu`);
         }
     };
 
@@ -34,9 +35,9 @@ console.log("isActive", isActive)
       <div className="fixed flex items-center justify-center inset-0 z-10">
         <div className="absolute inset-0 bg-mainWhite opacity-80"></div>
         <div className="flex flex-col justify-center items-center w-64 sm:w-96 border-2 border-darkGreen bg-mainWhite rounded space-y-2 p-4 z-20">
-          <h1 className="text-xl">{isActive? 'Dezaktywacja ' : 'Aktywacja '}kortu</h1>
+          <h1 className="text-xl">{isClosed? 'Aktywacja ' : 'Dezaktywacja '}kortu</h1>
           <p className="text-sm text-center font-sans">
-            Czy na pewno chcesz {isActive? 'deaktywować ' : 'aktywować '}wybrany kort?
+            Czy na pewno chcesz {isClosed? 'aktywować ' : 'deaktywować '}wybrany kort?
           </p>
           <span className="space-x-4">
             <button
@@ -47,7 +48,7 @@ console.log("isActive", isActive)
             </button>
             <button
                 onClick={handleActiveClub}
-              className="bg-red-600 text-mainWhite text-sm rounded px-4 py-2 w-fit"
+              className="bg-mainGreen text-mainWhite text-sm rounded px-4 py-2 w-fit"
             >
               Tak
             </button>

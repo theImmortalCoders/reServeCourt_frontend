@@ -130,7 +130,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                         setActiveWarning={setActiveWarning}
                         tempId={tempId}
                         setTempId={setTempId}
-                        isActive={court.closed}
+                        isClosed={court.closed}
                     />
                 ))}
               </>

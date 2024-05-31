@@ -89,6 +89,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                     </div>
                     {userRole === "ADMIN" && (
                       <button
+                          onClick={() => setIsOpen(true)}
                         className="w-auto h-auto bg-mainGreen text-mainWhite text-md md:text-lg lg:text-xl px-2 lg:px-4 py-1 lg:py-2 rounded"
                       >
                         Dodaj kort
@@ -122,13 +123,18 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
               setTempId={setTempId}
             />
           )}
-          {activeWarning && (
-              <ActiveWarning
-              setActiveWarning={setActiveWarning}
-              tempId={tempId}
-              setTempId={setTempId}
-              isActive={true}
-          />)}
+          {activeWarning && clubDetailsData && typeof clubDetailsData !== "string"  && (
+              <>
+                {clubDetailsData.courts.map((court) => (
+                    <ActiveWarning
+                        setActiveWarning={setActiveWarning}
+                        tempId={tempId}
+                        setTempId={setTempId}
+                        isActive={court.closed}
+                    />
+                ))}
+              </>
+              )}
         </>
       ) : (
         <CourtForm

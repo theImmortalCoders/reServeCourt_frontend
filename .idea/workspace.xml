@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #73 active court workflow">
+    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #73 active court workflow: isActive">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(role_admin)/clubs/[clubId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(role_admin)/clubs/[clubId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/courts/CourtListComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/CourtListComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,6 +191,7 @@
     <MESSAGE value="feat: #73 confirm reservation as admin" />
     <MESSAGE value="feat: #73 active court workflow" />
     <MESSAGE value="fix: #73 active court workflow" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: #73 active court workflow" />
+    <MESSAGE value="fix: #73 active court workflow: isActive" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: #73 active court workflow: isActive" />
   </component>
 </project>

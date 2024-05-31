@@ -14,19 +14,19 @@ export default function ActiveWarning({
   }) {
 
     const [message, setMessage] = useState<string>("");
-
+console.log("isActive", isActive)
     const handleActiveClub = async () => {
         try {
-            const result = await setCourtOpenness(tempId[0], false);
+            const result = await setCourtOpenness(tempId[0], !isActive);
             if (result === 200) {
                 setActiveWarning(false);
             } else {
-                console.error("Błąd aktywacji kortu");
-                setMessage("Błąd aktywacji kortu");
+               console.error(result);
+                setMessage(result);
             }
         } catch (error) {
-            console.error("Błąd aktywacji kortu", error);
-            setMessage("Błąd aktywacji kortu");
+            console.error(`Błąd ${isActive ? 'Dezaktywacja' : 'Aktywacja'} kortu`, error);
+            setMessage(`Błąd ${isActive ? 'Dezaktywacja' : 'Aktywacja'} kortu`);
         }
     };
 
@@ -34,9 +34,9 @@ export default function ActiveWarning({
       <div className="fixed flex items-center justify-center inset-0 z-10">
         <div className="absolute inset-0 bg-mainWhite opacity-80"></div>
         <div className="flex flex-col justify-center items-center w-64 sm:w-96 border-2 border-darkGreen bg-mainWhite rounded space-y-2 p-4 z-20">
-          <h1 className="text-xl">{isActive? 'Aktywacja ' : 'Dekatywacja '}kortu</h1>
+          <h1 className="text-xl">{isActive? 'Dezaktywacja ' : 'Aktywacja '}kortu</h1>
           <p className="text-sm text-center font-sans">
-            Czy na pewno chcesz aktywować wybrane kort?
+            Czy na pewno chcesz {isActive? 'deaktywować ' : 'aktywować '}wybrany kort?
           </p>
           <span className="space-x-4">
             <button
@@ -52,6 +52,7 @@ export default function ActiveWarning({
               Tak
             </button>
           </span>
+            {message && <p className="mt-2 text-sm">{message}</p>}
         </div>
       </div>
     );

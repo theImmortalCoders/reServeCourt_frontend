@@ -12,9 +12,9 @@ import Page from "@/components/common/page/Page";
 import Box from "@/components/common/box/Box";
 import Link from "next/link";
 import { InputPassword, InputEmail } from "@/components/login/molecules/Inputs";
-import LoginMessage from "@/components/login/atoms/LoginMessage";
 import { useQuery, useQueryClient } from "react-query";
 import Error500Page from "@/components/common/error/Error500Page";
+import Message from "@/components/login/atoms/LoginMessage";
 
 export default function Login() {
   const [message, setMessage] = useState("");
@@ -94,7 +94,7 @@ export default function Login() {
                 </button>
               </Link>
             </div>
-            <LoginMessage
+            <Message
               value={logged}
               messageIfIsRed={message}
               messageIfIsGreen={"Zalogowano poprawnie"}

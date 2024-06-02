@@ -10,7 +10,7 @@ import {
   InputPassword,
   InputSecondPassword,
 } from "@/components/login/molecules/Inputs";
-import LoginMessage from "@/components/login/atoms/LoginMessage";
+import Message from "@/components/login/atoms/LoginMessage";
 
 export default function PasswordResetToken({
   params,
@@ -65,7 +65,7 @@ export default function PasswordResetToken({
             messageIfLoadingIsTrue={"Resetowanie hasła..."}
             messageIfLoadingIsFalse={"Resetuj hasło"}
           />
-          <LoginMessage
+          <Message
             value={resetPasswordState}
             messageIfIsRed={message}
             messageIfIsGreen={"Hasło zostało zresetowane"}

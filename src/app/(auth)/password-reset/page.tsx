@@ -3,10 +3,10 @@ import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
 import { LoginButton } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
-import LoginMessage from "@/components/login/atoms/LoginMessage";
 import { InputEmail } from "@/components/login/molecules/Inputs";
 import { requestResetPassword } from "@/hooks/user";
 import { useState } from "react";
+import Message from "@/components/login/atoms/LoginMessage";
 
 export default function passwordReset() {
   const [message, setMessage] = useState("");
@@ -44,7 +44,7 @@ export default function passwordReset() {
             messageIfLoadingIsTrue={"Resetowanie hasła..."}
             messageIfLoadingIsFalse={"Resetuj hasło"}
           />
-          <LoginMessage
+          <Message
             value={resetPasswordState}
             messageIfIsRed={message}
             messageIfIsGreen={

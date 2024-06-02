@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { DaysOpen, getClubDetails } from "@/hooks/club";
 import {

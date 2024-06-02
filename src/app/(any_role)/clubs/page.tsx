@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { getAllClubs } from "@/hooks/club";
 import { getCurrentUser } from "@/hooks/user";

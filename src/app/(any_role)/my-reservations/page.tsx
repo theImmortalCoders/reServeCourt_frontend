@@ -3,7 +3,6 @@ import { useState, Dispatch, SetStateAction } from "react";
 import {
   getAllReservationByCurrentUser,
   cancelReservation,
-  ReservationData,
 } from "@/hooks/reservation";
 import { useQuery } from "react-query";
 import ReservationListComponent from "@/components/my-reservations/ReservationListComponent";

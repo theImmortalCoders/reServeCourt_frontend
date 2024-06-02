@@ -1,9 +1,9 @@
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
-import {confirmReservation, ReservationData} from "@/hooks/reservation";
+import {ReservationData} from "@/hooks/reservation";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import APIImageComponent from "@/hooks/imageAPI";
 import {MdCancel, MdVerified} from "react-icons/md";
-import {getRole} from "@/app/(role_admin)/clubs/[clubId]/page";
+import {getRole} from "@/app/(any_role)/clubs/[clubId]/page";
 
 export default function ReservationListComponent({
     reservation,

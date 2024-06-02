@@ -4,9 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #73 fix setCourtOpenness hook">
+    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #75 fix reset-password page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/add-account/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/add-account/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/book/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/book/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/my-reservations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/my-reservations/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/password-reset/[token]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/password-reset/[token]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/password-reset/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/password-reset/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/reservation/[courtId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/reservation/[courtId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(role_admin)/admin-panel/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(role_admin)/clubs/[clubId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/clubs/[clubId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(role_admin)/clubs/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/clubs/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/atoms/LoginMessage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/atoms/LoginMessage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/user.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +98,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/my-reservations" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/(any_role)" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
@@ -135,7 +150,7 @@
       <workItem from="1716981582264" duration="441000" />
       <workItem from="1716986013745" duration="240000" />
       <workItem from="1717147478915" duration="1332000" />
-      <workItem from="1717318694785" duration="639000" />
+      <workItem from="1717318694785" duration="1670000" />
     </task>
     <task id="LOCAL-00001" summary="feat: #40 basic notification workflow">
       <option name="closed" value="true" />
@@ -201,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717156580642</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix: #75 fix login page">
+      <option name="closed" value="true" />
+      <created>1717319393298</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1717319393298</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +241,8 @@
     <MESSAGE value="fix: #73 active court workflow: isActive" />
     <MESSAGE value="fix: #73 active court workflow: isActive change to isClosed" />
     <MESSAGE value="fix: #73 fix setCourtOpenness hook" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: #73 fix setCourtOpenness hook" />
+    <MESSAGE value="fix: #75 fix login page" />
+    <MESSAGE value="fix: #75 fix reset-password page" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: #75 fix reset-password page" />
   </component>
 </project>

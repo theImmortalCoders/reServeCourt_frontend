@@ -74,20 +74,23 @@ export default function Login() {
             />
             <InputEmail />
             <InputPassword />
-            <Link href={"/password-reset"}>
-              <button className="w-full text-right text-darkGreen underline pb-2 text-sm sm:text-md">
-                Zapomniałeś hasła?
-              </button>
-            </Link>
+
             <LoginButton
               messageIfLoadingIsTrue={"Logowanie..."}
               messageIfLoadingIsFalse={"Zaloguj"}
             />
+            <Link href={"/password-reset"}>
+              <button
+                  className="border-darkGreen border-2 text-inherit text-darkGreen rounded px-3 lg:px-4 py-2 w-full mt-2"
+              >
+                Zapomniałeś hasła?
+              </button>
+            </Link>
             <div className="flex flex-row justify-center gap-x-1 pt-2 text-sm sm:text-md">
               <p>Nie masz konta?</p>
               <Link href={"/add-account"}>
                 <button className="text-right text-darkGreen underline text-sm sm:text-md">
-                  Załóż konto
+                Załóż konto
                 </button>
               </Link>
             </div>

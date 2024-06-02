@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #73 active court workflow: isActive change to isClosed">
+    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #73 fix setCourtOpenness hook">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/court.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/court.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/login/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +70,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "issue-73",
+    "git-widget-placeholder": "issue-75",
     "last_opened_file_path": "/home/wiktor/Dokumenty/Git/reServeCourt/reServeCourt_frontend/src/components/my-reservations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -136,6 +135,7 @@
       <workItem from="1716981582264" duration="441000" />
       <workItem from="1716986013745" duration="240000" />
       <workItem from="1717147478915" duration="1332000" />
+      <workItem from="1717318694785" duration="639000" />
     </task>
     <task id="LOCAL-00001" summary="feat: #40 basic notification workflow">
       <option name="closed" value="true" />
@@ -193,7 +193,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717153639627</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix: #73 fix setCourtOpenness hook">
+      <option name="closed" value="true" />
+      <created>1717156580642</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1717156580642</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +217,7 @@
     <MESSAGE value="fix: #73 active court workflow" />
     <MESSAGE value="fix: #73 active court workflow: isActive" />
     <MESSAGE value="fix: #73 active court workflow: isActive change to isClosed" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: #73 active court workflow: isActive change to isClosed" />
+    <MESSAGE value="fix: #73 fix setCourtOpenness hook" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: #73 fix setCourtOpenness hook" />
   </component>
 </project>

@@ -26,7 +26,7 @@ export default function MainPage() {
           <HomePageText number={20} text={"kortów otwartych"} />
           <HomePageText number={20000} text={"rezerwacji"} />
         </div>
-        <a href="/book">
+        <a href="/clubs">
           <button className="text-nowrap uppercase bg-darkGreen text-mainWhite px-3 py-6 mt-[28%] sm:mt-0 ml-6 sm:ml-0 flex items-center justify-center rounded-b-3xl text-xs sm:text-1x1 md:text-lg xl:text-2xl">
             Zarezerwuj teraz
           </button>

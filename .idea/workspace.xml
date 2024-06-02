@@ -5,37 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #75 fix Server Side Analysis">
-      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(any_role)/book/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/book/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(any_role)/clubs/[clubId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/clubs/[clubId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(any_role)/clubs/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/clubs/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(any_role)/my-reservations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/my-reservations/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(common)/aboutus/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(common)/aboutus/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(common)/rules/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(common)/rules/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/clubs/ClubForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clubs/ClubForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/clubs/ClubFormInputs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clubs/ClubFormInputs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/clubs/DeleteWarning.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clubs/DeleteWarning.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/box/Box.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/box/Box.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboardContainer/DashboardContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboardContainer/DashboardContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/footer/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/imageCrop/ImageCropFrame.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/imageCrop/ImageCropFrame.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/modal/Modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/modal/Modal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/common/navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/navbar/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/page/Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/page/Page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/courts/DeleteWarningCourt.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/DeleteWarningCourt.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/login/atoms/LoginInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/atoms/LoginInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/price/CourtType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/price/CourtType.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/price/DiscountType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/price/DiscountType.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/price/TableRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/price/TableRow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/reservation/ReservationButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reservation/ReservationButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/image.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/image.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/imageAPI.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/imageAPI.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/reservationErrorMessageHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/reservationErrorMessageHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/organisms/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/organisms/MainPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +165,7 @@
       <workItem from="1716981582264" duration="441000" />
       <workItem from="1716986013745" duration="240000" />
       <workItem from="1717147478915" duration="1332000" />
-      <workItem from="1717318694785" duration="4920000" />
+      <workItem from="1717318694785" duration="5085000" />
     </task>
     <task id="LOCAL-00001" summary="feat: #40 basic notification workflow">
       <option name="closed" value="true" />
@@ -275,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717320420495</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix: #75 fix Server Side Analysis">
+      <option name="closed" value="true" />
+      <created>1717323631916</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1717323631916</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -19,7 +19,6 @@ import {
 import { useQuery } from "react-query";
 
 export default function CourtForm({
-  isOpen,
   setIsOpen,
   isUpdate,
   setIsUpdate,
@@ -27,7 +26,6 @@ export default function CourtForm({
   setTempId,
   clubID,
 }: {
-  isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   isUpdate: boolean;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
@@ -56,7 +54,9 @@ export default function CourtForm({
     } = useQuery(["court", tempId[0]], () => getCourtDetails(tempId[0]));
 
     useEffect(() => {
-      refetchCourt();
+      (async () => {
+        await refetchCourt();
+      })();
       if (isUpdate && !courtLoading) {
         if (typeof courtData !== "string" && !courtError) {
           if (courtData) {
@@ -98,8 +98,9 @@ export default function CourtForm({
         console.error("Błąd dodawania obrazów", error);
       }
     };
-
-    handleNewImages();
+    (async () => {
+      await handleNewImages();
+    })();
   }, [logoFiles]);
 
   const submitForm = async () => {

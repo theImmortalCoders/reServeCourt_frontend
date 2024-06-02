@@ -117,7 +117,6 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
           )}
           {deleteWarning && (
             <DeleteWarningCourt
-                deleteWarning={deleteWarning}
               setDeleteWarning={setDeleteWarning}
               tempId={tempId}
               setTempId={setTempId}
@@ -129,7 +128,6 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                     <ActiveWarning
                         setActiveWarning={setActiveWarning}
                         tempId={tempId}
-                        setTempId={setTempId}
                         isClosed={court.closed}
                     />
                 ))}
@@ -138,7 +136,6 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
         </>
       ) : (
         <CourtForm
-          isOpen={isOpen}
           setIsOpen={setIsOpen}
           isUpdate={isUpdate}
           setIsUpdate={setIsUpdate}

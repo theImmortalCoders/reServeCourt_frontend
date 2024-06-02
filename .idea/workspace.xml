@@ -4,21 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #75 fix reset-password page">
+    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #75 fix Server Side Analysis">
+      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(auth)/add-account/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/add-account/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(auth)/book/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/book/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(auth)/my-reservations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/my-reservations/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(auth)/password-reset/[token]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/password-reset/[token]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(auth)/password-reset/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/password-reset/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(auth)/reservation/[courtId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/reservation/[courtId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(role_admin)/admin-panel/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(role_admin)/clubs/[clubId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/clubs/[clubId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(role_admin)/clubs/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/clubs/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/login/atoms/LoginMessage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/atoms/LoginMessage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(any_role)/book/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/book/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(any_role)/clubs/[clubId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/clubs/[clubId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(any_role)/clubs/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/clubs/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(any_role)/my-reservations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(any_role)/my-reservations/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(common)/aboutus/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(common)/aboutus/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(common)/rules/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(common)/rules/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clubs/ClubForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clubs/ClubForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clubs/ClubFormInputs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clubs/ClubFormInputs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clubs/DeleteWarning.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clubs/DeleteWarning.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/box/Box.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/box/Box.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/dashboardContainer/DashboardContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboardContainer/DashboardContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/footer/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/imageCrop/ImageCropFrame.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/imageCrop/ImageCropFrame.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/modal/Modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/modal/Modal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/page/Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/page/Page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/courts/DeleteWarningCourt.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/DeleteWarningCourt.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/atoms/LoginInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/atoms/LoginInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ReservationListComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/price/CourtType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/price/CourtType.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/price/DiscountType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/price/DiscountType.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/price/TableRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/price/TableRow.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reservation/ReservationButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reservation/ReservationButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/image.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/image.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/imageAPI.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/imageAPI.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/reservationErrorMessageHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/reservationErrorMessageHelper.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +80,8 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="proportion" value="0.5021763" />
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -94,6 +112,31 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="QodanaHighlightedReportService">
+    <option name="localRunNotPublishedPersistedInfo">
+      <LocalReportPersistedInfo>
+        <option name="path" value="/tmp/qodana_output342/qodana.sarif.json" />
+        <option name="reportGuid" value="428ea73b-ec2a-4abe-ac5a-535031f7f389" />
+        <option name="reportName" value="reServeCourt_frontend/qodana/2024-06-02" />
+      </LocalReportPersistedInfo>
+    </option>
+  </component>
+  <component name="QodanaIsSelectedPersistenceService">
+    <option name="selectedOrLoading" value="true" />
+  </component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="/tmp/qodana_output2/qodana.sarif.json" reportGuid="dee7bd63-e808-400e-b225-d18615b9a323" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output10/qodana.sarif.json" reportGuid="eb90eba1-e13e-4e5f-b12d-6cd904cc1e91" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output7/qodana.sarif.json" reportGuid="e961bcf4-42f4-40f5-8124-d4adeee47c8a" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output3/qodana.sarif.json" reportGuid="e924e0b2-8b6b-47c9-95d2-c5945f1f1bb2" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output342/qodana.sarif.json" reportGuid="428ea73b-ec2a-4abe-ac5a-535031f7f389" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output/qodana.sarif.json" reportGuid="19a35059-4bc2-4915-a697-a5ae0e1f4554" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output9/qodana.sarif.json" reportGuid="0a0e994e-70dd-4bbd-95ce-33617ed532a0" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output1/qodana.sarif.json" reportGuid="105d0731-07f6-4a84-b3e9-9c15892a72a9" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output5/qodana.sarif.json" reportGuid="65bfca20-f136-4e2b-8aea-3a8cd3a7afb1" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/my-reservations" />
@@ -150,7 +193,7 @@
       <workItem from="1716981582264" duration="441000" />
       <workItem from="1716986013745" duration="240000" />
       <workItem from="1717147478915" duration="1332000" />
-      <workItem from="1717318694785" duration="1670000" />
+      <workItem from="1717318694785" duration="4920000" />
     </task>
     <task id="LOCAL-00001" summary="feat: #40 basic notification workflow">
       <option name="closed" value="true" />
@@ -224,7 +267,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717319393298</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix: #75 fix reset-password page">
+      <option name="closed" value="true" />
+      <created>1717320420495</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1717320420495</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,6 +294,7 @@
     <MESSAGE value="fix: #73 fix setCourtOpenness hook" />
     <MESSAGE value="fix: #75 fix login page" />
     <MESSAGE value="fix: #75 fix reset-password page" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: #75 fix reset-password page" />
+    <MESSAGE value="fix: #75 fix Server Side Analysis" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: #75 fix Server Side Analysis" />
   </component>
 </project>

@@ -42,7 +42,7 @@ export default function BookPage() {
   );
 
   const searchCourts = async () => {
-    if (loadData === false && dateFrom !== "" && dateTo !== "") {
+    if (!loadData && dateFrom !== "" && dateTo !== "") {
       setLoadData(true);
     } else {
       refetch();

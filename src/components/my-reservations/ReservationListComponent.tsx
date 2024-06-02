@@ -28,7 +28,9 @@ export default function ReservationListComponent({
             }
 
         };
-        fetchRole();
+        (async () => {
+            await fetchRole();
+        })();
     }, []);
 
     console.log(reservation)

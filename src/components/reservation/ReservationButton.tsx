@@ -42,7 +42,9 @@ export function ReservationButton({
         console.error("Błąd podczas pobierania rezerwacji:", error);
       }
     };
-    fetchData();
+    (async () => {
+      await fetchData();
+    })();
   }, [isReservationModalOpen]);
 
   const handleButtonClick = () => {

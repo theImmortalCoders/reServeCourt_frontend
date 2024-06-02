@@ -2,11 +2,12 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import {
   getAllReservationByCurrentUser,
-  cancelReservation,
+  cancelReservation, confirmReservation,
 } from "@/hooks/reservation";
 import { useQuery } from "react-query";
 import ReservationListComponent from "@/components/my-reservations/ReservationListComponent";
 import CancelWarning from "@/components/my-reservations/CancelWarning";
+import VerifyWarning from "@/components/my-reservations/VerifyWarning";
 
 const HistoryCurrentSwitch = ({
   isCurrent,
@@ -48,6 +49,8 @@ export default function MyReservationsPage() {
 
   const currentDate = new Date().toISOString().slice(0, -5).toString();
 
+  const [verifyWarning, setVerifyWarning] = useState<boolean>(false);
+
   const {
     data: reservationsData,
     isLoading,
@@ -74,6 +77,20 @@ export default function MyReservationsPage() {
     }
   };
 
+  const handleVerifyReservation = async (id:number) => {
+    try {
+      const result = await confirmReservation(id);
+      if (result === 200) {
+        refetch();
+        setTempId(-1);
+      } else {
+        console.error(result);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="flex flex-col items-center bg-mainWhite min-h-max py-8 space-y-6">
       <HistoryCurrentSwitch isCurrent={isCurrent} setIsCurrent={setIsCurrent} />
@@ -89,6 +106,7 @@ export default function MyReservationsPage() {
                   reservation={reservation}
                   setCancelWarning={setCancelWarning}
                   setTempId={setTempId}
+                  setVerifyWarning={setVerifyWarning}
                 />
               )
           )}
@@ -99,6 +117,10 @@ export default function MyReservationsPage() {
           setCancelWarning={setCancelWarning}
           handleCancelReservation={handleCancelReservation}
         />
+      )}
+      {verifyWarning && (
+          <VerifyWarning tempId={tempId} setVerifyWarning={setVerifyWarning}
+                         handleVerifyReservation={handleVerifyReservation}/>
       )}
     </div>
   );

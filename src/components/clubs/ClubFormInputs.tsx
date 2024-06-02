@@ -1,8 +1,6 @@
 import {
   MdDriveFileRenameOutline,
   MdOutlineShortText,
-  MdImage,
-  MdOutlineDeleteForever,
 } from "react-icons/md";
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useMapEvents } from "react-leaflet";
@@ -118,7 +116,7 @@ export function DescriptionInput({
         className="w-full h-16 outline-none focus:outline-none bg-inherit"
         onChange={(e) => {
           const value = e.target.value;
-          const isValid = /^[\w\s\/\d\WąęłńóśźżĄĘŁŃÓŚŹŻ]{0,255}$/i.test(value);
+          const isValid = /^[\w\s\/\WąęłńóśźżĄĘŁŃÓŚŹŻ]{0,255}$/i.test(value);
 
           if (isValid) {
             setDescription(value);
@@ -255,14 +253,10 @@ export function LocationMap({
 }
 
 export function ClubLogoInput({
-  logoFile,
   setLogoFile,
-  isForm,
   logoId,
 }: {
-  logoFile: File;
   setLogoFile: Dispatch<SetStateAction<File>>;
-  isForm?: boolean;
   logoId: number;
 }) {
   return (
@@ -272,7 +266,6 @@ export function ClubLogoInput({
       <ImageCropFrame
         formName="logoInput"
         croppingRatio={16 / 16}
-        imageFile={logoFile}
         setImageFile={setLogoFile}
       />
       <div className="flex flex-row items-center mt-10 justify-center space-x-12 pt-2 bg-close2White pr-0 sm:pr-10 lg:pr-20">

@@ -1,3 +1,5 @@
+import {FC} from "react";
+
 interface TableRowProps {
     hours: string;
     p1: string;
@@ -10,7 +12,7 @@ interface TableRowProps {
     isInfo: boolean;
 }
 
-const TableRow: React.FC<TableRowProps> = ({ hours, p1, p2, p3, p4, p5, p6, isIndoor, isInfo }) => {
+const TableRow: FC<TableRowProps> = ({ hours, p1, p2, p3, p4, p5, p6, isIndoor, isInfo }) => {
     return (
         <div className={`flex flex-row w-full justify-center items-center py-1 ${isInfo ? 'border-b-[1px] xs:border-b-2 border-mainOrange' : ''}`}>
             <span className="w-1/4 flex items-center justify-center text-center">{hours}</span>

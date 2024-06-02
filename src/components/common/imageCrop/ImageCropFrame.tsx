@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import {ChangeEvent, Dispatch, SetStateAction, useCallback, useState} from "react";
 import { CropperProps, Area } from "react-easy-crop";
 import Cropper from 'react-easy-crop';
 import { MdImage } from "react-icons/md";
@@ -9,7 +9,6 @@ export function ImageCropFrame(
     inputDescription,
     formName,
     croppingRatio,
-    imageFile,
     setImageFile,
     } 
     : 
@@ -17,7 +16,6 @@ export function ImageCropFrame(
     inputDescription ?: string, 
     formName : string,
     croppingRatio : number,
-    imageFile: File;
     setImageFile: Dispatch<SetStateAction<File>>;
     }) {
 
@@ -35,7 +33,7 @@ export function ImageCropFrame(
         setZoom(zoom);
     }, []);
     
-    const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
           const reader = new FileReader();
           reader.onload = (event) => {

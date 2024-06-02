@@ -1,5 +1,5 @@
 import { AiOutlineClose } from "react-icons/ai";
-import Page from "../page/Page";
+import {ReactNode} from "react";
 
 const CloseCross = ({ handleCloseCross }: { handleCloseCross: () => void }) => {
   return (
@@ -18,7 +18,7 @@ export default function Modal({
   children,
   closeModal,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   closeModal: () => void;
 }) {
   return (

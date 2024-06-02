@@ -4,12 +4,10 @@ import {setCourtOpenness} from "@/hooks/court";
 export default function ActiveWarning({
     setActiveWarning,
     tempId,
-    setTempId,
     isClosed,
   }: {
     setActiveWarning: Dispatch<SetStateAction<boolean>>;
     tempId: number[];
-    setTempId: Dispatch<SetStateAction<number[]>>;
     isClosed: boolean
   }) {
 

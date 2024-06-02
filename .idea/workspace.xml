@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #73 active court workflow: isActive change to isClosed">
+    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #75 fix buttons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-reservations/ActiveWarning.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/court.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/court.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +51,8 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="proportion" value="0.5021763" />
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -71,7 +71,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "issue-73",
+    "git-widget-placeholder": "issue-75",
     "last_opened_file_path": "/home/wiktor/Dokumenty/Git/reServeCourt/reServeCourt_frontend/src/components/my-reservations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -83,9 +83,37 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="QodanaHighlightedReportService">
+    <option name="localRunNotPublishedPersistedInfo">
+      <LocalReportPersistedInfo>
+        <option name="path" value="/tmp/qodana_output342/qodana.sarif.json" />
+        <option name="reportGuid" value="428ea73b-ec2a-4abe-ac5a-535031f7f389" />
+        <option name="reportName" value="reServeCourt_frontend/qodana/2024-06-02" />
+      </LocalReportPersistedInfo>
+    </option>
+  </component>
+  <component name="QodanaIsSelectedPersistenceService">
+    <option name="selectedOrLoading" value="true" />
+  </component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="/tmp/qodana_output2/qodana.sarif.json" reportGuid="dee7bd63-e808-400e-b225-d18615b9a323" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output10/qodana.sarif.json" reportGuid="eb90eba1-e13e-4e5f-b12d-6cd904cc1e91" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output7/qodana.sarif.json" reportGuid="e961bcf4-42f4-40f5-8124-d4adeee47c8a" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output3/qodana.sarif.json" reportGuid="e924e0b2-8b6b-47c9-95d2-c5945f1f1bb2" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output342/qodana.sarif.json" reportGuid="428ea73b-ec2a-4abe-ac5a-535031f7f389" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output/qodana.sarif.json" reportGuid="19a35059-4bc2-4915-a697-a5ae0e1f4554" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output9/qodana.sarif.json" reportGuid="0a0e994e-70dd-4bbd-95ce-33617ed532a0" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output1/qodana.sarif.json" reportGuid="105d0731-07f6-4a84-b3e9-9c15892a72a9" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+      <ReportDescription localRun="true" path="/tmp/qodana_output5/qodana.sarif.json" reportGuid="65bfca20-f136-4e2b-8aea-3a8cd3a7afb1" reportId="reServeCourt_frontend/qodana/2024-06-02" />
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/my-reservations" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/(any_role)" />
     </key>
   </component>
   <component name="RunManager">
@@ -136,6 +164,7 @@
       <workItem from="1716981582264" duration="441000" />
       <workItem from="1716986013745" duration="240000" />
       <workItem from="1717147478915" duration="1332000" />
+      <workItem from="1717318694785" duration="5843000" />
     </task>
     <task id="LOCAL-00001" summary="feat: #40 basic notification workflow">
       <option name="closed" value="true" />
@@ -193,7 +222,47 @@
       <option name="project" value="LOCAL" />
       <updated>1717153639627</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix: #73 fix setCourtOpenness hook">
+      <option name="closed" value="true" />
+      <created>1717156580642</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1717156580642</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix: #75 fix login page">
+      <option name="closed" value="true" />
+      <created>1717319393298</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1717319393298</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix: #75 fix reset-password page">
+      <option name="closed" value="true" />
+      <created>1717320420495</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1717320420495</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix: #75 fix Server Side Analysis">
+      <option name="closed" value="true" />
+      <created>1717323631916</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1717323631916</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fix: #75 fix buttons">
+      <option name="closed" value="true" />
+      <created>1717323822078</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1717323822078</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +278,11 @@
     <MESSAGE value="fix: #73 active court workflow" />
     <MESSAGE value="fix: #73 active court workflow: isActive" />
     <MESSAGE value="fix: #73 active court workflow: isActive change to isClosed" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: #73 active court workflow: isActive change to isClosed" />
+    <MESSAGE value="fix: #73 fix setCourtOpenness hook" />
+    <MESSAGE value="fix: #75 fix login page" />
+    <MESSAGE value="fix: #75 fix reset-password page" />
+    <MESSAGE value="fix: #75 fix Server Side Analysis" />
+    <MESSAGE value="fix: #75 fix buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: #75 fix buttons" />
   </component>
 </project>

@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
+import {ReactNode, useState} from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 function Point({
   children,
   onClick,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   onClick: () => void;
 }) {
   return (
@@ -19,11 +19,11 @@ function Point({
   );
 }
 
-function List({ children }: { children: React.ReactNode }) {
+function List({ children }: { children: ReactNode }) {
   return <ol className="list-decimal ml-10">{children}</ol>;
 }
 
-function Rule({ children }: { children: React.ReactNode }) {
+function Rule({ children }: { children: ReactNode }) {
   return <li className="text-xs md:text-sm font-sans mt-2">{children}</li>;
 }
 

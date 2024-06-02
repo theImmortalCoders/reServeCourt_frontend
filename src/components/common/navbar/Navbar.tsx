@@ -15,10 +15,10 @@ import { useRouter } from "next/navigation";
 function Navbox() {
   return (
     <>
-      <Link href="/aboutus">O nas</Link>
-      <Link href="/price">Cennik</Link>
-      <Link href="/rules">Regulamin </Link>
-      <Link href="/clubs">Kluby</Link>
+      <Link href={"/aboutus"}>O nas</Link>
+      <Link href={"/price"}>Cennik</Link>
+      <Link href={"/rules"}>Regulamin </Link>
+      <Link href={"/clubs"}>Kluby</Link>
     </>
   );
 }
@@ -41,10 +41,10 @@ export default function Navbar() {
       } else {
         console.log(result);
       }
-      queryClient.invalidateQueries("currentUser");
+      await queryClient.invalidateQueries("currentUser");
     } catch (error) {
       console.error(error);
-      queryClient.invalidateQueries("currentUser");
+      await queryClient.invalidateQueries("currentUser");
     }
   };
 
@@ -72,17 +72,16 @@ export default function Navbar() {
 
       <div className="flex flex-row gap-4 md:gap-8 items-center">
         <Link
-          href="/book"
+          href={"/clubs"}
           className="text-mainWhite bg-darkGreen py-[2px] px-6 rounded-lg text-md md:text-lg"
         >
           Rezerwuj
         </Link>
         {typeof currentUserData === "string" ||
         !currentUserData ||
-        currentUserData === null ||
         isLoading ||
         isError ? (
-          <Link href="/login">
+          <Link href={"/login"}>
             <IoPersonCircleOutline className="w-8 h-8 text-darkGreen" />
           </Link>
         ) : (
@@ -106,15 +105,10 @@ export default function Navbar() {
                   : "Super Admin"}
               </p>
               <hr className="size-[2px] bg-mainBlack w-3/4" />
-              {(currentUserData.role === "ADMIN") &&
-              <Link href="/admin-panel">
-                <p className="cursor-pointer">Panel Admina</p>
-              </Link>
-              }
-              <Link href="/my-reservations">
+              <Link href={"/my-reservations"}>
                 <p className="cursor-pointer">Moje rezerwacje</p>
               </Link>
-              <Link href="/password-change">
+              <Link href={"/password-change"}>
                 <p className="cursor-pointer">Zmień hasło</p>
               </Link>
               <p

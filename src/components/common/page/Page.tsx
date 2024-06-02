@@ -1,8 +1,10 @@
+import {ReactNode} from "react";
+
 export default function Page({
   children,
   className,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }>) {
   return (

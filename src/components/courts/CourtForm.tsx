@@ -19,7 +19,6 @@ import {
 import { useQuery } from "react-query";
 
 export default function CourtForm({
-  isOpen,
   setIsOpen,
   isUpdate,
   setIsUpdate,
@@ -27,7 +26,6 @@ export default function CourtForm({
   setTempId,
   clubID,
 }: {
-  isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   isUpdate: boolean;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
@@ -56,7 +54,9 @@ export default function CourtForm({
     } = useQuery(["court", tempId[0]], () => getCourtDetails(tempId[0]));
 
     useEffect(() => {
-      refetchCourt();
+      (async () => {
+        await refetchCourt();
+      })();
       if (isUpdate && !courtLoading) {
         if (typeof courtData !== "string" && !courtError) {
           if (courtData) {
@@ -98,8 +98,9 @@ export default function CourtForm({
         console.error("Błąd dodawania obrazów", error);
       }
     };
-
-    handleNewImages();
+    (async () => {
+      await handleNewImages();
+    })();
   }, [logoFiles]);
 
   const submitForm = async () => {
@@ -111,8 +112,14 @@ export default function CourtForm({
       locX === 0 ||
       locY === 0
     ) {
-      console.error("Pola muszą być wypełnione");
-      setMessage("Pola muszą być wypełnione");
+      console.error("Wszystkie pola muszą być wypełnione");
+      setMessage("Wszystkie pola muszą być wypełnione");
+      return;
+    }
+
+    if (logoIds.length === 0) {
+      console.error("Dodaj przynajmniej 1 obrazek");
+      setMessage("Dodaj przynajmniej 1 obrazek");
       return;
     }
 
@@ -197,6 +204,7 @@ export default function CourtForm({
         <p className="text-sm">Wczytaj logo:</p>
         <input
           type="file"
+          accept="image/*"
           required
           multiple
           onChange={(e) => {

@@ -7,7 +7,6 @@ export async function deleteAccount() {
       withCredentials: true,
     });
     if (response.status === 200) {
-      console.log("Konto zostało usunięte poprawnie!");
       return response.status;
     } else if (response.status === 401) {
       window.location.replace("/login");
@@ -77,7 +76,6 @@ export async function logoutUser() {
       withCredentials: true,
     });
     if (response.status === 200) {
-      console.log("Wylogowano poprawnie!");
       return response.status;
     } else if (response.status === 401) {
       window.location.replace("/login");
@@ -108,7 +106,6 @@ export async function changeUserRole(userId: number, newRole: string) {
       }
     );
     if (response.status === 200) {
-      console.log("Rola użytkownika została zmieniona poprawnie!");
       return response.status;
     } else if (response.status === 401) {
       window.location.replace("/login");
@@ -145,7 +142,6 @@ export async function banUser(userId: number) {
       }
     );
     if (response.status === 200) {
-      console.log("Użytkownik został zablokowany poprawnie!");
       return response.status;
     } else if (response.status === 401) {
       window.location.replace("/login");
@@ -185,7 +181,6 @@ export async function changeEmail(value: string) {
       }
     );
     if (response.status === 200) {
-      console.log("E-mail użytkownika został zmieniony poprawnie!");
       return response.status;
     } else if (response.status === 401) {
       window.location.replace("/login");
@@ -222,7 +217,6 @@ export async function changePassword(passwordsData: changePasswordData) {
       }
     );
     if (response.status === 200) {
-      console.log("Hasło użytkownika został zmieniony poprawnie!");
       return response.status;
     } else if (response.status === 401) {
       window.location.replace("/login");
@@ -296,8 +290,8 @@ export async function requestResetPassword(email: FormDataEntryValue | null) {
       console.error("Niepoprawne dane");
       return "Niepoprawne dane";
     } else if (response.status === 404) {
-      console.error("Nie podano email-a");
-      return "Nie podano email-a";
+      console.error("Nie znaleziono email-a o podanej nazwie");
+      return "Nie znaleziono email-a o podanej nazwie";
     } else {
       console.error("Wystąpił błąd podczas resetowania hasła");
       return "Wystąpił błąd podczas resetowania hasła";
@@ -307,8 +301,8 @@ export async function requestResetPassword(email: FormDataEntryValue | null) {
       console.error("Niepoprawne dane");
       return "Niepoprawne dane";
     } else if (error.response.status === 404) {
-      console.error("Nie podano email-a");
-      return "Nie podano email-a";
+      console.error("Nie znaleziono email-a o podanej nazwie");
+      return "Nie znaleziono email-a o podanej nazwie";
     } else {
       console.error("Wystąpił błąd podczas resetowania hasła");
       return "Wystąpił błąd podczas resetowania hasła";
@@ -335,7 +329,6 @@ export async function registerNewUser(newUser: RegisterNewUserData) {
       }
     );
     if (response.status === 200) {
-      console.log("Użytkownik został zarejestrowany poprawnie!");
       return response.status;
     } else if (response.status === 400) {
       console.error("Niepoprawne dane");
@@ -376,7 +369,6 @@ export async function authenticateUser(userData: AuthenticateUserData) {
       }
     );
     if (response.status === 200) {
-      console.log("Użytkownik został zalogowany poprawnie!");
       return response.status;
     } else if (response.status === 401) {
       console.error("Błędne dane logowania");
@@ -414,7 +406,6 @@ export async function authenticateAsCourtOwner(
       }
     );
     if (response.status === 200) {
-      console.log("Użytkownik stał się właścicielem kortu!");
       return response.status;
     } else if (response.status === 401) {
       console.error("Brak autoryzacji użytkownika");

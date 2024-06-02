@@ -1,3 +1,5 @@
+import {ReactNode} from "react";
+
 export default function LoginInput({
   type,
   name,
@@ -7,7 +9,7 @@ export default function LoginInput({
   type: string;
   name: string;
   placeholder: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 }) {
   return (
     <div className="flex items-center border text-sm lg:text-base border-gray-500 rounded px-3 py-2 mb-4">

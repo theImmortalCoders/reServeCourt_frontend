@@ -21,14 +21,12 @@ import {
 import { uploadSingleImage } from "@/hooks/image";
 
 export default function ClubForm({
-  isOpen,
   setIsOpen,
   isUpdate,
   setIsUpdate,
   tempId,
   setTempId,
 }: {
-  isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   isUpdate: boolean;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
@@ -69,7 +67,9 @@ export default function ClubForm({
     } = useQuery(["club", tempId[0]], () => getClubDetails(tempId[0]));
 
     useEffect(() => {
-      refetchClub();
+      (async () => {
+        await refetchClub();
+      })();
       if (isUpdate && !clubLoading) {
         if (typeof clubData !== "string" && !clubError) {
           if (clubData) {
@@ -90,13 +90,15 @@ export default function ClubForm({
             setDaysOpen(defaultDaysOpen);
           }
         } else {
-          console.log("Loading data error");
+          console.error("Loading data error");
         }
       }
     }, [clubData, tempId[0]]);
   }
 
   useEffect(() => {
+    if (!logoFile) return;
+
     const handleNewImage = async () => {
       try {
         if (!logoFile.name) return;
@@ -107,7 +109,9 @@ export default function ClubForm({
       }
     };
 
-    handleNewImage();
+    (async () => {
+      await handleNewImage();
+    })();
   }, [logoFile]);
 
   const validateDaysOpen = (daysOpen: DaysOpen) => {
@@ -124,8 +128,14 @@ export default function ClubForm({
 
   const submitForm = async () => {
     if (!name || !description || locX === 0 || locY === 0) {
-      console.error("Pola muszą być wypełnione");
-      setMessage("Pola muszą być wypełnione");
+      console.error("Wszystkie pola muszą być wypełnione");
+      setMessage("Wszystkie pola muszą być wypełnione");
+      return;
+    }
+
+    if(logoId === -1){
+      console.error("Dodaj obrazek");
+      setMessage("Dodaj obrazek");
       return;
     }
 
@@ -150,9 +160,7 @@ export default function ClubForm({
 
     try {
       if (!isUpdate) {
-        console.log("newClubData", newClubData)
         const result = await addClub(newClubData);
-        console.log("result", result)
         if (result === 200) {
           setName("");
           setDescription("");
@@ -168,16 +176,16 @@ export default function ClubForm({
           setDaysOpen(defaultDaysOpen);
           setMessage("Dodano klub");
         } else {
-          console.error("Błąd dodawania klubu");
-          setMessage("Błąd dodawania klubu");
+          console.error(result);
+          setMessage(result);
         }
       } else {
         const result = await updateClub(tempId[0], newClubData);
         if (result === 200) {
           setMessage("Zaktualizowano klub");
         } else {
-          console.error("Błąd aktualizowania klubu");
-          setMessage("Błąd aktualizowania klubu");
+          console.error(result);
+          setMessage(result);
         }
       }
     } catch (error) {
@@ -211,9 +219,7 @@ export default function ClubForm({
       <div className="space-y-1">
         <p className="text-sm">Wczytaj logo:</p>
         <ClubLogoInput
-          logoFile={logoFile}
           setLogoFile={setLogoFile}
-          isForm={true}
           logoId={logoId}
         />
       </div>

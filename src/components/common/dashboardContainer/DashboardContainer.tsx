@@ -1,11 +1,12 @@
 import Link from "next/link";
+import {ReactNode} from "react";
 
 export default function DashboardContainer({
   children,
   className,
   href,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   href?: string;
 }>) {

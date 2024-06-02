@@ -1,5 +1,5 @@
 export function getPolishReservationErrorMessage(message: string) {
-    let polishErrorMesage = '';
+    let polishErrorMesage;
       switch(message) {
         case 'Cannot book later than 7 days before':
           polishErrorMesage = 'Nie można dokonać rezerwacji później niż 7 dni przed';

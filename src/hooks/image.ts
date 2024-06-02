@@ -113,7 +113,7 @@ export async function uploadMultipleImages(
 ) {
   try {
     const formData = new FormData();
-    uploadedFiles.forEach((file, index) => {
+    uploadedFiles.forEach((file) => {
       formData.append(`uploadedFiles`, file);
     });
     const response: AxiosResponse<ImageResponseData[]> = await appAPI.post(

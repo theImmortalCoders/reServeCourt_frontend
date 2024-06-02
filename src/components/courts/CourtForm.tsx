@@ -112,8 +112,14 @@ export default function CourtForm({
       locX === 0 ||
       locY === 0
     ) {
-      console.error("Pola muszą być wypełnione");
-      setMessage("Pola muszą być wypełnione");
+      console.error("Wszystkie pola muszą być wypełnione");
+      setMessage("Wszystkie pola muszą być wypełnione");
+      return;
+    }
+
+    if (logoIds.length === 0) {
+      console.error("Dodaj przynajmniej 1 obrazek");
+      setMessage("Dodaj przynajmniej 1 obrazek");
       return;
     }
 
@@ -198,6 +204,7 @@ export default function CourtForm({
         <p className="text-sm">Wczytaj logo:</p>
         <input
           type="file"
+          accept="image/*"
           required
           multiple
           onChange={(e) => {

@@ -2,17 +2,37 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { getClubDetails } from "@/hooks/club";
+import { getCurrentUser } from "@/hooks/user";
 import Error500Page from "@/components/common/error/Error500Page";
-import CourtForm from "@/components/managecourts/CourtForm";
-import DeleteWarningCourt from "@/components/managecourts/DeleteWarningCourt";
-import CourtListComponent from "@/components/managecourts/CourtListComponent";
+import CourtForm from "@/components/courts/CourtForm";
+import DeleteWarningCourt from "@/components/courts/DeleteWarningCourt";
+import CourtListComponent from "@/components/courts/CourtListComponent";
 import APIImageComponent from "@/hooks/imageAPI";
+import ActiveWarning from "@/components/my-reservations/ActiveWarning";
+
+export async function getRole() {
+  const userData = await getCurrentUser();
+  if (userData && typeof userData === "object" && "role" in userData) {
+    return userData.role;
+  }
+  return null;
+}
 
 export default function ClubId({ params }: { params: { clubId: string } }) {
+  const [userRole, setUserRole] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [deleteWarning, setDeleteWarning] = useState<boolean>(false);
+  const [activeWarning, setActiveWarning] = useState<boolean>(false);
   const [tempId, setTempId] = useState<number[]>([-1, -1]);
+
+  useEffect(() => {
+    const fetchRole = async () => {
+      const role = await getRole();
+      setUserRole(role);
+    };
+    fetchRole();
+  }, []);
 
   const {
     data: clubDetailsData,
@@ -67,12 +87,14 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                         {clubDetailsData.courts.length}
                       </h2>
                     </div>
-                    <button
-                      onClick={() => setIsOpen(true)}
-                      className="w-auto h-auto bg-mainGreen text-mainWhite text-md md:text-lg lg:text-xl px-2 lg:px-4 py-1 lg:py-2 rounded"
-                    >
-                      Dodaj kort
-                    </button>
+                    {userRole === "ADMIN" && (
+                      <button
+                          onClick={() => setIsOpen(true)}
+                        className="w-auto h-auto bg-mainGreen text-mainWhite text-md md:text-lg lg:text-xl px-2 lg:px-4 py-1 lg:py-2 rounded"
+                      >
+                        Dodaj kort
+                      </button>
+                    )}
                   </div>
                   <div className="w-11/12 lg:w-3/5 space-y-2">
                     {clubDetailsData.courts.map((court, index) => (
@@ -82,7 +104,10 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                         setIsUpdate={setIsUpdate}
                         setIsOpen={setIsOpen}
                         setDeleteWarning={setDeleteWarning}
+                        setActiveWarning={setActiveWarning}
                         setTempId={setTempId}
+                        userRole={userRole}
+                        daysOpen={clubDetailsData.daysOpen}
                       />
                     ))}
                   </div>
@@ -92,16 +117,25 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
           )}
           {deleteWarning && (
             <DeleteWarningCourt
-              deleteWarning={deleteWarning}
               setDeleteWarning={setDeleteWarning}
               tempId={tempId}
               setTempId={setTempId}
             />
           )}
+          {activeWarning && clubDetailsData && typeof clubDetailsData !== "string"  && (
+              <>
+                {clubDetailsData.courts.map((court) => (
+                    <ActiveWarning
+                        setActiveWarning={setActiveWarning}
+                        tempId={tempId}
+                        isClosed={court.closed}
+                    />
+                ))}
+              </>
+              )}
         </>
       ) : (
         <CourtForm
-          isOpen={isOpen}
           setIsOpen={setIsOpen}
           isUpdate={isUpdate}
           setIsUpdate={setIsUpdate}

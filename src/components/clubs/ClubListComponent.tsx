@@ -11,26 +11,30 @@ export default function ClubListComponent({
   setIsOpen,
   setDeleteWarning,
   setTempId,
+  userRole,
 }: {
   club: Content;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   setDeleteWarning: Dispatch<SetStateAction<boolean>>;
   setTempId: Dispatch<SetStateAction<number[]>>;
+  userRole: string | null;
 }) {
   return (
     <DashboardContainer
       className="flex flex-col md:flex-row md:h-36 cursor-pointer"
-      clubId={club.id}
+      href={`/clubs/${club.id}`}
     >
       <div className="flex items-center w-40 p-4">
         <APIImageComponent imageId={club.logo.id} type={club.logo.path} />
       </div>
       <div className="flex flex-col justify-center w-full p-4">
         <p className="text-base">{club.name}</p>
-        <p className="text-xs font-sans mb-2 text-wrap min-h-12 md:h-fit">
-          {club.description}
-        </p>
+        <div className="">
+          <p className="flex w-full h-full items-center text-xs font-sans mb-2 text-wrap min-h-12 md:h-fit ">
+            {club.description}
+          </p>
+        </div>
         <div className="hidden md:flex flex-col justify-end space-y-1 h-full">
           <p className="text-sm text-mainOrange text-wrap">
             {club.location.name}
@@ -57,25 +61,27 @@ export default function ClubListComponent({
             </span>
           </span>
         </div>
-        <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
-          <MdEdit
-            onClick={(e: any) => {
-              e.preventDefault();
-              setIsUpdate(true);
-              setTempId([club.id, club.logo.id]);
-              setIsOpen(true);
-            }}
-            className="cursor-pointer hover:text-mainGreen"
-          />
-          <MdDelete
-            onClick={(e: any) => {
-              e.preventDefault();
-              setDeleteWarning(true);
-              setTempId([club.id, club.logo.id]);
-            }}
-            className="cursor-pointer hover:text-red-600"
-          />
-        </span>
+        {userRole === "ADMIN" && (
+          <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl">
+            <MdEdit
+              onClick={(e: any) => {
+                e.preventDefault();
+                setIsUpdate(true);
+                setTempId([club.id, club.logo.id]);
+                setIsOpen(true);
+              }}
+              className="cursor-pointer hover:text-mainGreen"
+            />
+            <MdDelete
+              onClick={(e: any) => {
+                e.preventDefault();
+                setDeleteWarning(true);
+                setTempId([club.id, club.logo.id]);
+              }}
+              className="cursor-pointer hover:text-red-600"
+            />
+          </span>
+        )}
       </span>
     </DashboardContainer>
   );

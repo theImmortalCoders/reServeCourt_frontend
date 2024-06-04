@@ -3,7 +3,6 @@ import Box from "@/components/common/box/Box";
 import Page from "@/components/common/page/Page";
 import { LoginButton } from "@/components/login/atoms/LoginButton";
 import LoginHeader from "@/components/login/atoms/LoginHeader";
-import LoginMessage from "@/components/login/atoms/LoginMessage";
 import {
   InputBirthDate,
   InputEmail,
@@ -16,6 +15,7 @@ import {
 import { RegisterNewUserData, registerNewUser } from "@/hooks/user";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Message from "@/components/login/atoms/LoginMessage";
 
 export default function AddAccount() {
   const [message, setMessage] = useState("");
@@ -82,7 +82,7 @@ export default function AddAccount() {
             messageIfLoadingIsTrue={"Sprawdzanie danych..."}
             messageIfLoadingIsFalse={"Stwórz konto"}
           />
-          <LoginMessage
+          <Message
             value={addAccount}
             messageIfIsRed={message}
             messageIfIsGreen={"Konto zostało dodane poprawnie."}

@@ -1,7 +1,7 @@
 "use client";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { Location, getClubDetails } from "@/hooks/club";
+import { Location } from "@/hooks/club";
 import { uploadMultipleImages } from "@/hooks/image";
 import {
   AddCourtData,
@@ -15,11 +15,10 @@ import {
   DescriptionInput,
   LocationMap,
   NameInput,
-} from "../manageclubs/ClubFormInputs";
+} from "../clubs/ClubFormInputs";
 import { useQuery } from "react-query";
 
 export default function CourtForm({
-  isOpen,
   setIsOpen,
   isUpdate,
   setIsUpdate,
@@ -27,7 +26,6 @@ export default function CourtForm({
   setTempId,
   clubID,
 }: {
-  isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   isUpdate: boolean;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
@@ -37,8 +35,8 @@ export default function CourtForm({
 }) {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [courtType, setCourtType] = useState<string>("");
-  const [courtSurface, setCourtSurface] = useState<string>("");
+  const [courtType, setCourtType] = useState<string>("INDOOR");
+  const [courtSurface, setCourtSurface] = useState<string>("CLAY");
   const [locX, setLocX] = useState<number>(0);
   const [locY, setLocY] = useState<number>(0);
   const [locName, setLocName] = useState<string>("");
@@ -56,7 +54,9 @@ export default function CourtForm({
     } = useQuery(["court", tempId[0]], () => getCourtDetails(tempId[0]));
 
     useEffect(() => {
-      refetchCourt();
+      (async () => {
+        await refetchCourt();
+      })();
       if (isUpdate && !courtLoading) {
         if (typeof courtData !== "string" && !courtError) {
           if (courtData) {
@@ -71,8 +71,8 @@ export default function CourtForm({
           } else {
             setName("");
             setDescription("");
-            setCourtType("");
-            setCourtSurface("");
+            setCourtType("INDOOR");
+            setCourtSurface("CLAY");
             setLocX(0);
             setLocY(0);
             setLocName("");
@@ -98,8 +98,9 @@ export default function CourtForm({
         console.error("Błąd dodawania obrazów", error);
       }
     };
-
-    handleNewImages();
+    (async () => {
+      await handleNewImages();
+    })();
   }, [logoFiles]);
 
   const submitForm = async () => {
@@ -108,11 +109,17 @@ export default function CourtForm({
       !description ||
       !courtType ||
       !courtSurface ||
-      locX === null ||
-      locY === null
+      locX === 0 ||
+      locY === 0
     ) {
-      console.error("Pola muszą być wypełnione");
-      setMessage("Pola muszą być wypełnione");
+      console.error("Wszystkie pola muszą być wypełnione");
+      setMessage("Wszystkie pola muszą być wypełnione");
+      return;
+    }
+
+    if (logoIds.length === 0) {
+      console.error("Dodaj przynajmniej 1 obrazek");
+      setMessage("Dodaj przynajmniej 1 obrazek");
       return;
     }
 
@@ -137,8 +144,8 @@ export default function CourtForm({
         if (result === 200) {
           setName("");
           setDescription("");
-          setCourtType("");
-          setCourtSurface("");
+          setCourtType("INDOOR");
+          setCourtSurface("CLAY");
           setLocX(0);
           setLocY(0);
           setLocName("");
@@ -147,7 +154,7 @@ export default function CourtForm({
           if (form) {
             form.reset();
           }
-          setMessage("Dodano kortu");
+          setMessage("Dodano kort");
         } else {
           console.error("Błąd dodawania kortu");
           setMessage("Błąd dodawania kortu");
@@ -197,6 +204,8 @@ export default function CourtForm({
         <p className="text-sm">Wczytaj logo:</p>
         <input
           type="file"
+          accept="image/*"
+          required
           multiple
           onChange={(e) => {
             const files = e.target.files;

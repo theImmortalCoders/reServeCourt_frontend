@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {FC, useEffect, useState} from "react";
 import { appAPI } from "@/utils/appAPI";
 
 interface APIImageComponentProps {
@@ -8,7 +8,7 @@ interface APIImageComponentProps {
   full?: boolean;
 }
 
-const APIImageComponent: React.FC<APIImageComponentProps> = ({
+const APIImageComponent: FC<APIImageComponentProps> = ({
     imageId,
     type,
     thumbnail,
@@ -28,7 +28,7 @@ const APIImageComponent: React.FC<APIImageComponentProps> = ({
             setDefaultImage("question.jpg");
           }
         } else {
-            if (!thumbnail || thumbnail === undefined) {
+            if (!thumbnail) {
                 const response = await appAPI.get(
                     `/api/image/${imageId}`,
                     {
@@ -98,11 +98,12 @@ const APIImageComponent: React.FC<APIImageComponentProps> = ({
           }
         }
       } catch (error) {
-        console.error("Erorr", error);
+        console.error("Error", error);
       }
     };
-
-    downloadImage();
+      (async () => {
+          await downloadImage();
+      })();
   }, [imageId]);
 
   return (

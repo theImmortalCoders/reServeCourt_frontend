@@ -1,12 +1,13 @@
 import { FaFacebookSquare, FaInstagramSquare, FaYoutubeSquare } from "react-icons/fa";
+import {ReactNode} from "react";
 
-function Plan({ children }: { children: React.ReactNode }) {
+function Plan({ children }: { children: ReactNode }) {
   return (
     <div className="flex font-sans text-xs lg:text-sm xl:text-base">{ children }</div>
   )
 }
 
-function OrangeSans({ children }: { children: React.ReactNode }) {
+function OrangeSans({ children }: { children: ReactNode }) {
   return (
     <span className="text-mainOrange mx-2 font-sans">{ children }</span>
   )
@@ -23,7 +24,7 @@ function OpenHours() {
   )
 }
 
-function Information({ children }: { children: React.ReactNode }) {
+function Information({ children }: { children: ReactNode }) {
   return (
     <p className="font-sans text-xs lg:text-sm xl:text-base">{ children }</p>
   )
@@ -40,13 +41,13 @@ function Informations() {
   )
 }
 
-function SocialsDiv({ children }: { children: React.ReactNode }) {
+function SocialsDiv({ children }: { children: ReactNode }) {
   return (
     <div className="flex md:w-full justify-start items-center space-x-2"> { children } </div>
   )
 }
 
-function SocialsLink({ children }: { children: React.ReactNode }) {
+function SocialsLink({ children }: { children: ReactNode }) {
   return (
     <p className="font-sans hidden md:block text-xs lg:text-sm xl:text-base">{ children }</p>
   )

@@ -5,7 +5,8 @@ import {
   DescriptionInput,
   LocationMap,
   NameInput,
-} from "@/components/manageclubs/ClubFormInputs";
+  OpenHoursInput
+} from "@/components/clubs/ClubFormInputs";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import {
@@ -14,18 +15,18 @@ import {
   updateClub,
   getClubDetails,
   Location,
+  DaysOpen,
+  OpenClosed
 } from "@/hooks/club";
 import { uploadSingleImage } from "@/hooks/image";
 
 export default function ClubForm({
-  isOpen,
   setIsOpen,
   isUpdate,
   setIsUpdate,
   tempId,
   setTempId,
 }: {
-  isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   isUpdate: boolean;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
@@ -40,6 +41,21 @@ export default function ClubForm({
   const [logoId, setLogoId] = useState<number>(-1);
   const [logoFile, setLogoFile] = useState<File>(new File([], ""));
 
+  const defaultOpenClosed: OpenClosed = {
+    open: "08:00",
+    closed: "17:00"
+  }
+  const defaultDaysOpen: DaysOpen = {
+    monday: defaultOpenClosed,
+    tuesday: defaultOpenClosed,
+    wednesday: defaultOpenClosed,
+    thursday: defaultOpenClosed,
+    friday: defaultOpenClosed,
+    saturday: defaultOpenClosed,
+    sunday: defaultOpenClosed
+  }
+  const [daysOpen, setDaysOpen] = useState<DaysOpen>(defaultDaysOpen);
+
   const [message, setMessage] = useState<string>("");
 
   if (isUpdate) {
@@ -51,7 +67,9 @@ export default function ClubForm({
     } = useQuery(["club", tempId[0]], () => getClubDetails(tempId[0]));
 
     useEffect(() => {
-      refetchClub();
+      (async () => {
+        await refetchClub();
+      })();
       if (isUpdate && !clubLoading) {
         if (typeof clubData !== "string" && !clubError) {
           if (clubData) {
@@ -61,6 +79,7 @@ export default function ClubForm({
             setLocY(clubData.location.locY);
             setLocName(clubData.location.name);
             setLogoId(clubData.logo.id);
+            setDaysOpen(clubData.daysOpen);
           } else {
             setName("");
             setDescription("");
@@ -68,15 +87,18 @@ export default function ClubForm({
             setLocY(0);
             setLocName("");
             setLogoId(-1);
+            setDaysOpen(defaultDaysOpen);
           }
         } else {
-          console.log("Loading data error");
+          console.error("Loading data error");
         }
       }
     }, [clubData, tempId[0]]);
   }
 
   useEffect(() => {
+    if (!logoFile) return;
+
     const handleNewImage = async () => {
       try {
         if (!logoFile.name) return;
@@ -87,13 +109,38 @@ export default function ClubForm({
       }
     };
 
-    handleNewImage();
+    (async () => {
+      await handleNewImage();
+    })();
   }, [logoFile]);
+
+  const validateDaysOpen = (daysOpen: DaysOpen) => {
+    for (const day in daysOpen) {
+      const openTime = new Date(`1970-01-01T${daysOpen[day as keyof DaysOpen].open}Z`);
+      const closeTime = new Date(`1970-01-01T${daysOpen[day as keyof DaysOpen].closed}Z`);
+  
+      if (openTime >= closeTime) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   const submitForm = async () => {
     if (!name || !description || locX === 0 || locY === 0) {
-      console.error("Pola muszą być wypełnione");
-      setMessage("Pola muszą być wypełnione");
+      console.error("Wszystkie pola muszą być wypełnione");
+      setMessage("Wszystkie pola muszą być wypełnione");
+      return;
+    }
+
+    if(logoId === -1){
+      console.error("Dodaj obrazek");
+      setMessage("Dodaj obrazek");
+      return;
+    }
+
+    if (!validateDaysOpen(daysOpen)) {
+      setMessage("Nieprawidłowe godziny otwarcia");
       return;
     }
 
@@ -108,6 +155,7 @@ export default function ClubForm({
       description: description,
       location: newLocation,
       logoId: logoId,
+      daysOpen: daysOpen
     };
 
     try {
@@ -125,18 +173,19 @@ export default function ClubForm({
           if (form) {
             form.reset();
           }
+          setDaysOpen(defaultDaysOpen);
           setMessage("Dodano klub");
         } else {
-          console.error("Błąd dodawania klubu");
-          setMessage("Błąd dodawania klubu");
+          console.error(result);
+          setMessage(result);
         }
       } else {
         const result = await updateClub(tempId[0], newClubData);
         if (result === 200) {
           setMessage("Zaktualizowano klub");
         } else {
-          console.error("Błąd aktualizowania klubu");
-          setMessage("Błąd aktualizowania klubu");
+          console.error(result);
+          setMessage(result);
         }
       }
     } catch (error) {
@@ -170,10 +219,13 @@ export default function ClubForm({
       <div className="space-y-1">
         <p className="text-sm">Wczytaj logo:</p>
         <ClubLogoInput
-          logoFile={logoFile}
           setLogoFile={setLogoFile}
-          isForm={true}
+          logoId={logoId}
         />
+      </div>
+      <div className="space-y-1">
+        <p className="text-sm">Podaj godziny otwarcia:</p>
+        <OpenHoursInput daysOpen={daysOpen} setDaysOpen={setDaysOpen}/>
       </div>
       <span className="flex justify-center space-x-4">
         <button

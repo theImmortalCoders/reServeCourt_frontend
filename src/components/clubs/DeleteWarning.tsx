@@ -3,12 +3,10 @@ import { deleteClub } from "@/hooks/club";
 import { deleteImage } from "@/hooks/image";
 
 export default function DeleteWarning({
-  deleteWarning,
   setDeleteWarning,
   tempId,
   setTempId,
 }: {
-  deleteWarning: boolean;
   setDeleteWarning: Dispatch<SetStateAction<boolean>>;
   tempId: number[];
   setTempId: Dispatch<SetStateAction<number[]>>;

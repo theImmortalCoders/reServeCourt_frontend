@@ -26,7 +26,8 @@ export async function deleteImage(imageId: number) {
       console.error("Brak autoryzacji użytkownika");
       return "Brak autoryzacji użytkownika";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas usuwania zdjęcia");
+      return "Wystąpił błąd podczas usuwania zdjęcia";
     }
   }
 }
@@ -54,7 +55,8 @@ export async function getAllImagesByAuthorId(authorId: number) {
       return "Wystąpił błąd podczas pobierania zdjęć danego autora";
     }
   } catch (error: any) {
-    throw new Error("Error500");
+    console.error("Wystąpił błąd podczas pobierania zdjęć danego autora");
+    return "Wystąpił błąd podczas pobierania zdjęć danego autora";
   }
 }
 
@@ -99,7 +101,8 @@ export async function uploadSingleImage(
       console.error("Obrazek jest zbyt duży!");
       return "Obrazek jest zbyt duży!";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas przesyłania zdjęcia");
+      return "Wystąpił błąd podczas przesyłania zdjęcia";
     }
   }
 }
@@ -110,7 +113,7 @@ export async function uploadMultipleImages(
 ) {
   try {
     const formData = new FormData();
-    uploadedFiles.forEach((file, index) => {
+    uploadedFiles.forEach((file) => {
       formData.append(`uploadedFiles`, file);
     });
     const response: AxiosResponse<ImageResponseData[]> = await appAPI.post(
@@ -147,7 +150,8 @@ export async function uploadMultipleImages(
       console.error("Obrazek jest zbyt duży!");
       return "Obrazek jest zbyt duży!";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas przesyłania zdjęć");
+      return "Wystąpił błąd podczas przesyłania zdjęć";
     }
   }
 }

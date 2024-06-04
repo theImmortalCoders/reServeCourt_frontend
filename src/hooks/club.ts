@@ -32,7 +32,8 @@ export async function deleteClub(clubId: number) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas usuwania klubu");
+      return "Wystąpił błąd podczas usuwania klubu";
     }
   }
 }
@@ -68,6 +69,27 @@ interface Owner {
   email: string;
 }
 
+export interface OpenClosed {
+  open: string;
+  closed: string;
+}
+
+// EXAMPLE VALUES FOR OPENING HOURS - SWAGGER SHOWS BAD REQUEST BODY
+//  monday: {
+//    open: "11:54",
+//    closed: "12:12"
+//  }
+
+export interface DaysOpen {
+  monday: OpenClosed;
+  tuesday: OpenClosed;
+  wednesday: OpenClosed;
+  thursday: OpenClosed;
+  friday: OpenClosed;
+  saturday: OpenClosed;
+  sunday: OpenClosed;
+}
+
 export interface GetClubDetailsData {
   id: number;
   name: string;
@@ -77,6 +99,7 @@ export interface GetClubDetailsData {
   courts: Court[];
   owner: Owner;
   rating: number;
+  daysOpen: DaysOpen;
 }
 
 export async function getClubDetails(
@@ -88,13 +111,14 @@ export async function getClubDetails(
         withCredentials: true,
       });
     if (response.status === 200) {
-      console.log("Szczegóły klubu pobrano poprawnie!");
       return response.data;
     } else {
-      throw new Error("Wystąpił błąd podczas pobierania szczegółów klubu");
+      console.error("Wystąpił błąd podczas pobierania szczegółów klubu");
+      return "Wystąpił błąd podczas pobierania szczegółów klubu";
     }
   } catch (error: any) {
-    throw new Error("Wystąpił błąd podczas pobierania szczegółów klubu");
+    console.error("Wystąpił błąd podczas pobierania szczegółów klubu");
+    return "Wystąpił błąd podczas pobierania szczegółów klubu";
   }
 }
 
@@ -161,6 +185,7 @@ export interface AddClubData {
   description: string;
   location: Location;
   logoId: number;
+  daysOpen: DaysOpen;
 }
 
 export async function addClub(clubData: AddClubData) {
@@ -195,7 +220,46 @@ export async function addClub(clubData: AddClubData) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas dodawania klubu");
+      return "Wystąpił błąd podczas dodawania klubu";
+    }
+  }
+}
+
+export async function rateClub(clubId: number, rate: number) {
+  try {
+    const response: AxiosResponse<void> = await appAPI.post(
+      `/api/club/${clubId}/rate?rate=${rate}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.status === 200) {
+      console.log("Klub został oceniony poprawnie!");
+      return response.status;
+    } else if (response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else if (response.status === 400) {
+      console.error("Ocena musi być pomiędzy 0 a 5");
+      return "Ocena musi być pomiędzy 0 a 5";
+    } else {
+      console.error("Wystąpił błąd podczas oceniania klubu");
+      return "Wystąpił błąd podczas oceniania klubu";
+    }
+  } catch (error: any) {
+    if (error.response.status === 401) {
+      window.location.replace("/login");
+      console.error("Brak autoryzacji użytkownika");
+      return "Brak autoryzacji użytkownika";
+    } else if (error.response.status === 400) {
+      console.error("Ocena musi być pomiędzy 0 a 5");
+      return "Ocena musi być pomiędzy 0 a 5";
+    } else {
+      console.error("Wystąpił błąd podczas oceniania klubu");
+      return "Wystąpił błąd podczas oceniania klubu";
     }
   }
 }
@@ -232,7 +296,8 @@ export async function updateClub(clubId: number, clubData: AddClubData) {
       console.error("Brak dostępu");
       return "Brak dostępu";
     } else {
-      throw new Error("Error500");
+      console.error("Wystąpił błąd podczas aktualizowania klubu");
+      return "Wystąpił błąd podczas aktualizowania klubu";
     }
   }
 }

@@ -5,6 +5,7 @@ import Balls_1 from "@/assets/aboutus/balls_1.png";
 import Court_2 from "@/assets/aboutus/court_2.png";
 import Balls_2 from "@/assets/aboutus/balls_2.png";
 import { FaCheck } from "react-icons/fa";
+import {ReactNode} from "react";
 
 function Header() {
   return (
@@ -24,7 +25,7 @@ function Header() {
   );
 }
 
-function Check({ children }: { children: React.ReactNode }) {
+function Check({ children }: { children: ReactNode }) {
   return (
     <span className="flex w-full text-sm items-start space-x-2 ml-10">
       <FaCheck />
@@ -52,7 +53,7 @@ function Photo() {
   );
 }
 
-function ContentContainer({ children }: { children: React.ReactNode }) {
+function ContentContainer({ children }: { children: ReactNode }) {
   return (
     <span className="flex flex-col md:flex-row items-center md:items-start md:space-x-10 space-y-5 md:space-y-10">
       {children}
@@ -60,15 +61,15 @@ function ContentContainer({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PointContainer({ children }: { children: React.ReactNode }) {
+function PointContainer({ children }: { children: ReactNode }) {
   return <div className="flex flex-col md:w-1/2">{children}</div>;
 }
 
-function HeaderPoint({ children }: { children: React.ReactNode }) {
+function HeaderPoint({ children }: { children: ReactNode }) {
   return <p className="text-xl md:text-2xl">{children}</p>;
 }
 
-function ContentPoint({ children }: { children: React.ReactNode }) {
+function ContentPoint({ children }: { children: ReactNode }) {
   return <p className="text-sm font-sans mt-2">{children}</p>;
 }
 

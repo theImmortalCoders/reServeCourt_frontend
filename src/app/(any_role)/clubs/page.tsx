@@ -1,16 +1,34 @@
 "use client";
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { getAllClubs } from "@/hooks/club";
-import ClubForm from "../../../components/manageclubs/ClubForm";
-import DeleteWarning from "@/components/manageclubs/DeleteWarning";
-import ClubListComponent from "@/components/manageclubs/ClubListComponent";
+import { getCurrentUser } from "@/hooks/user";
+import ClubForm from "../../../components/clubs/ClubForm";
+import DeleteWarning from "@/components/clubs/DeleteWarning";
+import ClubListComponent from "@/components/clubs/ClubListComponent";
+
+async function getRole() {
+  const userData = await getCurrentUser();
+  if (userData && typeof userData === 'object' && 'role' in userData) {
+    return userData.role;
+  }
+  return null;
+}
 
 export default function ManageClubs() {
+  const [userRole, setUserRole] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [deleteWarning, setDeleteWarning] = useState<boolean>(false);
   const [tempId, setTempId] = useState<number[]>([-1, -1]);
+
+  useEffect(() => {
+    const fetchRole = async () => {
+      const role = await getRole();
+      setUserRole(role);
+    };
+    fetchRole();
+  }, []);
 
   const {
     data: clubsData,
@@ -29,12 +47,16 @@ export default function ManageClubs() {
     <div className="flex flex-col items-center bg-mainWhite min-h-max py-8 space-y-6">
       {!isOpen ? (
         <>
-          <button
-            onClick={() => setIsOpen(true)}
-            className="bg-mainGreen text-mainWhite text-xl w-fit px-4 py-2 rounded"
-          >
-            Dodaj klub
-          </button>
+          {userRole === "ADMIN" ? (
+            <button
+              onClick={() => setIsOpen(true)}
+              className="bg-mainGreen text-mainWhite text-xl w-fit px-4 py-2 rounded"
+            >
+              Dodaj klub
+            </button>  
+          ) : (
+            <p className="text-2xl">Dostępne kluby:</p>
+          )}
           {clubsLoading || clubsError ? (
             <div>Trwa ładowanie danych...</div>
           ) : (
@@ -48,13 +70,13 @@ export default function ManageClubs() {
                     setIsOpen={setIsOpen}
                     setDeleteWarning={setDeleteWarning}
                     setTempId={setTempId}
+                    userRole={userRole}
                   />
                 ))}
             </div>
           )}
           {deleteWarning && (
             <DeleteWarning
-              deleteWarning={deleteWarning}
               setDeleteWarning={setDeleteWarning}
               tempId={tempId}
               setTempId={setTempId}
@@ -63,7 +85,6 @@ export default function ManageClubs() {
         </>
       ) : (
         <ClubForm
-          isOpen={isOpen}
           setIsOpen={setIsOpen}
           isUpdate={isUpdate}
           setIsUpdate={setIsUpdate}

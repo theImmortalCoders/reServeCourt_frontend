@@ -9,14 +9,9 @@ import DeleteWarningCourt from "@/components/courts/DeleteWarningCourt";
 import CourtListComponent from "@/components/courts/CourtListComponent";
 import APIImageComponent from "@/hooks/imageAPI";
 import ActiveWarning from "@/components/my-reservations/ActiveWarning";
+import getRole from "@/utils/Role";
 
-export async function getRole() {
-  const userData = await getCurrentUser();
-  if (userData && typeof userData === "object" && "role" in userData) {
-    return userData.role;
-  }
-  return null;
-}
+
 
 export default function ClubId({ params }: { params: { clubId: string } }) {
   const [userRole, setUserRole] = useState<string | null>(null);

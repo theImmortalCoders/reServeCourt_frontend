@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="fix: #75 fix buttons">
+    <list default="true" id="7a727bf2-5458-46ca-b54e-deba98d41f06" name="Changes" comment="feat: #40 working notification component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/courts/CourtForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reservation/ReservationCalendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reservation/ReservationCalendar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,10 +23,11 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SHOW_RECENT_BRANCHES" value="false" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -44,7 +45,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/theImmortalCoders/reServeCourt_frontend.git&quot;,
-    &quot;accountId&quot;: &quot;380ea345-13f5-4c95-9df6-0d5a618f851f&quot;
+    &quot;accountId&quot;: &quot;71fa7ca9-4d85-4994-ab75-6ff86bb9cdc6&quot;
   }
 }</component>
   <component name="MarkdownSettingsMigration">
@@ -71,7 +72,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "issue-75",
+    "git-widget-placeholder": "issue-78",
     "last_opened_file_path": "/home/wiktor/Dokumenty/Git/reServeCourt/reServeCourt_frontend/src/components/my-reservations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -83,18 +84,6 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="QodanaHighlightedReportService">
-    <option name="localRunNotPublishedPersistedInfo">
-      <LocalReportPersistedInfo>
-        <option name="path" value="/tmp/qodana_output342/qodana.sarif.json" />
-        <option name="reportGuid" value="428ea73b-ec2a-4abe-ac5a-535031f7f389" />
-        <option name="reportName" value="reServeCourt_frontend/qodana/2024-06-02" />
-      </LocalReportPersistedInfo>
-    </option>
-  </component>
-  <component name="QodanaIsSelectedPersistenceService">
-    <option name="selectedOrLoading" value="true" />
-  </component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="/tmp/qodana_output2/qodana.sarif.json" reportGuid="dee7bd63-e808-400e-b225-d18615b9a323" reportId="reServeCourt_frontend/qodana/2024-06-02" />
@@ -131,7 +120,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17011.90" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17890.13" />
       </set>
     </attachedChunks>
   </component>
@@ -165,6 +154,8 @@
       <workItem from="1716986013745" duration="240000" />
       <workItem from="1717147478915" duration="1332000" />
       <workItem from="1717318694785" duration="5843000" />
+      <workItem from="1718098366459" duration="12000" />
+      <workItem from="1718098385307" duration="741000" />
     </task>
     <task id="LOCAL-00001" summary="feat: #40 basic notification workflow">
       <option name="closed" value="true" />

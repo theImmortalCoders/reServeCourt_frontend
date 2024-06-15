@@ -3,7 +3,8 @@ import {ReservationData} from "@/hooks/reservation";
 import DashboardContainer from "@/components/common/dashboardContainer/DashboardContainer";
 import APIImageComponent from "@/hooks/imageAPI";
 import {MdCancel, MdVerified} from "react-icons/md";
-import {getRole} from "@/app/(any_role)/clubs/[clubId]/page";
+import getRole from "@/utils/Role";
+
 
 export default function ReservationListComponent({
     reservation,

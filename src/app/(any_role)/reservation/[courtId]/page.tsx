@@ -6,8 +6,8 @@ import Error500Page from "@/components/common/error/Error500Page";
 import ReservationListComponent from "@/components/my-reservations/ReservationListComponent";
 import CancelWarning from "@/components/my-reservations/CancelWarning";
 import {useEffect, useState} from "react";
-import {getRole} from "@/app/(any_role)/clubs/[clubId]/page";
 import VerifyWarning from "@/components/my-reservations/VerifyWarning";
+import getRole from "@/utils/Role";
 
 export default function Reservation({ params }: { params: { courtId: string } }) {
 

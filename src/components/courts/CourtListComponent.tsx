@@ -54,48 +54,50 @@ export default function CourtListComponent({
           </span>
         </div>
         <div className="flex-col w-auto">
-          {userRole === "ADMIN" && (
-            <span className="flex items-center space-x-3 md:space-x-2 text-3xl md:text-2xl justify-end pt-2">
-              <ReservationButton courtId={court.id} daysOpen={daysOpen} />
-              <a
-                className="w-auto text-nowrap flex items-center justify-center h-auto bg-mainGreen text-mainWhite text-sm lg:text-md px-1 lg:px-2 py-1 rounded"
-                href={`/reservation/${court.id}`}
-              >
-                Zobacz rezerwacje
-              </a>
-              <MdEdit
-                onClick={(e: any) => {
-                  e.preventDefault();
-                  if (setIsUpdate && setTempId && setIsOpen) {
-                    setIsUpdate(true);
-                    setTempId([court.id, court.image.id]);
-                    setIsOpen(true);
-                  }
-                }}
-                className="cursor-pointer hover:text-mainGreen"
-              />
-              <MdBuild
-                onClick={(e: any) => {
-                  e.preventDefault();
-                  if (setActiveWarning && setTempId) {
-                    setActiveWarning(true);
-                    setTempId([court.id, court.image.id]);
-                  }
-                }}
-                className="cursor-pointer hover:text-mainOrange"
-              />
-              <MdDelete
-                onClick={(e: any) => {
-                  e.stopPropagation();
-                  if (setDeleteWarning && setTempId) {
-                    setDeleteWarning(true);
-                    setTempId([court.id, court.image.id]);
-                  }
-                }}
-                className="cursor-pointer hover:text-red-600"
-              />
-            </span>
-          )}
+          <span className="flex items-center space-x-3 md:space-x-2 text-3xl md:text-2xl justify-end pt-2">
+            <ReservationButton courtId={court.id} daysOpen={daysOpen} />
+            <a
+              className="w-auto text-nowrap flex items-center justify-center h-auto bg-mainGreen text-mainWhite text-sm lg:text-md px-1 lg:px-2 py-1 rounded"
+              href={`/reservation/${court.id}`}
+            >
+              Zobacz rezerwacje
+            </a>
+            {userRole === "ADMIN" && (
+              <>
+                <MdEdit
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    if (setIsUpdate && setTempId && setIsOpen) {
+                      setIsUpdate(true);
+                      setTempId([court.id, court.image.id]);
+                      setIsOpen(true);
+                    }
+                  }}
+                  className="cursor-pointer hover:text-mainGreen"
+                />
+                <MdBuild
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    if (setActiveWarning && setTempId) {
+                      setActiveWarning(true);
+                      setTempId([court.id, court.image.id]);
+                    }
+                  }}
+                  className="cursor-pointer hover:text-mainOrange"
+                />
+                <MdDelete
+                  onClick={(e: any) => {
+                    e.stopPropagation();
+                    if (setDeleteWarning && setTempId) {
+                      setDeleteWarning(true);
+                      setTempId([court.id, court.image.id]);
+                    }
+                  }}
+                  className="cursor-pointer hover:text-red-600"
+                />
+              </>
+            )}
+          </span>
         </div>
       </span>
     </DashboardContainer>

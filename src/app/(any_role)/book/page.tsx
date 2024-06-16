@@ -68,7 +68,10 @@ export default function BookPage() {
   }, [courtsData]);
 
   return (
-    <div className="flex flex-col items-center bg-mainWhite min-h-max py-8 space-y-6">
+    <div className="flex flex-col items-center bg-mainWhite min-h-[92vh] py-8 space-y-6">
+      <h2 className="w-full text-center py-10 uppercase text-2xl sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl text-darkGreen">
+        Kiedy i gdzie chcesz zagrać?
+      </h2>
       <SearchBar
         setDateFrom={setDateFrom}
         setDateTo={setDateTo}

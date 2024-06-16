@@ -10,8 +10,7 @@ import CourtListComponent from "@/components/courts/CourtListComponent";
 import APIImageComponent from "@/hooks/imageAPI";
 import ActiveWarning from "@/components/my-reservations/ActiveWarning";
 import getRole from "@/utils/Role";
-
-
+import Link from "next/link";
 
 export default function ClubId({ params }: { params: { clubId: string } }) {
   const [userRole, setUserRole] = useState<string | null>(null);
@@ -84,7 +83,7 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
                     </div>
                     {userRole === "ADMIN" && (
                       <button
-                          onClick={() => setIsOpen(true)}
+                        onClick={() => setIsOpen(true)}
                         className="w-auto h-auto bg-mainGreen text-mainWhite text-md md:text-lg lg:text-xl px-2 lg:px-4 py-1 lg:py-2 rounded"
                       >
                         Dodaj kort
@@ -117,17 +116,19 @@ export default function ClubId({ params }: { params: { clubId: string } }) {
               setTempId={setTempId}
             />
           )}
-          {activeWarning && clubDetailsData && typeof clubDetailsData !== "string"  && (
+          {activeWarning &&
+            clubDetailsData &&
+            typeof clubDetailsData !== "string" && (
               <>
                 {clubDetailsData.courts.map((court) => (
-                    <ActiveWarning
-                        setActiveWarning={setActiveWarning}
-                        tempId={tempId}
-                        isClosed={court.closed}
-                    />
+                  <ActiveWarning
+                    setActiveWarning={setActiveWarning}
+                    tempId={tempId}
+                    isClosed={court.closed}
+                  />
                 ))}
               </>
-              )}
+            )}
         </>
       ) : (
         <CourtForm

@@ -41,10 +41,7 @@ export default function ClubListComponent({
           </p>
           <span className="flex items-end space-x-8 text-xs">
             <p>Liczba kortów: {club.courtsAmount}</p>
-            <span className="flex items-center space-x-1">
-              <p>Ocena:</p>
-              <RatingStars rating={club.rating} />
-            </span>
+            <span className="flex items-center space-x-1"></span>
           </span>
         </div>
       </div>

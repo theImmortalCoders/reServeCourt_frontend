@@ -1,7 +1,7 @@
 import { Court, DaysOpen } from "@/hooks/club";
 import { Dispatch, SetStateAction } from "react";
 import DashboardContainer from "../common/dashboardContainer/DashboardContainer";
-import { MdBuild, MdDelete, MdEdit} from "react-icons/md";
+import { MdBuild, MdDelete, MdEdit } from "react-icons/md";
 import { translateCourtSurface, translateCourtType } from "@/utils/courthelper";
 import APIImageComponent from "@/hooks/imageAPI";
 import { ReservationButton } from "../reservation/ReservationButton";
@@ -54,10 +54,15 @@ export default function CourtListComponent({
           </span>
         </div>
         <div className="flex-col w-auto">
-          <ReservationButton courtId={court.id} daysOpen={daysOpen} />
           {userRole === "ADMIN" && (
-            <span className="flex space-x-3 md:space-x-2 text-3xl md:text-2xl justify-end pt-2">
-              <Link className="w-auto h-auto bg-mainGreen text-mainWhite text-sm lg:text-md px-1 lg:px-2 py-1 rounded" href={`/reservation/${court.id}`}>Zobacz rezerwację</Link>
+            <span className="flex items-center space-x-3 md:space-x-2 text-3xl md:text-2xl justify-end pt-2">
+              <ReservationButton courtId={court.id} daysOpen={daysOpen} />
+              <a
+                className="w-auto text-nowrap flex items-center justify-center h-auto bg-mainGreen text-mainWhite text-sm lg:text-md px-1 lg:px-2 py-1 rounded"
+                href={`/reservation/${court.id}`}
+              >
+                Zobacz rezerwacje
+              </a>
               <MdEdit
                 onClick={(e: any) => {
                   e.preventDefault();
@@ -69,15 +74,16 @@ export default function CourtListComponent({
                 }}
                 className="cursor-pointer hover:text-mainGreen"
               />
-               <MdBuild
-                   onClick={(e: any) => {
-                     e.preventDefault();
-                     if (setActiveWarning && setTempId) {
-                       setActiveWarning(true);
-                       setTempId([court.id, court.image.id]);
-                     }
-                   }}
-                   className="cursor-pointer hover:text-mainOrange"/>
+              <MdBuild
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  if (setActiveWarning && setTempId) {
+                    setActiveWarning(true);
+                    setTempId([court.id, court.image.id]);
+                  }
+                }}
+                className="cursor-pointer hover:text-mainOrange"
+              />
               <MdDelete
                 onClick={(e: any) => {
                   e.stopPropagation();

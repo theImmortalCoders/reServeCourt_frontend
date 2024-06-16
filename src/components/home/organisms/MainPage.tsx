@@ -1,8 +1,15 @@
+"use client";
 import Image from "next/image";
 import Tennis from "@/assets/home/tennis.jpg";
 import HomePageText from "@/components/home/atoms/HomePageText";
+import { getStats } from "@/hooks/user";
+import { useQuery } from "react-query";
 
 export default function MainPage() {
+  const { data: stats } = useQuery("stats", getStats);
+
+  if (stats === undefined || typeof stats === "string") return <></>;
+
   return (
     <div className="min-h-max w-full justify-center grid grid-cols-1 sm:grid-cols-2">
       <div className="flex w-full h-full justify-start items-center">
@@ -21,10 +28,19 @@ export default function MainPage() {
       </div>
       <div className="text-darkGreen sm:flex sm:flex-col gap-y-6 sm:gap-y-10 justify-center w-full pl-3 sm:pl-[20%] grid grid-cols-2">
         <div className="flex flex-col gap-y-6 sm:gap-y-10">
-          <HomePageText number={8} text={"ośrodków tenisowych"} />
-          <HomePageText number={10} text={"kortów krytych"} />
-          <HomePageText number={20} text={"kortów otwartych"} />
-          <HomePageText number={20000} text={"rezerwacji"} />
+          <HomePageText
+            number={stats.clubsAmount}
+            text={"ośrodków tenisowych"}
+          />
+          <HomePageText
+            number={stats.indoorCourtsAmount}
+            text={"kortów krytych"}
+          />
+          <HomePageText
+            number={stats.outdoorCourtsAmount}
+            text={"kortów otwartych"}
+          />
+          <HomePageText number={stats.reservationsAmount} text={"rezerwacji"} />
         </div>
         <a href="/book">
           <button className="text-nowrap uppercase bg-darkGreen text-mainWhite px-3 py-6 mt-[28%] sm:mt-0 ml-6 sm:ml-0 flex items-center justify-center rounded-b-3xl text-xs sm:text-1x1 md:text-lg xl:text-2xl">

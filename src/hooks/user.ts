@@ -28,6 +28,29 @@ export async function deleteAccount() {
   }
 }
 
+export interface StatsSingleResponse {
+  clubsAmount: number;
+  outdoorCourtsAmount: number;
+  indoorCourtsAmount: number;
+  reservationsAmount: number;
+}
+
+export async function getStats() {
+  try {
+    const response: AxiosResponse<StatsSingleResponse> = await appAPI.get(
+      `/api/user/stats`,
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error: any) {
+    return "Wystąpił błąd podczas pobierania danych";
+  }
+}
+
 export interface GetCurrentUserData {
   id: number;
   name: string;

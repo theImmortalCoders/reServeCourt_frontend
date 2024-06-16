@@ -12,6 +12,7 @@
     "@googlemaps/js-api-loader": "^1.16.6",
     "@types/google.maps": "^3.55.7",
     "axios": "^1.6.8",
+    "google-maps-react-markers": "^2.0.10",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "next": "14.1.4",

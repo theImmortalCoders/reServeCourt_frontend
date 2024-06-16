@@ -20,6 +20,11 @@ body,
   scroll-behavior: smooth;
 }
 
+.leaflet-container {
+  height: 70vh;
+  width: 100wh;
+}
+
 :root {
   --color-webkit-scrollbar: 200 200 200;
 

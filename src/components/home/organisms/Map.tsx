@@ -1,17 +1,38 @@
-import Pin from "@/components/home/atoms/Pin";
+"use client";
+import { getAllClubs } from "@/hooks/club";
+import React from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { useQuery } from "react-query";
 
 export default function Map() {
+  const { data: clubsData } = useQuery("clubs", getAllClubs);
+
+  if (clubsData?.content.length === 0 || clubsData === undefined) return <></>;
   return (
-    <div className="h-auto w-full">
-      <h1 className="uppercase py-5 text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-sans text-mainWhite flex items-center justify-center bg-darkGreen w-full">
-        Zobacz, gdzie jesteśmy
-      </h1>
-      <div className="bg-mainOrange h-3 sm:h-4 md:h-5 lg:h-6" />
-      <div className="flex justify-evenly w-full">
-        <Pin className={"mt-12"} />
-        <Pin className={"mt-24"} />
-        <Pin className={"mt-12"} />
-      </div>
+    <div>
+      <h2 className="w-full text-center py-10 uppercase text-2xl sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl text-darkGreen">
+        Zobacz, gdzie już jesteśmy!
+      </h2>
+      <MapContainer
+        center={[
+          clubsData.content[0].location.locX,
+          clubsData.content[0].location.locY,
+        ]}
+        zoom={13}
+        scrollWheelZoom={false}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {clubsData?.content.map((club) => (
+          <Marker position={[club.location.locX, club.location.locY]}>
+            <Popup>
+              <a href={`/clubs/${club.id}`}>{club.name}</a>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
     </div>
   );
 }

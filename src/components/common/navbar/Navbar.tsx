@@ -72,7 +72,7 @@ export default function Navbar() {
 
       <div className="flex flex-row gap-4 md:gap-8 items-center">
         <Link
-          href={"/clubs"}
+          href={"/book"}
           className="text-mainWhite bg-darkGreen py-[2px] px-6 rounded-lg text-md md:text-lg"
         >
           Rezerwuj
